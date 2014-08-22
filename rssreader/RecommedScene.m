@@ -22,13 +22,15 @@
     [_sceneModel loadData];
 
     MBProgressHUD* _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    _hud.mode = MBProgressHUDModeDeterminate;
-    _hud.labelText = @"开始加载";
-    _hud.progress = 0;
+    _hud.mode = MBProgressHUDModeIndeterminate;
+    _hud.labelText = @"加载中";
     _hud.tag = 0;
     [_hud show:YES];
     
-    [RACObserve(self.sceneModel, dataArray)
+    [[RACObserve(self.sceneModel, dataArray)
+     filter:^BOOL(NSArray *list) {
+         return list.count >0;
+     }]
      subscribeNext:^(NSArray *list) {
          [_tableView reloadData];
          _hud.mode = MBProgressHUDModeCustomView;
