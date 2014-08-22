@@ -1,0 +1,133 @@
+//
+//  ViewController.m
+//  rssreader
+//
+//  Created by 朱潮 on 14-8-12.
+//  Copyright (c) 2014年 zhuchao. All rights reserved.
+//
+
+#import "RootScene.h"
+#import "CenterNav.h"
+#import "UIColor+MLPFlatColors.h"
+#import "FeedSceneModel.h"
+#import "AddScene.h"
+#import "RssListScene.h"
+@interface RootScene ()
+@property(nonatomic,retain)FeedSceneModel *feedSceneModel;
+@property(nonatomic,retain)CenterNav *nav;
+@end
+
+@implementation RootScene
+            
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    _nav = (CenterNav *)self.navigationController;
+    self.tableView.SceneDelegate = self;
+    [self.tableView addHeader];   //添加下拉刷新
+    
+    _feedSceneModel = [FeedSceneModel sharedInstance];
+    self.view.backgroundColor = [UIColor flatGrayColor];
+    
+    UIButton *leftbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_align_left" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
+    [self showBarButton:NAV_LEFT button:leftbutton];
+    
+    UIButton *rssbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_rss" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
+    [self showBarButton:NAV_RIGHT button:rssbutton];
+    
+    [RACObserve(self.feedSceneModel, feedList)
+        subscribeNext:^(NSArray *list) {
+            [_tableView reloadData];
+            [_tableView.header endRefreshing];
+        }];
+    
+    // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    _nav.shouldOpen = YES;
+}
+
+-(void)leftButtonTouch{
+    [_nav.drawer open];
+}
+
+-(void)rightButtonTouch{
+    AddScene *addScene =  [self.storyboard instantiateViewControllerWithIdentifier:@"AddScene"];
+    [self.navigationController pushViewController:addScene animated:YES];
+    _nav.shouldOpen = NO;
+}
+
+
+-(void)handlePullLoader:(MJRefreshBaseView *)view state:(PullLoaderState)state{
+    [super handlePullLoader:view state:state];
+    if(state == HEADER_REFRESH){
+        
+        MBProgressHUD* _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        _hud.mode = MBProgressHUDModeDeterminate;
+        _hud.labelText = @"开始加载";
+        _hud.progress = 0;
+        _hud.tag = 0;
+        [_hud show:YES];
+        
+        [self.feedSceneModel reflashAllFeed:nil
+         each:^{
+             _hud.tag += 1;
+             _hud.progress += 1.0/self.feedSceneModel.feedList.count;
+             _hud.labelText = [NSString stringWithFormat:@"请耐心等待(%d/%d)",_hud.tag,self.feedSceneModel.feedList.count];
+         } finish:^{
+             [_hud hide:YES];
+        }];
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.feedSceneModel.feedList.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *SettingTableIdentifier = @"PostCell";
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingTableIdentifier];
+    Feed *feed = [self.feedSceneModel.feedList objectAtIndex:indexPath.row];
+
+    [cell.imageView setImageFromURL:[NSURL URLWithString:feed.favicon] placeHolderImage:[UIImage imageNamed:@"rssIcon"]];
+    cell.textLabel.text = feed.title;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",(long)feed.total];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+    cell.backgroundColor = [UIColor colorWithString:@"#F9F9F9"];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    RssListScene *scene =  [self.storyboard instantiateViewControllerWithIdentifier:@"RssListScene"];
+    scene.feed = [self.feedSceneModel.feedList objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:scene animated:YES];
+    _nav.shouldOpen = NO;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        Feed *feed = [self.feedSceneModel.feedList objectAtIndex:indexPath.row];
+        [[GCDQueue globalQueue] queueBlock:^{
+            [feed delete];
+        }];
+       [self.feedSceneModel.feedList removeObjectAtIndex:indexPath.row];
+       [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+@end

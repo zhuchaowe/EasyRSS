@@ -1,0 +1,73 @@
+PODS:
+  - CSStickyHeaderFlowLayout (0.2.1)
+  - EasyIOS (2.0.1):
+    - EasyIOS/Easy
+  - EasyIOS/Easy (2.0.1):
+    - CSStickyHeaderFlowLayout
+    - FLKAutoLayout
+    - FontIcon
+    - GCDObjC
+    - MBProgressHUD
+    - MojoDatabase
+    - ReactiveCocoa
+    - RegExCategories
+    - RTLabel
+    - TMCache
+    - UICKeyChainStore
+  - FLKAutoLayout (0.1.1)
+  - FontIcon (1.0)
+  - GCDObjC (0.2.0)
+  - JSONModel (1.0.1)
+  - MBProgressHUD (0.9)
+  - MojoDatabase (1.3):
+    - JSONModel
+  - MWFeedParser (1.0.1):
+    - MWFeedParser/FeedParser
+    - MWFeedParser/NSDate+InternetDateTime
+    - MWFeedParser/NSString+HTML
+  - MWFeedParser/FeedParser (1.0.1):
+    - MWFeedParser/NSDate+InternetDateTime
+    - MWFeedParser/NSString+HTML
+  - MWFeedParser/NSDate+InternetDateTime (1.0.1)
+  - MWFeedParser/NSString+HTML (1.0.1)
+  - ReactiveCocoa (2.3.1):
+    - ReactiveCocoa/UI
+  - ReactiveCocoa/Core (2.3.1):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.3.1)
+  - ReactiveCocoa/UI (2.3.1):
+    - ReactiveCocoa/Core
+  - RegExCategories (1.0)
+  - RTLabel (1.0)
+  - TMCache (1.2.1)
+  - UICKeyChainStore (1.0.5)
+  - UIColor+MLPFlatColors (1.0)
+
+DEPENDENCIES:
+  - CSStickyHeaderFlowLayout (~> 0.2.1)
+  - EasyIOS (from `~/Desktop/podspec/EasyIOS.podspec`)
+  - MWFeedParser (~> 1.0.1)
+  - UIColor+MLPFlatColors (~> 1.0)
+
+EXTERNAL SOURCES:
+  EasyIOS:
+    :podspec: ~/Desktop/podspec/EasyIOS.podspec
+
+SPEC CHECKSUMS:
+  CSStickyHeaderFlowLayout: 50d1968dc88560419a96beab3de0fa47a4294eac
+  EasyIOS: 5730ef7e9ca754ede8068d2e83fb6ae2c3e331f0
+  FLKAutoLayout: 9fa39aac2903b274fbeed6be74154cdb937a04fc
+  FontIcon: 26bc94735ea33d51e412a3eeb20f306b2527ce17
+  GCDObjC: 4221bab8503688aaee67e5930b58fe8c0ed1f9a9
+  JSONModel: 634100aaacbd89811bc8a03da209356e5989c569
+  MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
+  MojoDatabase: b81663d9cd3886d83e731d78f93cd05ed2e577e3
+  MWFeedParser: 003cbf5398e99a7f2057fbe9583054fd1b84be72
+  ReactiveCocoa: dca75777b9d18990c8714a3a6f2149f29b4d1462
+  RegExCategories: a6410301023ff81bd047c05fd8691d24ca5c7ea9
+  RTLabel: 03deb1a0c2784e987d6e5b731d7e29f5125301e3
+  TMCache: ed936c5b4684e4ea15113d46fba8829ed3baadad
+  UICKeyChainStore: 4f9719600cc70025064e26f28f1210bcfc3b0c35
+  UIColor+MLPFlatColors: d74d0e59ba8eb8960c0f8136928056d91e208585
+
+COCOAPODS: 0.33.1
