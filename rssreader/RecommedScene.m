@@ -7,22 +7,24 @@
 //
 
 #import "RecommedScene.h"
-
+#import "RecommendSceneModel.h"
+#import "UIAlertView+Blocks.h"
+#import "FeedSceneModel.h"
 @interface RecommedScene ()
-
+@property(nonatomic,retain)RecommendSceneModel *sceneModel;
 @end
 
 @implementation RecommedScene
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [JSONHTTPClient postJSONFromURLWithString:@"https://raw.githubusercontent.com/zhuchaowe/EasyRSS/master/list.json"
-                                       params:nil
-                                   completion:^(id json, JSONModelError *err) {
-                                       
-                                       //check err, process json ...
-                                       
-                                   }];
+    _sceneModel = [RecommendSceneModel SceneModel];
+    [_sceneModel loadData];
+
+    [RACObserve(self.sceneModel, dataArray)
+     subscribeNext:^(NSArray *list) {
+         [_tableView reloadData];
+     }];
     // Do any additional setup after loading the view.
 }
 
@@ -31,5 +33,57 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.sceneModel.dataArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *SettingTableIdentifier = @"PostCell";
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingTableIdentifier];
+    NSDictionary *dict = [self.sceneModel.dataArray objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [dict objectForKey:@"title"];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+    cell.backgroundColor = [UIColor colorWithString:@"#F9F9F9"];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *dict = [self.sceneModel.dataArray objectAtIndex:indexPath.row];
+    
+    [UIAlertView showWithTitle:@"添加rss源"
+                       message:[NSString stringWithFormat:@"您即将添加[%@]",[dict objectForKey:@"title"]]
+             cancelButtonTitle:@"取消"
+             otherButtonTitles:@[@"确定"]
+                      tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                          if (buttonIndex == [alertView cancelButtonIndex]) {
+                              NSLog(@"Cancelled");
+                          } else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"确定"]) {
+                              MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                              hud.labelText = @"加载中...";
+                              
+                              [[FeedSceneModel sharedInstance]
+                               loadAFeed:[dict objectForKey:@"link"]
+                               start:nil
+                               finish:^{
+                                   hud.mode = MBProgressHUDModeCustomView;
+                   
+                                   hud.customView =  [IconFont labelWithIcon:[IconFont icon:@"fa_check" fromFont:fontAwesome] fontName:fontAwesome size:37.0f color:[UIColor whiteColor]];
+                                   hud.labelText = @"添加成功！";
+                                   [hud hide:YES afterDelay:0.5];
+                                   
+                               } error:^{
+                                  hud.labelText = @"加载失败！";
+                                  [hud hide:YES afterDelay:0.5];
+                               }];
+                          }
+                      }];
+}
 
 @end

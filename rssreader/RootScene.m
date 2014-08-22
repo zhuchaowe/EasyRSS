@@ -61,7 +61,10 @@
              _hud.progress += 1.0/self.feedSceneModel.feedList.count;
              _hud.labelText = [NSString stringWithFormat:@"请耐心等待(%d/%d)",_hud.tag,self.feedSceneModel.feedList.count];
          } finish:^{
-             [_hud hide:YES];
+             _hud.mode = MBProgressHUDModeCustomView;
+             _hud.customView =  [IconFont labelWithIcon:[IconFont icon:@"fa_check" fromFont:fontAwesome] fontName:fontAwesome size:37.0f color:[UIColor whiteColor]];
+             _hud.labelText = @"刷新成功！";
+             [_hud hide:YES afterDelay:0.5];
         }];
     }
 }

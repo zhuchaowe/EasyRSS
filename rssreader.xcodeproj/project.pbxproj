@@ -10,6 +10,8 @@
 		5F010A1A199B0A7C00051E83 /* CSAlwaysOnTopHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F010A18199B0A7C00051E83 /* CSAlwaysOnTopHeader.m */; };
 		5F0EBB5819A79117001E8626 /* RecommedScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB5719A79117001E8626 /* RecommedScene.m */; };
 		5F0EBB5B19A79827001E8626 /* BaseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB5A19A79827001E8626 /* BaseScene.m */; };
+		5F0EBB5E19A79F6F001E8626 /* RecommendSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB5D19A79F6F001E8626 /* RecommendSceneModel.m */; };
+		5F0EBB6219A7A1F9001E8626 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB6119A7A1F9001E8626 /* UIAlertView+Blocks.m */; };
 		5F2558E3199B579A00C79F8F /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F2558E2199B579A00C79F8F /* bg.jpg */; };
 		5F42DD1A19A0FF2400359866 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F42DD1919A0FF2400359866 /* Feed.m */; };
 		5F42DD1D19A0FF3200359866 /* Rss.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F42DD1C19A0FF3200359866 /* Rss.m */; };
@@ -52,6 +54,10 @@
 		5F0EBB5719A79117001E8626 /* RecommedScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommedScene.m; sourceTree = "<group>"; };
 		5F0EBB5919A79827001E8626 /* BaseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseScene.h; sourceTree = "<group>"; };
 		5F0EBB5A19A79827001E8626 /* BaseScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseScene.m; sourceTree = "<group>"; };
+		5F0EBB5C19A79F6F001E8626 /* RecommendSceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendSceneModel.h; sourceTree = "<group>"; };
+		5F0EBB5D19A79F6F001E8626 /* RecommendSceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendSceneModel.m; sourceTree = "<group>"; };
+		5F0EBB6019A7A1F9001E8626 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
+		5F0EBB6119A7A1F9001E8626 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
 		5F2558E2199B579A00C79F8F /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		5F42DD1819A0FF2400359866 /* Feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
 		5F42DD1919A0FF2400359866 /* Feed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed.m; sourceTree = "<group>"; };
@@ -134,6 +140,15 @@
 				5FA288D4199B0E7400F3CB8E /* LeftHeader.m */,
 			);
 			name = Left;
+			sourceTree = "<group>";
+		};
+		5F0EBB5F19A7A1DE001E8626 /* AlertBlock */ = {
+			isa = PBXGroup;
+			children = (
+				5F0EBB6019A7A1F9001E8626 /* UIAlertView+Blocks.h */,
+				5F0EBB6119A7A1F9001E8626 /* UIAlertView+Blocks.m */,
+			);
+			name = AlertBlock;
 			sourceTree = "<group>";
 		};
 		5F578275199A43D600FCA0EE = {
@@ -230,6 +245,8 @@
 			children = (
 				5F42DD5619A1B9E500359866 /* FeedSceneModel.h */,
 				5F42DD5719A1B9E500359866 /* FeedSceneModel.m */,
+				5F0EBB5C19A79F6F001E8626 /* RecommendSceneModel.h */,
+				5F0EBB5D19A79F6F001E8626 /* RecommendSceneModel.m */,
 			);
 			name = SceneModel;
 			sourceTree = "<group>";
@@ -254,6 +271,7 @@
 		5F5782AB199A4C9A00FCA0EE /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				5F0EBB5F19A7A1DE001E8626 /* AlertBlock */,
 				5F5782AC199A4CAA00FCA0EE /* ICSDrawerController */,
 			);
 			name = Vendor;
@@ -424,6 +442,8 @@
 				5F5782B2199A4CAA00FCA0EE /* ICSDropShadowView.m in Sources */,
 				5F42DD5819A1B9E500359866 /* FeedSceneModel.m in Sources */,
 				5FC3633F19A5033F0090547A /* RssDetailScene.m in Sources */,
+				5F0EBB5E19A79F6F001E8626 /* RecommendSceneModel.m in Sources */,
+				5F0EBB6219A7A1F9001E8626 /* UIAlertView+Blocks.m in Sources */,
 				5F0EBB5819A79117001E8626 /* RecommedScene.m in Sources */,
 				5FA288D2199B0CF100F3CB8E /* LeftCell.m in Sources */,
 			);
