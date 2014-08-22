@@ -21,9 +21,22 @@
     _sceneModel = [RecommendSceneModel SceneModel];
     [_sceneModel loadData];
 
+    MBProgressHUD* _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    _hud.mode = MBProgressHUDModeDeterminate;
+    _hud.labelText = @"开始加载";
+    _hud.progress = 0;
+    _hud.tag = 0;
+    [_hud show:YES];
+    
     [RACObserve(self.sceneModel, dataArray)
      subscribeNext:^(NSArray *list) {
          [_tableView reloadData];
+         _hud.mode = MBProgressHUDModeCustomView;
+         
+         _hud.customView =  [IconFont labelWithIcon:[IconFont icon:@"fa_check" fromFont:fontAwesome] fontName:fontAwesome size:37.0f color:[UIColor whiteColor]];
+         _hud.labelText = @"加载成功！";
+         [_hud hide:YES afterDelay:0.5];
+         
      }];
     // Do any additional setup after loading the view.
 }
