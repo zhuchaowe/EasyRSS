@@ -1,5 +1,5 @@
 platform :ios, '7.0'
-pod 'EasyIOS', :podspec => '~/Desktop/podspec/EasyIOS.podspec'
+pod 'EasyIOS', :head
 pod 'MWFeedParser', '~> 1.0.1'
 pod 'UIColor+MLPFlatColors', '~> 1.0'
 pod 'CSStickyHeaderFlowLayout', '~> 0.2.1'

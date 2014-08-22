@@ -1,9 +1,8 @@
 PODS:
   - CSStickyHeaderFlowLayout (0.2.1)
-  - EasyIOS (2.0.1):
+  - EasyIOS (HEAD based on 2.0.2):
     - EasyIOS/Easy
-  - EasyIOS/Easy (2.0.1):
-    - CSStickyHeaderFlowLayout
+  - EasyIOS/Easy (HEAD based on 2.0.2):
     - FLKAutoLayout
     - FontIcon
     - GCDObjC
@@ -45,17 +44,13 @@ PODS:
 
 DEPENDENCIES:
   - CSStickyHeaderFlowLayout (~> 0.2.1)
-  - EasyIOS (from `~/Desktop/podspec/EasyIOS.podspec`)
+  - EasyIOS (HEAD)
   - MWFeedParser (~> 1.0.1)
   - UIColor+MLPFlatColors (~> 1.0)
 
-EXTERNAL SOURCES:
-  EasyIOS:
-    :podspec: ~/Desktop/podspec/EasyIOS.podspec
-
 SPEC CHECKSUMS:
   CSStickyHeaderFlowLayout: 50d1968dc88560419a96beab3de0fa47a4294eac
-  EasyIOS: 5730ef7e9ca754ede8068d2e83fb6ae2c3e331f0
+  EasyIOS: c6508448218fab2b5787e7f518d1e9445110884d
   FLKAutoLayout: 9fa39aac2903b274fbeed6be74154cdb937a04fc
   FontIcon: 26bc94735ea33d51e412a3eeb20f306b2527ce17
   GCDObjC: 4221bab8503688aaee67e5930b58fe8c0ed1f9a9
