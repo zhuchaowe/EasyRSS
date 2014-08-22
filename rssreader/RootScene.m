@@ -7,30 +7,23 @@
 //
 
 #import "RootScene.h"
-#import "CenterNav.h"
-#import "UIColor+MLPFlatColors.h"
 #import "FeedSceneModel.h"
 #import "AddScene.h"
 #import "RssListScene.h"
 @interface RootScene ()
 @property(nonatomic,retain)FeedSceneModel *feedSceneModel;
-@property(nonatomic,retain)CenterNav *nav;
 @end
 
 @implementation RootScene
             
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    _nav = (CenterNav *)self.navigationController;
+  
     self.tableView.SceneDelegate = self;
     [self.tableView addHeader];   //添加下拉刷新
     
     _feedSceneModel = [FeedSceneModel sharedInstance];
-    self.view.backgroundColor = [UIColor flatGrayColor];
-    
-    UIButton *leftbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_align_left" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
-    [self showBarButton:NAV_LEFT button:leftbutton];
+
     
     UIButton *rssbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_rss" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
     [self showBarButton:NAV_RIGHT button:rssbutton];
@@ -44,19 +37,10 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    _nav.shouldOpen = YES;
-}
-
--(void)leftButtonTouch{
-    [_nav.drawer open];
-}
-
 -(void)rightButtonTouch{
+    [super rightButtonTouch];
     AddScene *addScene =  [self.storyboard instantiateViewControllerWithIdentifier:@"AddScene"];
     [self.navigationController pushViewController:addScene animated:YES];
-    _nav.shouldOpen = NO;
 }
 
 
@@ -108,7 +92,7 @@
     RssListScene *scene =  [self.storyboard instantiateViewControllerWithIdentifier:@"RssListScene"];
     scene.feed = [self.feedSceneModel.feedList objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:scene animated:YES];
-    _nav.shouldOpen = NO;
+    self.nav.shouldOpen = NO;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

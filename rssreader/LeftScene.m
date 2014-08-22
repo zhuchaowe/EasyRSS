@@ -14,9 +14,16 @@
 #import "UIView+FLKAutoLayout.h"
 #import "CSAlwaysOnTopHeader.h"
 #import "IconFont.h"
+#import "CenterNav.h"
+
 @interface LeftScene ()
 @property (strong, nonatomic) IBOutlet SceneCollectionView *collectionView;
 @property (nonatomic, strong) NSArray *sections;
+@property (nonatomic, strong)CenterNav *navMain;
+@property (nonatomic, strong)CenterNav *navRecommend;
+@property (nonatomic, strong)CenterNav *navDiscover;
+@property (nonatomic, strong)CenterNav *navFav;
+@property (nonatomic, strong)CenterNav *navSetting;
 @end
 
 @implementation LeftScene
@@ -95,6 +102,21 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if(indexPath.row == 0){
+        if(_navMain == nil){
+            _navMain = [[CenterNav alloc]initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"RootScene"]];
+        }
+        [self.drawer replaceCenterViewControllerWithViewController:_navMain];
+    }else if (indexPath.row == 1){
+        if(_navRecommend == nil){
+            _navRecommend = [[CenterNav alloc]initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"RecommedScene"]];
+        }
+        [self.drawer replaceCenterViewControllerWithViewController:_navRecommend];
+    }
+}
+
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         
@@ -119,7 +141,7 @@
 -(BOOL)shouldDrawerControllerOpen:(ICSDrawerController *)drawerController{
     BOOL result = YES;
     if(result){
-        self.view.userInteractionEnabled = NO;
+        self.view.userInteractionEnabled = YES;
     }
     return result;
 }
@@ -138,7 +160,7 @@
 
 - (void)drawerControllerDidClose:(ICSDrawerController *)drawerController
 {
-    self.view.userInteractionEnabled = YES;
+    self.view.userInteractionEnabled = NO;
 }
 #pragma mark - Configuring the view’s layout behavior
 

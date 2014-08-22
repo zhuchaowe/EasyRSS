@@ -1,18 +1,14 @@
 //
-//  ViewController.h
+//  RecommedScene.h
 //  rssreader
 //
-//  Created by 朱潮 on 14-8-12.
+//  Created by 朱潮 on 14-8-22.
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
 #import "BaseScene.h"
 #import "SceneTableView.h"
-
-
-@interface RootScene : BaseScene<SceneTableViewDelegate>
+@interface RecommedScene : BaseScene
 @property (strong, nonatomic) IBOutlet SceneTableView *tableView;
 
-
 @end
-

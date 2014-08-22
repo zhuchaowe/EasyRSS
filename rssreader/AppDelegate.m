@@ -12,6 +12,7 @@
 #import "UIColor+MLPFlatColors.h"
 #import "CacheAction.h"
 #import "EasyKit.h"
+#import "RootScene.h"
 @interface AppDelegate ()
 
 @end
@@ -41,7 +42,8 @@
     self.window.backgroundColor = [UIColor blackColor];
     
     LeftScene *leftScene = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LeftScene"];
-    CenterNav *centerNav = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"CenterNav"];
+    RootScene *rootScene = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"RootScene"];
+    CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:rootScene];
 
     ICSDrawerController *drawer = [[ICSDrawerController alloc]
                                    initWithLeftViewController:leftScene

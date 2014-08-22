@@ -4,22 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
     </dependencies>
     <scenes>
-        <!--Center Nav-->
-        <scene sceneID="xK4-JE-dfC">
-            <objects>
-                <navigationController storyboardIdentifier="CenterNav" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UXb-5k-Etu" customClass="CenterNav" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vey-Ri-NMi">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="PUH-32-4YT"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Sld-Ql-say" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-387" y="-742"/>
-        </scene>
         <!--Left Scene-->
         <scene sceneID="oFz-2Y-qYD">
             <objects>
@@ -61,7 +45,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C2K-9R-ZNB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-401" y="-76"/>
+            <point key="canvasLocation" x="-387" y="-36"/>
         </scene>
         <!--RSS-->
         <scene sceneID="ufC-wZ-h7g">
@@ -145,6 +129,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FjE-cO-iUV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="407" y="-36"/>
+        </scene>
+        <!--Feed推荐-->
+        <scene sceneID="u2u-Ly-L5h">
+            <objects>
+                <viewController storyboardIdentifier="RecommedScene" title="Feed推荐" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VsG-jP-mPh" customClass="RecommedScene" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KzT-aU-HO2"/>
+                        <viewControllerLayoutGuide type="bottom" id="FxF-7C-F10"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hye-xR-UCq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="anC-Bc-XVD" customClass="SceneTableView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="anC-Bc-XVD" firstAttribute="leading" secondItem="hye-xR-UCq" secondAttribute="leading" id="3Y9-vj-gVz"/>
+                            <constraint firstAttribute="trailing" secondItem="anC-Bc-XVD" secondAttribute="trailing" id="B4Y-1Z-vpt"/>
+                            <constraint firstAttribute="bottom" secondItem="anC-Bc-XVD" secondAttribute="bottom" id="N72-Vy-ogO"/>
+                            <constraint firstItem="anC-Bc-XVD" firstAttribute="top" secondItem="hye-xR-UCq" secondAttribute="top" id="sKh-Ax-L9d"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="anC-Bc-XVD" id="DJF-DG-gnU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3hD-GO-VG2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="413" y="700"/>
         </scene>
         <!--详情-->
         <scene sceneID="hSP-KO-UUW">
