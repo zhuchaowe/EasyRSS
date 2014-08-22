@@ -42,7 +42,7 @@
     
     LeftScene *leftScene = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LeftScene"];
     CenterNav *centerNav = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"CenterNav"];
-    
+
     ICSDrawerController *drawer = [[ICSDrawerController alloc]
                                    initWithLeftViewController:leftScene
                                    centerViewController:centerNav];

@@ -35,9 +35,8 @@
         [self.contentView addSubview:_titleLabel];
         [_titleLabel alignTop:@"0" leading:@"0" toView:self.contentView];
         [_titleLabel constrainWidth:[NSString stringWithFormat:@"%f",frame.size.width]];
-        
         [_titleLabel constrainHeight:@"44"];
-        
+
     }
     return self;
 }
