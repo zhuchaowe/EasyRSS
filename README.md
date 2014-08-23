@@ -7,7 +7,7 @@ EasyRSS is a rss reader for ios based on EasyIOS 2.0.2
 
 ![image](https://raw.githubusercontent.com/zhuchaowe/EasyRSS/master/rssreader/Home/Rescource/Default.png)
 
-[易阅1.0 beta1](http://www.pgyer.com/EasyRSS)
+[易阅1.0 beta1](http://www.pgyer.com/EasyRSS) Safari打开安装
 
 ##DEMO
 * 1.整天做公司的项目越来越没有激情了。
