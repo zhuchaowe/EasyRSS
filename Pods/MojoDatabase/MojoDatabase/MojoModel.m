@@ -141,6 +141,7 @@ static NSMutableDictionary *tableCache = nil;
 }
 
 -(NSArray *)select{
+    [[self class] assertDatabaseExists];
     NSString *sql = [NSString stringWithFormat:@"SELECT %@ FROM %@ %@ %@ %@ %@",self.field,self.table,self.where,self.group,self.order,self.limit];
     NSMutableDictionary *dict = [self.map mutableCopy];
     [dict removeObjectForKey:@"_string"];
@@ -162,6 +163,7 @@ static NSMutableDictionary *tableCache = nil;
 }
 
 -(NSUInteger)getCount{
+    [[self class] assertDatabaseExists];
     NSString *sql = [NSString stringWithFormat:@"SELECT count(*) AS c FROM %@ %@ %@ %@",self.table,self.where,self.group,self.order];
     NSMutableDictionary *dict = [self.map mutableCopy];
     [dict removeObjectForKey:@"_string"];

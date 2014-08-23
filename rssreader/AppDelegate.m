@@ -26,10 +26,10 @@
     [$ swizzleClassMethod:@selector(objectAtIndex:) with:@selector(safeObjectAtIndex:) in:[NSArray class]];
     
     if (IOS7_OR_LATER) {
-        [[UINavigationBar appearance] setBarTintColor:[UIColor flatDarkBlueColor]];
-        [[UINavigationBar appearance] setTintColor:[UIColor flatDarkBlueColor]];
+        [[UINavigationBar appearance] setBarTintColor:[UIColor flatDarkOrangeColor]];
+        [[UINavigationBar appearance] setTintColor:[UIColor flatDarkOrangeColor]];
     }else{
-        [[UINavigationBar appearance] setTintColor:[UIColor flatDarkBlueColor]];
+        [[UINavigationBar appearance] setTintColor:[UIColor flatDarkOrangeColor]];
     }
     
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
