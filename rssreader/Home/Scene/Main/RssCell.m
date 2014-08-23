@@ -14,6 +14,7 @@
 @property(nonatomic,retain)EzUILabel *rssTitle;
 @property(nonatomic,retain)EzUILabel *summary;
 @property(nonatomic,retain)EzUILabel *time;
+@property(nonatomic,retain)UIView *rightColorView;
 @property(nonatomic,retain)UIImageView *rssImageView;
 @end
 
@@ -36,6 +37,12 @@
         _time.font = [UIFont systemFontOfSize:12.0f];
         _time.textColor = [UIColor grayColor];
         [self.contentView addSubview:_time];
+        
+        _rightColorView = [[UIView alloc]init];
+        [_rightColorView constrainHeight:@"5"];
+        [self.contentView addSubview:_rightColorView];
+        [_rightColorView alignTop:@"0" leading:@"0" bottom:nil
+                         trailing:@"0" toView:self.contentView];
         
         _rssTitle = [[EzUILabel alloc]initWithFrame:CGRectMake(_feedImage.right + 5, _feedTitle.bottom, self.width - _feedImage.right-5 - 10, 1000)];
         _rssTitle.numberOfLines = 0;
@@ -61,6 +68,7 @@
 
 -(void)reloadFeed:(Feed *)feed rss:(Rss *)rss{
 
+
     [_feedImage setImageFromURL:[NSURL URLWithString:feed.favicon]  placeHolderImage:[UIImage imageNamed:@"rssIcon"] animation:YES];
     _time.text = [[NSDate dateWithTimeIntervalSince1970:rss.date] stringWithDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     _feedTitle.text = feed.title;
@@ -80,12 +88,18 @@
         top = _rssTitle.bottom + 10;
         [_summary removeFromSuperview];
     }
-    if(rss.imageUrl != nil && ![rss.imageUrl isEmpty]){
+    if(![rss.imageUrl isEmpty]){
         _rssImageView.frame = CGRectMake(_rssImageView.left, top, _rssImageView.width, _rssImageView.height);
         [_rssImageView setImageForReloadFromURL:[NSURL URLWithString:rss.imageUrl] placeHolderImage:nil animation:YES];
         [self.contentView addSubview:_rssImageView];
     }else{
         [_rssImageView removeFromSuperview];
+    }
+
+    if(rss.isRead == 0){
+        _rightColorView.backgroundColor = [UIColor flatOrangeColor];
+    }else{
+        _rightColorView.backgroundColor = [UIColor clearColor];
     }
 }
 
@@ -105,6 +119,7 @@
     
     [super setSelected:selected animated:animated];
     if (selected) {
+        _rightColorView.backgroundColor = [UIColor clearColor];
         self.contentView.backgroundColor = [UIColor flatWhiteColor];
     } else {
         self.contentView.backgroundColor = [UIColor whiteColor];

@@ -113,30 +113,20 @@ static NSMutableDictionary *tableCache = nil;
     return self;
 }
 
--(MojoModel*)where:(NSMutableDictionary *)map{
+-(MojoModel*)where:(NSDictionary *)map{
     NSMutableString *where = [NSMutableString string];
     if(map != nil){
-        [where appendString:@" WHERE "];
-        NSUInteger i =0;
+        [where appendString:@" WHERE 1"];
         [map enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSString* value, BOOL *stop) {
-            
             if([key isEqualToString:@"_string"]){
-                if(i == 0){
-                    [where appendFormat:@" %@ ",value];
-                }else{
-                    [where appendFormat:@" AND %@ ",value];
-                }
+                [where appendFormat:@" AND %@ ",value];
             }else{
-                if(i == 0){
-                    [where appendFormat:@" `%@` = ?",key];
-                }else{
-                    [where appendFormat:@" AND `%@` = ?",key];
-                }
+                [where appendFormat:@" AND `%@` = ?",key];
             }
         }];
     }
     self.where = where;
-    self.map = map;
+    self.map = [NSMutableDictionary dictionaryWithDictionary:map];
     return self;
 }
 
@@ -232,7 +222,6 @@ static NSMutableDictionary *tableCache = nil;
 -(void)createTable{
     if(!self.isTableExist){
         NSArray *propertyList = [self getPropertyList];
-        
         NSString *sql = [NSString stringWithFormat:@"CREATE TABLE %@ (primaryKey integer primary key autoincrement, %@)", [[self class] tableName], [propertyList componentsJoinedByString:@","]];
         [database executeSql:sql];
     }

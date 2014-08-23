@@ -21,9 +21,25 @@
         if(idx == 0){
             self.primaryKey = objc.primaryKey;
             self.savedInDatabase = objc.savedInDatabase;
+            self.isRead = objc.isRead;
+            self.isDislike = objc.isDislike;
+            self.isFav = objc.isFav;
         }else{
             [objc delete];
         }
     }];
+}
+
+-(void)saveRead{
+    [self resetAll];
+    [self update:@{@"isRead":@(self.isRead)}];
+}
+-(void)saveDislike{
+    [self resetAll];
+    [self update:@{@"isDislike":@(self.isDislike)}];
+}
+-(void)saveFav{
+    [self resetAll];
+    [self update:@{@"isFav":@(self.isFav)}];
 }
 @end

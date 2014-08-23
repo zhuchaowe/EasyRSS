@@ -24,8 +24,12 @@
 }
 
 -(NSUInteger)rssListCount{
-    NSMutableDictionary *map = [NSMutableDictionary dictionaryWithDictionary:@{@"_fid":[NSNumber numberWithInteger:self.primaryKey]}];
-    return [[[[Rss Model] where:map] order:@"`date` DESC"] getCount];
+    return [[[Rss Model] where:@{@"_fid":@(self.primaryKey)}] getCount];
+}
+
+-(NSUInteger)notReadedCount{
+    return [[[Rss Model] where:@{@"isRead":@(0),
+                                 @"_fid":@(self.primaryKey)}] getCount];
 }
 
 /**
@@ -48,6 +52,7 @@
 -(void)resetTotal{
     [self resetAll];
     self.total = self.rssListCount;
+    
     [self update:@{@"total":@(self.total)}];
 }
 

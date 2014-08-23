@@ -14,6 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor clearColor];
         _textLabel = [[UILabel alloc]init];
         _textLabel.textAlignment = NSTextAlignmentLeft;
         _textLabel.textColor = [UIColor whiteColor];

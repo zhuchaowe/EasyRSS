@@ -61,7 +61,9 @@
                                                 [hud hide:YES];
                                                 self.tableView.page = @1;
                                             } error:^{
-                                                hud.labelText = @"加载失败！";
+                                                hud.mode = MBProgressHUDModeCustomView;
+                                                hud.customView =  [IconFont labelWithIcon:[IconFont icon:@"fa_times" fromFont:fontAwesome] fontName:fontAwesome size:37.0f color:[UIColor whiteColor]];
+                                                hud.labelText = @"加载失败";
                                                 [hud hide:YES afterDelay:0.5];
                                             }];
         

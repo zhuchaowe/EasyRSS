@@ -11,4 +11,6 @@
 @interface RssDetailScene : Scene<UIWebViewDelegate>
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property(nonatomic,retain)Rss *rss;
+@property(nonatomic,retain)NSURLRequest *req;
+- (void)loadHTML:(Rss*)rss;
 @end

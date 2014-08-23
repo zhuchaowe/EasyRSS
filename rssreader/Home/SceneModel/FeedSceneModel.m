@@ -66,7 +66,7 @@
         rss.identifier = [item.identifier safeString];
         rss.title = [item.title safeString];
         rss.link = [item.link safeString ];
-        
+        rss.subscribeUrl = feed.url;
         rss.createDate = [NSDate dateWithTimeIntervalSinceNow:0].timeIntervalSince1970;
         rss.updated = item.updated !=nil ? item.updated.timeIntervalSince1970 :rss.createDate;
         rss.date = item.date !=nil ? item.date.timeIntervalSince1970:rss.updated;

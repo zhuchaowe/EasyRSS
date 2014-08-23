@@ -25,6 +25,8 @@
 @property (nonatomic, retain) NSMutableArray<Rss> * rssList;
 +(NSArray *)getAllDesc;
 -(NSUInteger)rssListCount;
+-(NSUInteger)notReadedCount;
 -(void)resetTotal;
+
 -(NSArray *)rssListInDb:(NSNumber *)page pageSize:(NSNumber *)pageSize;
 @end

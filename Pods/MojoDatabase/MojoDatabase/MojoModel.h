@@ -29,7 +29,7 @@
 -(MojoModel*)limit:(NSUInteger)start size:(NSUInteger)size;
 -(MojoModel*)order:(NSString *)order;
 -(MojoModel*)group:(NSString *)group;
--(MojoModel*)where:(NSMutableDictionary *)map;
+-(MojoModel*)where:(NSDictionary *)map;
 -(NSArray *)select;
 -(NSUInteger)getCount;
 

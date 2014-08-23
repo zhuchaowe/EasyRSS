@@ -32,8 +32,11 @@
             [_tableView reloadData];
             [_tableView.header endRefreshing];
         }];
-    
-    // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [_tableView reloadData];
 }
 
 -(void)rightButtonTouch{
@@ -83,7 +86,7 @@
 
     [cell.imageView setImageFromURL:[NSURL URLWithString:feed.favicon] placeHolderImage:[UIImage imageNamed:@"rssIcon"]];
     cell.textLabel.text = feed.title;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",(long)feed.total];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",(long)feed.notReadedCount];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     return cell;
