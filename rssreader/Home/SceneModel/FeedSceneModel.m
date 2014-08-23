@@ -54,18 +54,18 @@
     self.startHandler = startHandler;
     Feed *feed = [Feed Model];
     self.infoHandler = ^(MWFeedInfo *info) {
-        feed.title = info.title;
-        feed.link = info.link;
-        feed.summary = info.summary;
+        feed.title = info.title.safeString;
+        feed.link = info.link.safeString;
+        feed.summary = info.summary.safeString;
         feed.url = [info.url absoluteString];
         feed.favicon = [NSString stringWithFormat:@"%@://%@/favicon.ico",info.url.scheme,info.url.host];
         feed.rssList = [NSMutableArray array];
     };
     self.itemHandler = ^(MWFeedItem *item) {
         Rss *rss = [Rss Model];
-        rss.identifier = item.identifier;
-        rss.title = item.title;
-        rss.link = item.link;
+        rss.identifier = item.identifier.safeString;
+        rss.title = item.title.safeString;
+        rss.link = item.link.safeString;
         
         rss.createDate = [NSDate dateWithTimeIntervalSinceNow:0].timeIntervalSince1970;
         rss.updated = item.updated !=nil ? item.updated.timeIntervalSince1970 :rss.createDate;

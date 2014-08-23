@@ -664,7 +664,8 @@
                     // Item
                     if (!processed) {
                         if ([currentPath isEqualToString:@"/feed/entry/title"]) { if (processedText.length > 0) item.title = processedText; processed = YES; }
-                        else if ([currentPath isEqualToString:@"/feed/entry/link"]) { [self processAtomLink:currentElementAttributes andAddToMWObject:item]; processed = YES; }
+                        else if ([currentPath isEqualToString:@"/feed/entry/link"]) {
+                            [self processAtomLink:currentElementAttributes andAddToMWObject:item]; processed = YES; }
                         else if ([currentPath isEqualToString:@"/feed/entry/id"]) { if (processedText.length > 0) item.identifier = processedText; processed = YES; }
                         else if ([currentPath isEqualToString:@"/feed/entry/summary"]) { if (processedText.length > 0) item.summary = processedText; processed = YES; }
                         else if ([currentPath isEqualToString:@"/feed/entry/content"]) { if (processedText.length > 0) item.content = processedText; processed = YES; }
@@ -943,7 +944,7 @@
 	if (attributes && [attributes objectForKey:@"rel"]) {
 		
 		// Use as link if rel == alternate
-		if ([[attributes objectForKey:@"rel"] isEqualToString:@"alternate"]) {
+		if ([[attributes objectForKey:@"rel"] isEqualToString:@"alternate"] || [[attributes objectForKey:@"rel"] isEqualToString:@"self"]) {
 			[MWObject setLink:[attributes objectForKey:@"href"]]; // Can be added to MWFeedItem or MWFeedInfo
 			return YES;
 		}
