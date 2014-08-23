@@ -13,6 +13,9 @@
 #import "CacheAction.h"
 #import "EasyKit.h"
 #import "RootScene.h"
+#import "MobClick.h"
+#define CHANNEL_ID @"pgyer"
+#define UMAppKey @"53f8902ffd98c585ba02a156"
 @interface AppDelegate ()
 
 @end
@@ -21,6 +24,7 @@
             
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self setUpAnialytics];
     self.database = [[AppDatabase alloc]initWithMigrations];
     [UIImageView setDefaultEngine:[CacheAction sharedInstance]];
     [$ swizzleClassMethod:@selector(objectAtIndex:) with:@selector(safeObjectAtIndex:) in:[NSArray class]];
@@ -73,6 +77,11 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(void)setUpAnialytics{
+    [MobClick startWithAppkey:UMAppKey reportPolicy:SEND_INTERVAL   channelId:CHANNEL_ID];
+    [MobClick checkUpdate];
 }
 
 @end

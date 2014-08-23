@@ -1,0 +1,2 @@
+PODS_BAIDU_ANALYTICS_SDK_LIBRARY_SEARCH_PATHS = $(PODS_ROOT)/Baidu-Analytics-SDK/Products/ios_api/Release-iphoneos
+PODS_BAIDU_ANALYTICS_SDK_OTHER_LDFLAGS = -lBaiduMobStat -lstdc++ -lz -framework CoreLocation -framework CoreTelephony -framework Security -framework SystemConfiguration

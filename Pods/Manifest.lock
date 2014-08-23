@@ -41,12 +41,14 @@ PODS:
   - TMCache (1.2.1)
   - UICKeyChainStore (1.0.5)
   - UIColor+MLPFlatColors (1.0)
+  - UMengAnalytics (3.1.2)
 
 DEPENDENCIES:
   - CSStickyHeaderFlowLayout (~> 0.2.1)
   - EasyIOS (HEAD)
   - MWFeedParser (~> 1.0.1)
   - UIColor+MLPFlatColors (~> 1.0)
+  - UMengAnalytics (~> 3.1.2)
 
 SPEC CHECKSUMS:
   CSStickyHeaderFlowLayout: 50d1968dc88560419a96beab3de0fa47a4294eac
@@ -64,5 +66,6 @@ SPEC CHECKSUMS:
   TMCache: ed936c5b4684e4ea15113d46fba8829ed3baadad
   UICKeyChainStore: 4f9719600cc70025064e26f28f1210bcfc3b0c35
   UIColor+MLPFlatColors: d74d0e59ba8eb8960c0f8136928056d91e208585
+  UMengAnalytics: db0b67f5334f356f8ac53dcc0abcc4bd9d0ffb45
 
 COCOAPODS: 0.33.1
