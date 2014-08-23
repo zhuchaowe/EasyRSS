@@ -31,9 +31,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = _collectionView.backgroundColor = [UIColor flatDarkBlackColor];
-    
+
+
     self.sections = @[@[[NSString stringWithFormat:@"%@ 首页",
                          [IconFont icon:@"ios7Home" fromFont:ionIcons]],
                         [NSString stringWithFormat:@"%@ 推荐",
@@ -141,6 +140,8 @@
 -(BOOL)shouldDrawerControllerOpen:(ICSDrawerController *)drawerController{
     BOOL result = YES;
     if(result){
+        self.view.backgroundColor = _collectionView.backgroundColor = [UIColor randomFlatDarkColor];
+        
         self.view.userInteractionEnabled = YES;
     }
     return result;
