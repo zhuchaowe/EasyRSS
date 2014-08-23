@@ -22,7 +22,6 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self){
-        
         _feedTitle = [[EzUILabel alloc]initWithFrame:CGRectMake(10, 10, 150, 20)];
         _feedTitle.textAlignment = NSTextAlignmentLeft;
         _feedTitle.font = [UIFont systemFontOfSize:12.0f];

@@ -210,7 +210,7 @@
         // Scanner
         NSScanner *scanner = [[NSScanner alloc] initWithString:self];
         [scanner setCharactersToBeSkipped:nil];
-        NSMutableString *result = [[NSMutableString alloc] init];
+        NSMutableString *result = [NSMutableString stringWithString:@""];
         NSString *temp;
         NSCharacterSet *newLineAndWhitespaceCharacters = [NSCharacterSet characterSetWithCharactersInString:
                                                           [NSString stringWithFormat:@" \t\n\r%C%C%C%C", (unichar)0x0085, (unichar)0x000C, (unichar)0x2028, (unichar)0x2029]];

@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _nav = (CenterNav *)self.navigationController;
-    self.view.backgroundColor = [UIColor flatGrayColor];
+    self.view.backgroundColor = [UIColor flatWhiteColor];
     
     UIButton *leftbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_align_left" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
     [self showBarButton:NAV_LEFT button:leftbutton];

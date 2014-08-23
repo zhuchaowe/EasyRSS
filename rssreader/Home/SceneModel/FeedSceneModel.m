@@ -63,9 +63,9 @@
     };
     self.itemHandler = ^(MWFeedItem *item) {
         Rss *rss = [Rss Model];
-        rss.identifier = item.identifier.safeString;
-        rss.title = item.title.safeString;
-        rss.link = item.link.safeString;
+        rss.identifier = [item.identifier safeString];
+        rss.title = [item.title safeString];
+        rss.link = [item.link safeString ];
         
         rss.createDate = [NSDate dateWithTimeIntervalSinceNow:0].timeIntervalSince1970;
         rss.updated = item.updated !=nil ? item.updated.timeIntervalSince1970 :rss.createDate;
@@ -77,7 +77,9 @@
         rss.summary = [[item.summary replace:RX(@"<[^>]*>|&(\\w+);") with:@""] trim];
         rss.imageUrl = [rss.content firstMatch:RX(@"(http|https|ftp|rtsp|mms)://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?[.]{1}(jpg|png|bmp)")];
         rss.author = item.author ?:feed.title;
-        [feed.rssList addObject:rss];
+        if(![rss.title isEmpty] && rss.title != nil){
+            [feed.rssList addObject:rss];
+        }
     };
     self.errorHandler = errorHandler;
     self.finishHandler = ^(MWFeedParser *parser) {

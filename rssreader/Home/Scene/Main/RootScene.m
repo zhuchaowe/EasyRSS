@@ -18,7 +18,6 @@
             
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
     self.tableView.SceneDelegate = self;
     [self.tableView addHeader];   //添加下拉刷新
     
@@ -87,7 +86,6 @@
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",(long)feed.total];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell setAccessoryType:UITableViewCellAccessoryNone];
-    cell.backgroundColor = [UIColor colorWithString:@"#F9F9F9"];
     return cell;
 }
 

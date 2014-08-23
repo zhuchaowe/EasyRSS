@@ -20,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = _feed.title;
+    self.view.backgroundColor = [UIColor whiteColor];
     UIButton *leftbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_chevron_left" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
     [self showBarButton:NAV_LEFT button:leftbutton];
     _tableView.SceneDelegate = self;
@@ -86,6 +87,7 @@
     [cell reloadFeed:self.feed rss:rss];
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     return cell;
 }
 

@@ -243,7 +243,7 @@
     if (text != nil) {
       return [NSString stringWithUTF8String:text];
     } else {
-      return nil;
+      return @"";
     }
   } else if (columnType == SQLITE_BLOB) {
     // create an NSData object with the same size as the blob
