@@ -77,6 +77,8 @@
         rss.summary = [[item.summary replace:RX(@"<[^>]*>|&(\\w+);") with:@""] trim];
         rss.imageUrl = [rss.content firstMatch:RX(@"(http|https|ftp|rtsp|mms)://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?[.]{1}(jpg|png|bmp)")];
         rss.author = item.author ?:feed.title;
+        rss.feedFavicon = feed.favicon;
+        rss.feedTitle = feed.title;
         if(![rss.title isEmpty] && rss.title != nil){
             [feed.rssList addObject:rss];
         }

@@ -66,12 +66,10 @@
     return self;
 }
 
--(void)reloadFeed:(Feed *)feed rss:(Rss *)rss{
-
-
-    [_feedImage setImageFromURL:[NSURL URLWithString:feed.favicon]  placeHolderImage:[UIImage imageNamed:@"rssIcon"] animation:YES];
+-(void)reloadRss:(Rss *)rss{
+    [_feedImage setImageFromURL:[NSURL URLWithString:rss.feedFavicon]  placeHolderImage:[UIImage imageNamed:@"rssIcon"] animation:YES];
     _time.text = [[NSDate dateWithTimeIntervalSince1970:rss.date] stringWithDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    _feedTitle.text = feed.title;
+    _feedTitle.text = rss.feedTitle;
     
     _rssTitle.text = rss.title;
     CGSize rssTitlesize = _rssTitle.autoSize;

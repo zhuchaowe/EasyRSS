@@ -8,7 +8,6 @@
 
 #import "ICSDrawerController.h"
 
-
 @interface CenterNav : UINavigationController<ICSDrawerControllerChild, ICSDrawerControllerPresenting>
 
 @property(nonatomic, weak) ICSDrawerController *drawer;

@@ -8,8 +8,40 @@
 
 #import "Rss.h"
 #import <UIKit/UIKit.h>
+#import "swift-bridge.h"
+#import "FavSceneModel.h"
 @implementation Rss
 
+/**
+ *  全部已读
+ */
++(void)setReadWhere:(NSDictionary *)map{
+    [[GCDQueue globalQueue] queueBlock:^{
+        [[[Rss Model] where:map] update:@{@"isRead":@(1)}];
+    }];
+}
+
+/**
+ *  更新已读
+ */
+-(void)saveRead{
+    if(self.savedInDatabase){
+        [[GCDQueue globalQueue] queueBlock:^{
+            [self resetAll];
+            [self update:@{@"isRead":@(self.isRead)}];
+        }];
+    }
+}
+
+-(void)saveFav{
+    if(self.savedInDatabase){
+        [[GCDQueue globalQueue] queueBlock:^{
+            [self resetAll];
+            [self update:@{@"isFav":@(self.isFav)}];
+            [[FavSceneModel sharedInstance] retData:@(1) pageSize:@10];
+        }];
+    }
+}
 /**
  *  beforeSave
  *  保存之前 保证数据字段identifier唯一
@@ -30,17 +62,8 @@
     }];
 }
 
--(void)saveRead{
-    [self resetAll];
-    [self update:@{@"isRead":@(self.isRead)}];
-}
--(void)saveDislike{
-    [self resetAll];
-    [self update:@{@"isDislike":@(self.isDislike)}];
-}
--(void)saveFav{
-    [self resetAll];
-    [self update:@{@"isFav":@(self.isFav)}];
++(NSArray *)rssListInDb:(NSDictionary *)map page:(NSNumber *)page pageSize:(NSNumber *)pageSize{
+    return [[[[[Rss Model] where:map] order:@"`date` DESC"] limit:(page.integerValue -1) * pageSize.integerValue size:pageSize.integerValue] select];
 }
 
 +(NSUInteger)totalNotReadedCount{
@@ -53,7 +76,7 @@
     UILocalNotification *notification=[[UILocalNotification alloc] init];
     if (notification!=nil) {
         NSDate *now=[NSDate new];
-        notification.fireDate=[now dateByAddingTimeInterval:600];//10秒后通知
+        notification.fireDate=[now dateByAddingTimeInterval:60*60*3];//3小时后通知
         notification.repeatInterval = kCFCalendarUnitDay;//循环次数，kCFCalendarUnitWeekday一周一次
         notification.timeZone=[NSTimeZone defaultTimeZone];
         notification.applicationIconBadgeNumber = [self totalNotReadedCount]; //应用的红色数字

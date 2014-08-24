@@ -11,6 +11,6 @@
 #import "Feed.h"
 #import "UIColor+MLPFlatColors.h"
 @interface RssCell : UITableViewCell
--(void)reloadFeed:(Feed *)feed rss:(Rss *)rss;
+-(void)reloadRss:(Rss *)rss;
 -(CGFloat)cellHeight;
 @end

@@ -18,6 +18,18 @@
 		5F0EBB8419A82AFD001E8626 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F0EBB8119A82AFD001E8626 /* Default.png */; };
 		5F0EBB8519A82AFD001E8626 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F0EBB8219A82AFD001E8626 /* Default@2x.png */; };
 		5F0EBB8A19A85CA2001E8626 /* detail.html in Resources */ = {isa = PBXBuildFile; fileRef = 5F0EBB8919A85CA2001E8626 /* detail.html */; };
+		5F0EBB9219A9A75D001E8626 /* FavoriteScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB9119A9A75D001E8626 /* FavoriteScene.m */; };
+		5F0EBB9519A9ABF2001E8626 /* FavSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB9419A9ABF2001E8626 /* FavSceneModel.m */; };
+		5F0EBB9819A9C1DB001E8626 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB9719A9C1DB001E8626 /* FeedCell.m */; };
+		5F0EBBB219A9F611001E8626 /* Frontia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0EBB9A19A9F611001E8626 /* Frontia.framework */; };
+		5F0EBBB319A9F611001E8626 /* FrontiaSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5F0EBB9B19A9F611001E8626 /* FrontiaSource.bundle */; };
+		5F0EBBB419A9F611001E8626 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB9D19A9F611001E8626 /* JSONKit.m */; };
+		5F0EBBB519A9F611001E8626 /* TencentOpenAPI in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0EBBA719A9F611001E8626 /* TencentOpenAPI */; };
+		5F0EBBB619A9F611001E8626 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5F0EBBA819A9F611001E8626 /* TencentOpenApi_IOS_Bundle.bundle */; };
+		5F0EBBB719A9F611001E8626 /* libWeiboSDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0EBBAC19A9F611001E8626 /* libWeiboSDK */; };
+		5F0EBBB819A9F612001E8626 /* libWeChatSDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0EBBAF19A9F611001E8626 /* libWeChatSDK */; };
+		5F0EBBBC19A9F679001E8626 /* DiscoveryScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBBBB19A9F679001E8626 /* DiscoveryScene.m */; };
+		5F0EBBBF19A9F754001E8626 /* DiscoverySceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBBBE19A9F754001E8626 /* DiscoverySceneModel.m */; };
 		5F2558E3199B579A00C79F8F /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F2558E2199B579A00C79F8F /* bg.jpg */; };
 		5F42DD1A19A0FF2400359866 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F42DD1919A0FF2400359866 /* Feed.m */; };
 		5F42DD1D19A0FF3200359866 /* Rss.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F42DD1C19A0FF3200359866 /* Rss.m */; };
@@ -69,6 +81,37 @@
 		5F0EBB8119A82AFD001E8626 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		5F0EBB8219A82AFD001E8626 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		5F0EBB8919A85CA2001E8626 /* detail.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = detail.html; sourceTree = "<group>"; };
+		5F0EBB9019A9A75D001E8626 /* FavoriteScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteScene.h; sourceTree = "<group>"; };
+		5F0EBB9119A9A75D001E8626 /* FavoriteScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteScene.m; sourceTree = "<group>"; };
+		5F0EBB9319A9ABF2001E8626 /* FavSceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavSceneModel.h; sourceTree = "<group>"; };
+		5F0EBB9419A9ABF2001E8626 /* FavSceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavSceneModel.m; sourceTree = "<group>"; };
+		5F0EBB9619A9C1DB001E8626 /* FeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCell.h; sourceTree = "<group>"; };
+		5F0EBB9719A9C1DB001E8626 /* FeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCell.m; sourceTree = "<group>"; };
+		5F0EBB9A19A9F611001E8626 /* Frontia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Frontia.framework; sourceTree = "<group>"; };
+		5F0EBB9B19A9F611001E8626 /* FrontiaSource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FrontiaSource.bundle; sourceTree = "<group>"; };
+		5F0EBB9C19A9F611001E8626 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		5F0EBB9D19A9F611001E8626 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		5F0EBB9F19A9F611001E8626 /* QQApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QQApi.h; sourceTree = "<group>"; };
+		5F0EBBA019A9F611001E8626 /* QQApiInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QQApiInterface.h; sourceTree = "<group>"; };
+		5F0EBBA119A9F611001E8626 /* QQApiInterfaceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QQApiInterfaceObject.h; sourceTree = "<group>"; };
+		5F0EBBA219A9F611001E8626 /* sdkdef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sdkdef.h; sourceTree = "<group>"; };
+		5F0EBBA319A9F611001E8626 /* TencentApiInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TencentApiInterface.h; sourceTree = "<group>"; };
+		5F0EBBA419A9F611001E8626 /* TencentMessageObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TencentMessageObject.h; sourceTree = "<group>"; };
+		5F0EBBA519A9F611001E8626 /* TencentOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TencentOAuth.h; sourceTree = "<group>"; };
+		5F0EBBA619A9F611001E8626 /* TencentOAuthObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TencentOAuthObject.h; sourceTree = "<group>"; };
+		5F0EBBA719A9F611001E8626 /* TencentOpenAPI */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = TencentOpenAPI; sourceTree = "<group>"; };
+		5F0EBBA819A9F611001E8626 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		5F0EBBA919A9F611001E8626 /* WeiBoAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiBoAPI.h; sourceTree = "<group>"; };
+		5F0EBBAA19A9F611001E8626 /* WeiyunAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiyunAPI.h; sourceTree = "<group>"; };
+		5F0EBBAC19A9F611001E8626 /* libWeiboSDK */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK; sourceTree = "<group>"; };
+		5F0EBBAD19A9F611001E8626 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
+		5F0EBBAF19A9F611001E8626 /* libWeChatSDK */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK; sourceTree = "<group>"; };
+		5F0EBBB019A9F611001E8626 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		5F0EBBB119A9F611001E8626 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		5F0EBBBA19A9F679001E8626 /* DiscoveryScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryScene.h; sourceTree = "<group>"; };
+		5F0EBBBB19A9F679001E8626 /* DiscoveryScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryScene.m; sourceTree = "<group>"; };
+		5F0EBBBD19A9F754001E8626 /* DiscoverySceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverySceneModel.h; sourceTree = "<group>"; };
+		5F0EBBBE19A9F754001E8626 /* DiscoverySceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverySceneModel.m; sourceTree = "<group>"; };
 		5F2558E2199B579A00C79F8F /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		5F42DD1819A0FF2400359866 /* Feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
 		5F42DD1919A0FF2400359866 /* Feed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed.m; sourceTree = "<group>"; };
@@ -115,6 +158,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F0EBBB219A9F611001E8626 /* Frontia.framework in Frameworks */,
+				5F0EBBB519A9F611001E8626 /* TencentOpenAPI in Frameworks */,
+				5F0EBBB819A9F612001E8626 /* libWeChatSDK in Frameworks */,
+				5F0EBBB719A9F611001E8626 /* libWeiboSDK in Frameworks */,
 				E162A456897B49C39563CC16 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,6 +232,8 @@
 				5F5782B9199A63F900FCA0EE /* CenterNav.m */,
 				5F42DD5F19A2024000359866 /* AddScene.h */,
 				5F42DD6019A2024000359866 /* AddScene.m */,
+				5F0EBB9619A9C1DB001E8626 /* FeedCell.h */,
+				5F0EBB9719A9C1DB001E8626 /* FeedCell.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -196,6 +245,76 @@
 				5F0EBB5719A79117001E8626 /* RecommedScene.m */,
 			);
 			path = Recommend;
+			sourceTree = "<group>";
+		};
+		5F0EBB8F19A9A744001E8626 /* FavoriteScene */ = {
+			isa = PBXGroup;
+			children = (
+				5F0EBB9019A9A75D001E8626 /* FavoriteScene.h */,
+				5F0EBB9119A9A75D001E8626 /* FavoriteScene.m */,
+			);
+			name = FavoriteScene;
+			sourceTree = "<group>";
+		};
+		5F0EBB9919A9F611001E8626 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				5F0EBB9A19A9F611001E8626 /* Frontia.framework */,
+				5F0EBB9B19A9F611001E8626 /* FrontiaSource.bundle */,
+				5F0EBB9C19A9F611001E8626 /* JSONKit.h */,
+				5F0EBB9D19A9F611001E8626 /* JSONKit.m */,
+				5F0EBB9E19A9F611001E8626 /* QQ */,
+				5F0EBBAB19A9F611001E8626 /* WB */,
+				5F0EBBAE19A9F611001E8626 /* WX */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		5F0EBB9E19A9F611001E8626 /* QQ */ = {
+			isa = PBXGroup;
+			children = (
+				5F0EBB9F19A9F611001E8626 /* QQApi.h */,
+				5F0EBBA019A9F611001E8626 /* QQApiInterface.h */,
+				5F0EBBA119A9F611001E8626 /* QQApiInterfaceObject.h */,
+				5F0EBBA219A9F611001E8626 /* sdkdef.h */,
+				5F0EBBA319A9F611001E8626 /* TencentApiInterface.h */,
+				5F0EBBA419A9F611001E8626 /* TencentMessageObject.h */,
+				5F0EBBA519A9F611001E8626 /* TencentOAuth.h */,
+				5F0EBBA619A9F611001E8626 /* TencentOAuthObject.h */,
+				5F0EBBA719A9F611001E8626 /* TencentOpenAPI */,
+				5F0EBBA819A9F611001E8626 /* TencentOpenApi_IOS_Bundle.bundle */,
+				5F0EBBA919A9F611001E8626 /* WeiBoAPI.h */,
+				5F0EBBAA19A9F611001E8626 /* WeiyunAPI.h */,
+			);
+			path = QQ;
+			sourceTree = "<group>";
+		};
+		5F0EBBAB19A9F611001E8626 /* WB */ = {
+			isa = PBXGroup;
+			children = (
+				5F0EBBAC19A9F611001E8626 /* libWeiboSDK */,
+				5F0EBBAD19A9F611001E8626 /* WeiboSDK.h */,
+			);
+			path = WB;
+			sourceTree = "<group>";
+		};
+		5F0EBBAE19A9F611001E8626 /* WX */ = {
+			isa = PBXGroup;
+			children = (
+				5F0EBBAF19A9F611001E8626 /* libWeChatSDK */,
+				5F0EBBB019A9F611001E8626 /* WXApi.h */,
+				5F0EBBB119A9F611001E8626 /* WXApiObject.h */,
+			);
+			path = WX;
+			sourceTree = "<group>";
+		};
+		5F0EBBB919A9F64F001E8626 /* Discovery */ = {
+			isa = PBXGroup;
+			children = (
+				5F0EBBBA19A9F679001E8626 /* DiscoveryScene.h */,
+				5F0EBBBB19A9F679001E8626 /* DiscoveryScene.m */,
+			);
+			name = Discovery;
 			sourceTree = "<group>";
 		};
 		5F578275199A43D600FCA0EE = {
@@ -266,6 +385,8 @@
 		5F5782A6199A4BA300FCA0EE /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				5F0EBBB919A9F64F001E8626 /* Discovery */,
+				5F0EBB8F19A9A744001E8626 /* FavoriteScene */,
 				5F0EBB8819A83CB1001E8626 /* Recommend */,
 				5F0EBB8719A83C91001E8626 /* Main */,
 				5F0EBB8619A83C7A001E8626 /* Base */,
@@ -281,6 +402,10 @@
 				5F42DD5719A1B9E500359866 /* FeedSceneModel.m */,
 				5F0EBB5C19A79F6F001E8626 /* RecommendSceneModel.h */,
 				5F0EBB5D19A79F6F001E8626 /* RecommendSceneModel.m */,
+				5F0EBB9319A9ABF2001E8626 /* FavSceneModel.h */,
+				5F0EBB9419A9ABF2001E8626 /* FavSceneModel.m */,
+				5F0EBBBD19A9F754001E8626 /* DiscoverySceneModel.h */,
+				5F0EBBBE19A9F754001E8626 /* DiscoverySceneModel.m */,
 			);
 			path = SceneModel;
 			sourceTree = "<group>";
@@ -310,6 +435,7 @@
 		5F5782AB199A4C9A00FCA0EE /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				5F0EBB9919A9F611001E8626 /* libs */,
 				5F0EBB5F19A7A1DE001E8626 /* AlertBlock */,
 				5F5782AC199A4CAA00FCA0EE /* ICSDrawerController */,
 			);
@@ -409,7 +535,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F0EBBB619A9F611001E8626 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				5F0EBB8319A82AFD001E8626 /* Default-568h.png in Resources */,
+				5F0EBBB319A9F611001E8626 /* FrontiaSource.bundle in Resources */,
 				5F0EBB8419A82AFD001E8626 /* Default.png in Resources */,
 				5F0EBB8519A82AFD001E8626 /* Default@2x.png in Resources */,
 				5F0EBB7F19A82368001E8626 /* icon@2x.png in Resources */,
@@ -477,6 +605,8 @@
 				5F57828A199A43D700FCA0EE /* RootScene.m in Sources */,
 				5F578287199A43D700FCA0EE /* AppDelegate.m in Sources */,
 				5F578284199A43D700FCA0EE /* main.m in Sources */,
+				5F0EBB9219A9A75D001E8626 /* FavoriteScene.m in Sources */,
+				5F0EBB9819A9C1DB001E8626 /* FeedCell.m in Sources */,
 				5F5782BA199A63F900FCA0EE /* CenterNav.m in Sources */,
 				5FA288D5199B0E7400F3CB8E /* LeftHeader.m in Sources */,
 				5F42DD6419A353B200359866 /* RssListScene.m in Sources */,
@@ -486,10 +616,14 @@
 				5F5782B2199A4CAA00FCA0EE /* ICSDropShadowView.m in Sources */,
 				5F42DD5819A1B9E500359866 /* FeedSceneModel.m in Sources */,
 				5FC3633F19A5033F0090547A /* RssDetailScene.m in Sources */,
+				5F0EBBBC19A9F679001E8626 /* DiscoveryScene.m in Sources */,
 				5F0EBB5E19A79F6F001E8626 /* RecommendSceneModel.m in Sources */,
+				5F0EBB9519A9ABF2001E8626 /* FavSceneModel.m in Sources */,
+				5F0EBBBF19A9F754001E8626 /* DiscoverySceneModel.m in Sources */,
 				5F0EBB6219A7A1F9001E8626 /* UIAlertView+Blocks.m in Sources */,
 				5F0EBB5819A79117001E8626 /* RecommedScene.m in Sources */,
 				5FA288D2199B0CF100F3CB8E /* LeftCell.m in Sources */,
+				5F0EBBB419A9F611001E8626 /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,9 +736,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 23F534577AD045DEBA85B7E1 /* Pods.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/rssreader/Home/Vendor/libs",
+				);
 				INFOPLIST_FILE = "rssreader/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/rssreader/Home/Vendor/libs/QQ",
+					"$(PROJECT_DIR)/rssreader/Home/Vendor/libs/WB",
+					"$(PROJECT_DIR)/rssreader/Home/Vendor/libs/WX",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -613,9 +757,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 23F534577AD045DEBA85B7E1 /* Pods.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/rssreader/Home/Vendor/libs",
+				);
 				INFOPLIST_FILE = "rssreader/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/rssreader/Home/Vendor/libs/QQ",
+					"$(PROJECT_DIR)/rssreader/Home/Vendor/libs/WB",
+					"$(PROJECT_DIR)/rssreader/Home/Vendor/libs/WX",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

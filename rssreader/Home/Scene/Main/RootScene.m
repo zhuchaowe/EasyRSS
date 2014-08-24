@@ -10,6 +10,9 @@
 #import "FeedSceneModel.h"
 #import "AddScene.h"
 #import "RssListScene.h"
+#import "BlockActionSheet.h"
+#import "SHGestureRecognizerBlocks.h"
+#import "FeedCell.h"
 @interface RootScene ()
 @property(nonatomic,retain)FeedSceneModel *feedSceneModel;
 @end
@@ -22,7 +25,6 @@
     [self.tableView addHeader];   //添加下拉刷新
     
     _feedSceneModel = [FeedSceneModel sharedInstance];
-
     
     UIButton *rssbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_rss" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
     [self showBarButton:NAV_RIGHT button:rssbutton];
@@ -80,43 +82,46 @@
     return self.feedSceneModel.feedList.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *SettingTableIdentifier = @"PostCell";
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingTableIdentifier];
+- (FeedCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *SettingTableIdentifier = @"FeedCell";
+    FeedCell *cell = [[FeedCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingTableIdentifier];
     Feed *feed = [self.feedSceneModel.feedList objectAtIndex:indexPath.row];
-
-    [cell.imageView setImageFromURL:[NSURL URLWithString:feed.favicon] placeHolderImage:[UIImage imageNamed:@"rssIcon"]];
-    cell.textLabel.text = feed.title;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",(long)feed.notReadedCount];
+    [cell reload:feed];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell setAccessoryType:UITableViewCellAccessoryNone];
+    
+    UILongPressGestureRecognizer *longPress = [UILongPressGestureRecognizer SH_gestureRecognizerWithBlock:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        if(state == UIGestureRecognizerStateBegan){
+            BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:feed.title];
+            [sheet setCancelButtonWithTitle:@"分享" block:nil];
+            [sheet setDestructiveButtonWithTitle:@"删除" block:^{
+                [[GCDQueue globalQueue] queueBlock:^{
+                    [feed deleteSelf];
+                }];
+                [self.feedSceneModel.feedList removeObjectAtIndex:indexPath.row];
+                [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            }];
+            [sheet addButtonWithTitle:@"全部已读" block:^{
+                cell.numberLabel.text = @"";
+                [Rss setReadWhere:@{@"_fid":@(feed.primaryKey)}];
+            }];
+            [sheet addButtonWithTitle:@"取消" block:nil];
+            [sheet showInView:self.view];
+        }
+    }];
+    [longPress setMinimumPressDuration:0.5f];
+    [longPress setAllowableMovement:50.0];
+    [cell addGestureRecognizer:longPress];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     RssListScene *scene =  [self.storyboard instantiateViewControllerWithIdentifier:@"RssListScene"];
-    scene.feed = [self.feedSceneModel.feedList objectAtIndex:indexPath.row];
+    Feed *feed = [self.feedSceneModel.feedList objectAtIndex:indexPath.row];
+    scene.map = @{@"_fid":@(feed.primaryKey)};
+    scene.url = feed.url;
     [self.navigationController pushViewController:scene animated:YES];
     self.nav.shouldOpen = NO;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        Feed *feed = [self.feedSceneModel.feedList objectAtIndex:indexPath.row];
-        [[GCDQueue globalQueue] queueBlock:^{
-            [feed deleteSelf];
-        }];
-       [self.feedSceneModel.feedList removeObjectAtIndex:indexPath.row];
-       [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
 }
 
 @end

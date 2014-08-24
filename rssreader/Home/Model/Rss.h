@@ -26,10 +26,14 @@
 @property (nonatomic, assign) NSUInteger isFav;
 @property (nonatomic, assign) NSUInteger isRead;
 @property (nonatomic, retain) NSString * subscribeUrl;
+@property (nonatomic, retain) NSString *feedFavicon;
+@property (nonatomic, retain) NSString *feedTitle;
 
++(void)setReadWhere:(NSDictionary *)map;
 -(void)saveRead;
--(void)saveDislike;
 -(void)saveFav;
+
++(NSArray *)rssListInDb:(NSDictionary *)map page:(NSNumber *)page pageSize:(NSNumber *)pageSize;
 +(NSUInteger)totalNotReadedCount;
 +(void)setUpNoti;
 @end

@@ -10,6 +10,7 @@
 #import "Feed.h"
 #import "SceneTableView.h"
 @interface RssListScene : Scene<SceneTableViewDelegate>
-@property(nonatomic,retain)Feed *feed;
+@property(nonatomic,strong) NSDictionary *map;
+@property(nonatomic,strong) NSString *url;
 @property (strong, nonatomic) IBOutlet SceneTableView *tableView;
 @end

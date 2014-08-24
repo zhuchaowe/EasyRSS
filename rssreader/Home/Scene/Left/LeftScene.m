@@ -113,6 +113,11 @@
             _navRecommend = [[CenterNav alloc]initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"RecommedScene"]];
         }
         [self.drawer replaceCenterViewControllerWithViewController:_navRecommend];
+    }else if(indexPath.row == 3){
+        if(_navFav == nil){
+            _navFav = [[CenterNav alloc]initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FavoriteScene"]];
+        }
+        [self.drawer replaceCenterViewControllerWithViewController:_navFav];
     }
 }
 

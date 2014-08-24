@@ -17,8 +17,8 @@
 -(NSArray *)rssListInDb:(NSNumber *)page pageSize:(NSNumber *)pageSize{
     NSArray *result = [NSArray array];
     if(self.primaryKey !=0){
-        NSMutableDictionary *map = [NSMutableDictionary dictionaryWithDictionary:@{@"_fid":[NSNumber numberWithInteger:self.primaryKey]}];
-        result = [[[[[Rss Model] where:map] order:@"`date` DESC"] limit:(page.integerValue -1) * pageSize.integerValue size:pageSize.integerValue] select];
+        NSDictionary *map = @{@"_fid":@(self.primaryKey)};
+       result = [Rss rssListInDb:map page:page pageSize:pageSize];
     }
     return result;
 }
@@ -31,9 +31,6 @@
     return [[[Rss Model] where:@{@"isRead":@(0),
                                  @"_fid":@(self.primaryKey)}] getCount];
 }
-
-
-
 /**
  *  beforeSave
  *  保存之前 保证数据字段url唯一
