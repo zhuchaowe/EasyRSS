@@ -27,8 +27,9 @@
 @property (nonatomic, assign) NSUInteger isRead;
 @property (nonatomic, retain) NSString * subscribeUrl;
 
-
 -(void)saveRead;
 -(void)saveDislike;
 -(void)saveFav;
++(NSUInteger)totalNotReadedCount;
++(void)setUpNoti;
 @end

@@ -29,6 +29,7 @@
     
     [RACObserve(self.feedSceneModel, feedList)
         subscribeNext:^(NSArray *list) {
+            [Rss totalNotReadedCount];
             [_tableView reloadData];
             [_tableView.header endRefreshing];
         }];
@@ -104,7 +105,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Feed *feed = [self.feedSceneModel.feedList objectAtIndex:indexPath.row];
         [[GCDQueue globalQueue] queueBlock:^{
-            [feed delete];
+            [feed deleteSelf];
         }];
        [self.feedSceneModel.feedList removeObjectAtIndex:indexPath.row];
        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];

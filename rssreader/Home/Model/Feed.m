@@ -32,6 +32,8 @@
                                  @"_fid":@(self.primaryKey)}] getCount];
 }
 
+
+
 /**
  *  beforeSave
  *  保存之前 保证数据字段url唯一
@@ -52,7 +54,6 @@
 -(void)resetTotal{
     [self resetAll];
     self.total = self.rssListCount;
-    
     [self update:@{@"total":@(self.total)}];
 }
 
@@ -72,8 +73,13 @@
  *  beforeDelete
  *  先删除关联模型数据
  */
--(void)beforeDelete{
-    [super beforeDelete];
-    [Rss deleteWhere:[NSString stringWithFormat:@"_fid = %lu",(unsigned long)self.primaryKey]];
+-(void)beforeDeleteSelf{
+    [super beforeDeleteSelf];
+    [[[Rss Model] where:@{@"_fid":@(self.primaryKey)}] delete];
+}
+
+-(void)afterDeleteSelf{
+    [super afterDeleteSelf];
+    [Rss totalNotReadedCount];
 }
 @end

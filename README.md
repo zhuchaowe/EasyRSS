@@ -30,3 +30,13 @@ EasyRSS is a rss reader for ios based on EasyIOS 2.0.2
 * 5.增加rss保存时间
 * 6.修改首页排版
 * 7.修改刷新hud交互
+
+#LICENSE
+
+GNU GENERAL PUBLIC LICENSE
+                       Version 2, June 1991
+
+ Copyright (C) 1989, 1991 Free Software Foundation, Inc., <http://fsf.org/>
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.

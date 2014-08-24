@@ -39,6 +39,7 @@
     if([rss isEmpty]) return;
     rss.isRead = 1;
     [rss saveRead];
+    [UIApplication sharedApplication].applicationIconBadgeNumber -=1;
     self.title = rss.title;
     NSString *detailString = [NSMutableString stringFromResFile:@"detail.html" encoding:NSUTF8StringEncoding];
     NSString *publishDate = [[NSDate dateWithTimeIntervalSince1970:rss.date] stringWithDateFormat:@"yyyy-MM-dd HH:mm:ss"];
