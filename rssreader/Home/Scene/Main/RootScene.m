@@ -13,6 +13,7 @@
 #import "BlockActionSheet.h"
 #import "SHGestureRecognizerBlocks.h"
 #import "FeedCell.h"
+#import "DiscoverySceneModel.h"
 @interface RootScene ()
 @property(nonatomic,retain)FeedSceneModel *feedSceneModel;
 @end
@@ -93,7 +94,9 @@
     UILongPressGestureRecognizer *longPress = [UILongPressGestureRecognizer SH_gestureRecognizerWithBlock:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
         if(state == UIGestureRecognizerStateBegan){
             BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:feed.title];
-            [sheet setCancelButtonWithTitle:@"分享" block:nil];
+            [sheet setCancelButtonWithTitle:@"分享" block:^{
+
+            }];
             [sheet setDestructiveButtonWithTitle:@"删除" block:^{
                 [[GCDQueue globalQueue] queueBlock:^{
                     [feed deleteSelf];

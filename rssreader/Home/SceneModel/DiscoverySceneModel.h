@@ -7,14 +7,13 @@
 //
 
 #import "SceneModel.h"
-#import <Frontia/Frontia.h>
-#import <Frontia/FrontiaData.h>
-#import "JSONKit.h"
+#import "swift-bridge.h"
 @interface DiscoverySceneModel : SceneModel
 @property(nonatomic,retain)NSMutableArray *dataArray;
-@property(nonatomic,retain)FrontiaStorage *storage;
--(void)findData:(NSString *)key value:(NSObject *)value;
--(void)updateData:(NSString *)key replace:(NSObject *)oldValue with:(NSObject *)newValue;
--(void)deleteData:(NSString *)key value:(NSObject *)value;
--(void)insertData:(NSString *)key value:(NSObject *)value;
+/**
+ *  生成单例
+ *
+ *  @return instancetype FeedSceneModel单例
+ */
++ (instancetype)sharedInstance;
 @end

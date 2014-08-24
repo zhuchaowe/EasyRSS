@@ -15,6 +15,7 @@
 #import "RootScene.h"
 #import "MobClick.h"
 #import "Rss.h"
+
 #define CHANNEL_ID @"pgyer"
 #define UMAppKey @"53f8902ffd98c585ba02a156"
 @interface AppDelegate ()
@@ -77,6 +78,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
 
 -(void)setUpAnialytics{
     [MobClick startWithAppkey:UMAppKey reportPolicy:SEND_INTERVAL   channelId:CHANNEL_ID];

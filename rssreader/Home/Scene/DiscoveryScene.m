@@ -14,6 +14,7 @@
 
 @implementation DiscoveryScene
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _discoverySceneModel = [DiscoverySceneModel SceneModel];
