@@ -31,7 +31,11 @@ EasyRSS is a rss reader for ios based on EasyIOS 2.0.2
 * 6.修改首页排版
 * 7.修改刷新hud交互
 
+
+
 #LICENSE
+* EasyRSS遵循GPL协议
+
 
 GNU GENERAL PUBLIC LICENSE
                        Version 2, June 1991
