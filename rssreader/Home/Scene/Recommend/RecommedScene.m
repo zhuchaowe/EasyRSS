@@ -10,6 +10,7 @@
 #import "RecommendSceneModel.h"
 #import "UIAlertView+Blocks.h"
 #import "FeedSceneModel.h"
+#import "BlockAlertView.h"
 @interface RecommedScene ()
 @property(nonatomic,retain)RecommendSceneModel *sceneModel;
 @end
@@ -70,34 +71,27 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Item *item = [self.sceneModel.itemList.list objectAtIndex:indexPath.row];
+    BlockAlertView *sheet = [BlockAlertView alertWithTitle:@"添加rss源" message:[NSString stringWithFormat:@"您即将添加[%@]",item.name]];
     
-    [UIAlertView showWithTitle:@"添加rss源"
-                       message:[NSString stringWithFormat:@"您即将添加[%@]",item.name]
-             cancelButtonTitle:@"取消"
-             otherButtonTitles:@[@"确定"]
-                      tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                          if (buttonIndex == [alertView cancelButtonIndex]) {
-                              NSLog(@"Cancelled");
-                          } else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"确定"]) {
-                              MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                              hud.labelText = @"加载中...";
-                              
-                              [[FeedSceneModel sharedInstance]
-                               loadAFeed:item.url
-                               start:nil
-                               finish:^{
-                                   hud.mode = MBProgressHUDModeCustomView;
-                   
-                                   hud.customView =  [IconFont labelWithIcon:[IconFont icon:@"fa_check" fromFont:fontAwesome] fontName:fontAwesome size:37.0f color:[UIColor whiteColor]];
-                                   hud.labelText = @"添加成功！";
-                                   [hud hide:YES afterDelay:0.5];
-                                   
-                               } error:^{
-                                  hud.labelText = @"加载失败！";
-                                  [hud hide:YES afterDelay:0.5];
-                               }];
-                          }
-                      }];
+    [sheet setCancelButtonWithTitle:@"取消" block:nil];
+    [sheet setDestructiveButtonWithTitle:@"确定" block:^{
+        MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = @"加载中...";
+        
+        [[FeedSceneModel sharedInstance]
+         loadAFeed:item.url
+         start:nil
+         finish:^{
+             hud.mode = MBProgressHUDModeCustomView;
+             hud.customView =  [IconFont labelWithIcon:[IconFont icon:@"fa_check" fromFont:fontAwesome] fontName:fontAwesome size:37.0f color:[UIColor whiteColor]];
+             hud.labelText = @"添加成功！";
+             [hud hide:YES afterDelay:0.5];
+         } error:^{
+             hud.labelText = @"加载失败！";
+             [hud hide:YES afterDelay:0.5];
+         }];
+    }];
+    [sheet show];
 }
 
 @end

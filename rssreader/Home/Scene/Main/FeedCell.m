@@ -21,13 +21,16 @@
         _titleLabel.font = [UIFont systemFontOfSize:18.0f];
         _titleLabel.textColor = [UIColor blackColor];
         [self.contentView addSubview:_titleLabel];
-        [_titleLabel alignTop:@"0" leading:@"46" bottom:@"0" trailing:@"80" toView:self.contentView];
-        [_titleLabel constrainHeight:@"21"];
+
         
         _numberLabel = [[UILabel alloc]init];
         _numberLabel.font = [UIFont systemFontOfSize:18.0f];
         _numberLabel.textColor = [UIColor grayColor];
         [self.contentView addSubview:_numberLabel];
+        
+        [_titleLabel alignTop:@"15" leading:@"46" toView:self.contentView];
+        [_titleLabel constrainWidth:@"220" height:@"21"];
+        
         [_numberLabel alignTop:@"0" leading:nil bottom:@"0" trailing:@"20" toView:self.contentView];
         [_numberLabel constrainWidth:@"50" height:@"21"];
     }
