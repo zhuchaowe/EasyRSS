@@ -7,8 +7,8 @@
 //
 
 #import "SceneModel.h"
-
+#import "ItemList.h"
 @interface RecommendSceneModel : SceneModel
-@property(nonatomic,retain)NSArray *dataArray;
+@property(nonatomic,retain)ItemList *itemList;
 -(void)loadData;
 @end

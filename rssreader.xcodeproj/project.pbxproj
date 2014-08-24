@@ -23,13 +23,16 @@
 		5F0EBB9819A9C1DB001E8626 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB9719A9C1DB001E8626 /* FeedCell.m */; };
 		5F0EBBB219A9F611001E8626 /* Frontia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0EBB9A19A9F611001E8626 /* Frontia.framework */; };
 		5F0EBBB319A9F611001E8626 /* FrontiaSource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5F0EBB9B19A9F611001E8626 /* FrontiaSource.bundle */; };
-		5F0EBBB419A9F611001E8626 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB9D19A9F611001E8626 /* JSONKit.m */; };
+		5F0EBBB419A9F611001E8626 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB9D19A9F611001E8626 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5F0EBBB519A9F611001E8626 /* TencentOpenAPI in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0EBBA719A9F611001E8626 /* TencentOpenAPI */; };
 		5F0EBBB619A9F611001E8626 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5F0EBBA819A9F611001E8626 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		5F0EBBB719A9F611001E8626 /* libWeiboSDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0EBBAC19A9F611001E8626 /* libWeiboSDK */; };
 		5F0EBBB819A9F612001E8626 /* libWeChatSDK in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0EBBAF19A9F611001E8626 /* libWeChatSDK */; };
 		5F0EBBBC19A9F679001E8626 /* DiscoveryScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBBBB19A9F679001E8626 /* DiscoveryScene.m */; };
 		5F0EBBBF19A9F754001E8626 /* DiscoverySceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBBBE19A9F754001E8626 /* DiscoverySceneModel.m */; };
+		5F0EBBC219A9F9E2001E8626 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBBC119A9F9E2001E8626 /* Item.m */; };
+		5F0EBBC519A9FAF1001E8626 /* ItemList.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBBC419A9FAF1001E8626 /* ItemList.m */; };
+		5F0EBBCB19AA011D001E8626 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F0EBBCA19AA011D001E8626 /* CoreTelephony.framework */; };
 		5F2558E3199B579A00C79F8F /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5F2558E2199B579A00C79F8F /* bg.jpg */; };
 		5F42DD1A19A0FF2400359866 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F42DD1919A0FF2400359866 /* Feed.m */; };
 		5F42DD1D19A0FF3200359866 /* Rss.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F42DD1C19A0FF3200359866 /* Rss.m */; };
@@ -112,6 +115,13 @@
 		5F0EBBBB19A9F679001E8626 /* DiscoveryScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryScene.m; sourceTree = "<group>"; };
 		5F0EBBBD19A9F754001E8626 /* DiscoverySceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverySceneModel.h; sourceTree = "<group>"; };
 		5F0EBBBE19A9F754001E8626 /* DiscoverySceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverySceneModel.m; sourceTree = "<group>"; };
+		5F0EBBC019A9F9E2001E8626 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		5F0EBBC119A9F9E2001E8626 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		5F0EBBC319A9FAF1001E8626 /* ItemList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemList.h; sourceTree = "<group>"; };
+		5F0EBBC419A9FAF1001E8626 /* ItemList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemList.m; sourceTree = "<group>"; };
+		5F0EBBC619AA00CD001E8626 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5F0EBBC819AA00F7001E8626 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		5F0EBBCA19AA011D001E8626 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		5F2558E2199B579A00C79F8F /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
 		5F42DD1819A0FF2400359866 /* Feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
 		5F42DD1919A0FF2400359866 /* Feed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed.m; sourceTree = "<group>"; };
@@ -158,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F0EBBCB19AA011D001E8626 /* CoreTelephony.framework in Frameworks */,
 				5F0EBBB219A9F611001E8626 /* Frontia.framework in Frameworks */,
 				5F0EBBB519A9F611001E8626 /* TencentOpenAPI in Frameworks */,
 				5F0EBBB819A9F612001E8626 /* libWeChatSDK in Frameworks */,
@@ -179,6 +190,9 @@
 		1DE6A70E1A3C45EA99E6BC16 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5F0EBBCA19AA011D001E8626 /* CoreTelephony.framework */,
+				5F0EBBC819AA00F7001E8626 /* MobileCoreServices.framework */,
+				5F0EBBC619AA00CD001E8626 /* CoreLocation.framework */,
 				A86CFD2511204D1485D569FC /* libPods.a */,
 			);
 			name = Frameworks;
@@ -378,6 +392,10 @@
 				5F42DD1919A0FF2400359866 /* Feed.m */,
 				5F42DD1B19A0FF3200359866 /* Rss.h */,
 				5F42DD1C19A0FF3200359866 /* Rss.m */,
+				5F0EBBC019A9F9E2001E8626 /* Item.h */,
+				5F0EBBC119A9F9E2001E8626 /* Item.m */,
+				5F0EBBC319A9FAF1001E8626 /* ItemList.h */,
+				5F0EBBC419A9FAF1001E8626 /* ItemList.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -609,6 +627,7 @@
 				5F0EBB9819A9C1DB001E8626 /* FeedCell.m in Sources */,
 				5F5782BA199A63F900FCA0EE /* CenterNav.m in Sources */,
 				5FA288D5199B0E7400F3CB8E /* LeftHeader.m in Sources */,
+				5F0EBBC219A9F9E2001E8626 /* Item.m in Sources */,
 				5F42DD6419A353B200359866 /* RssListScene.m in Sources */,
 				5F42DD6919A4504B00359866 /* RssCell.m in Sources */,
 				5F42DD6119A2024000359866 /* AddScene.m in Sources */,
@@ -622,6 +641,7 @@
 				5F0EBBBF19A9F754001E8626 /* DiscoverySceneModel.m in Sources */,
 				5F0EBB6219A7A1F9001E8626 /* UIAlertView+Blocks.m in Sources */,
 				5F0EBB5819A79117001E8626 /* RecommedScene.m in Sources */,
+				5F0EBBC519A9FAF1001E8626 /* ItemList.m in Sources */,
 				5FA288D2199B0CF100F3CB8E /* LeftCell.m in Sources */,
 				5F0EBBB419A9F611001E8626 /* JSONKit.m in Sources */,
 			);

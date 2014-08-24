@@ -27,11 +27,11 @@
     _hud.tag = 0;
     [_hud show:YES];
     
-    [[RACObserve(self.sceneModel, dataArray)
-     filter:^BOOL(NSArray *list) {
-         return list.count >0;
+    [[RACObserve(self.sceneModel, itemList)
+     filter:^BOOL(ItemList *itemList) {
+         return itemList.list.count >0;
      }]
-     subscribeNext:^(NSArray *list) {
+     subscribeNext:^(ItemList *itemList) {
          [_tableView reloadData];
          _hud.mode = MBProgressHUDModeCustomView;
          
@@ -54,15 +54,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.sceneModel.dataArray.count;
+    return self.sceneModel.itemList.list.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *SettingTableIdentifier = @"PostCell";
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingTableIdentifier];
-    NSDictionary *dict = [self.sceneModel.dataArray objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = [dict objectForKey:@"title"];
+    Item *item = [self.sceneModel.itemList.list objectAtIndex:indexPath.row];
+    cell.textLabel.text = item.name;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     cell.backgroundColor = [UIColor colorWithString:@"#F9F9F9"];
@@ -70,10 +69,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *dict = [self.sceneModel.dataArray objectAtIndex:indexPath.row];
+    Item *item = [self.sceneModel.itemList.list objectAtIndex:indexPath.row];
     
     [UIAlertView showWithTitle:@"添加rss源"
-                       message:[NSString stringWithFormat:@"您即将添加[%@]",[dict objectForKey:@"title"]]
+                       message:[NSString stringWithFormat:@"您即将添加[%@]",item.name]
              cancelButtonTitle:@"取消"
              otherButtonTitles:@[@"确定"]
                       tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
@@ -84,7 +83,7 @@
                               hud.labelText = @"加载中...";
                               
                               [[FeedSceneModel sharedInstance]
-                               loadAFeed:[dict objectForKey:@"link"]
+                               loadAFeed:item.url
                                start:nil
                                finish:^{
                                    hud.mode = MBProgressHUDModeCustomView;

@@ -8,19 +8,14 @@
 
 #import "RecommendSceneModel.h"
 #import "swift-bridge.h"
+
 @implementation RecommendSceneModel
 
 -(void)loadData{
-    [JSONHTTPClient postJSONFromURLWithString:@"https://raw.githubusercontent.com/zhuchaowe/EasyRSS/master/lists.json"
+    [JSONHTTPClient getJSONFromURLWithString:@"https://raw.githubusercontent.com/zhuchaowe/EasyRSS/master/lists.json"
                                        params:nil
                                    completion:^(NSDictionary* json, JSONModelError *err) {
-                                       NSDictionary *list = [json objectForKey:@"list"];
-                                       NSMutableArray *array  = [NSMutableArray array];
-                                       for (NSString* key in [list allKeys]) {
-                                           [array addObject:@{@"link":key,
-                                                              @"title":[list objectForKey:key]}];
-                                       }
-                                       self.dataArray = array;
+                                       self.itemList = [[ItemList alloc] initWithDictionary:json error:nil];
                                    }];
 }
 @end
