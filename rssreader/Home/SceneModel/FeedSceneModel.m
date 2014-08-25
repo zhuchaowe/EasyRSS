@@ -86,7 +86,7 @@
     self.errorHandler = errorHandler;
     self.finishHandler = ^(MWFeedParser *parser) {
         [feed save];
-        [feed resetTotal];
+      //  [feed resetTotal];
         if(finishHandler){
             finishHandler(parser);
         }

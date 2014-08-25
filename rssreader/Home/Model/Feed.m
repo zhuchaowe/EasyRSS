@@ -10,6 +10,9 @@
 #import "GCDObjC.h"
 @implementation Feed
 
+-(void)loadModel{
+    self.createDate = 0;
+}
 +(NSArray *)getAllDesc{
     return [[[[Feed Model] where:nil] order:@"`primaryKey` DESC"] select];
 }
