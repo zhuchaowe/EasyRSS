@@ -91,6 +91,7 @@
             finishHandler(parser);
         }
     };
+    
     [_feedParser resetFeedRequestUrl:[NSURL URLWithString:url]];
     [_feedParser parse];
 }
