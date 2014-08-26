@@ -17,7 +17,7 @@
         _logoImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:_logoImageView];
         
-        _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(46, 15, 220, 21)];
+        _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(46, 15, 210, 21)];
         _titleLabel.font = [UIFont systemFontOfSize:18.0f];
         _titleLabel.textColor = [UIColor blackColor];
         [self.contentView addSubview:_titleLabel];
@@ -28,12 +28,6 @@
         _numberLabel.textColor = [UIColor grayColor];
         _numberLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:_numberLabel];
-        
-//        [_titleLabel alignTop:@"15" leading:@"46" toView:self.contentView];
-//        [_titleLabel constrainWidth:@"220" height:@"21"];
-        
-//        [_numberLabel alignTop:@"0" leading:nil bottom:@"0" trailing:@"20" toView:self.contentView];
-//        [_numberLabel constrainWidth:@"50" height:@"21"];
     }
     return self;
 }
