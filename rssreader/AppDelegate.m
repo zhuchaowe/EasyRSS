@@ -30,7 +30,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     UILocalNotification * notification=[launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    if(notification !=nil){
+    if(notification !=nil && [notification.userInfo objectForKey:@"time"]){
         [DataCenter sharedInstance].time = [notification.userInfo objectForKey:@"time"];
     }
     
@@ -98,10 +98,17 @@
 }
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler{
-    [[FeedSceneModel sharedInstance]
-     reflashAllFeed:nil each:nil finish:^{
-         if([Rss notifyNewMessage]){
-             completionHandler(UIBackgroundFetchResultNewData);
+    [[$ rac_didNetworkChanges]
+     subscribeNext:^(Reachability* reach) {
+         if([reach isReachableViaWiFi]){ //正在使用Wi-Fi网络
+             [[FeedSceneModel sharedInstance]
+              reflashAllFeed:nil each:nil finish:^{
+                  if([Rss notifyNewMessage]){
+                      completionHandler(UIBackgroundFetchResultNewData);
+                  }else{
+                      completionHandler(UIBackgroundFetchResultNoData);
+                  }
+              }];
          }else{
              completionHandler(UIBackgroundFetchResultNoData);
          }

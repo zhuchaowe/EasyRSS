@@ -39,7 +39,7 @@
     if(![[DataCenter sharedInstance].time isEmpty]){
         PresentRssList *presentRssListScene =  [self.storyboard instantiateViewControllerWithIdentifier:@"PresentRssList"];
         CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:presentRssListScene];
-        [self presentViewController:centerNav animated:YES completion:nil];
+        [self presentViewController:centerNav animated:NO completion:nil];
     }
 
     

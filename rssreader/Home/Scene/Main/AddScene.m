@@ -47,7 +47,10 @@
  *  导航条右按钮点击事件
  */
 -(void)rightButtonTouch{
-    if([NSURL URLWithString:_textView.text] != nil){
+    if([NSURL URLWithString:_textView.text].scheme == nil){
+        _textView.text = [NSString stringWithFormat:@"http://%@",_textView.text];
+    }
+    if([NSURL URLWithString:_textView.text].host != nil){
         MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"加载中...";
         
