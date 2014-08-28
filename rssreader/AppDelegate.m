@@ -15,29 +15,38 @@
 #import "RootScene.h"
 #import "MobClick.h"
 #import "Rss.h"
-
+#import "FeedSceneModel.h"
+#import "PresentRssList.h"
+#import "DataCenter.h"
 #define CHANNEL_ID @"pgyer"
 #define UMAppKey @"53f8902ffd98c585ba02a156"
 @interface AppDelegate ()
-
+@property(nonatomic,retain)RootScene *rootScene;
 @end
 
 @implementation AppDelegate
             
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    UILocalNotification * notification=[launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if(notification !=nil){
+        [DataCenter sharedInstance].time = [notification.userInfo objectForKey:@"time"];
+    }
+    
     [self setUpAnialytics];
+    [self setUpBackGroundReflash];
+
     self.database = [[AppDatabase alloc]initWithMigrations];
     [UIImageView setDefaultEngine:[CacheAction sharedInstance]];
     [$ swizzleClassMethod:@selector(objectAtIndex:) with:@selector(safeObjectAtIndex:) in:[NSArray class]];
     
     if (IOS7_OR_LATER) {
         [[UINavigationBar appearance] setBarTintColor:[UIColor flatDarkOrangeColor]];
-        [[UINavigationBar appearance] setTintColor:[UIColor flatDarkOrangeColor]];
+        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     }else{
         [[UINavigationBar appearance] setTintColor:[UIColor flatDarkOrangeColor]];
     }
-    
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           [UIColor whiteColor],NSForegroundColorAttributeName,
                                                           [UIFont systemFontOfSize:18],NSFontAttributeName,
@@ -48,8 +57,8 @@
     self.window.backgroundColor = [UIColor blackColor];
     
     LeftScene *leftScene = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LeftScene"];
-    RootScene *rootScene = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"RootScene"];
-    CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:rootScene];
+    _rootScene = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"RootScene"];
+    CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:_rootScene];
 
     ICSDrawerController *drawer = [[ICSDrawerController alloc]
                                    initWithLeftViewController:leftScene
@@ -79,7 +88,30 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+    if([notification.userInfo objectForKey:@"time"]){
+        [DataCenter sharedInstance].time = [notification.userInfo objectForKey:@"time"];
+        PresentRssList *presentRssListScene =  [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"PresentRssList"];
+        CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:presentRssListScene];
+        [_rootScene presentViewController:centerNav animated:YES completion:nil];
+    }
+}
 
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler{
+    [[FeedSceneModel sharedInstance]
+     reflashAllFeed:nil each:nil finish:^{
+         if([Rss notifyNewMessage]){
+             completionHandler(UIBackgroundFetchResultNewData);
+         }else{
+             completionHandler(UIBackgroundFetchResultNoData);
+         }
+     }];
+}
+
+
+-(void)setUpBackGroundReflash{
+    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:1800];
+}
 
 -(void)setUpAnialytics{
     [MobClick startWithAppkey:UMAppKey reportPolicy:SEND_INTERVAL   channelId:CHANNEL_ID];

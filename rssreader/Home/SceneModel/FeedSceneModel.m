@@ -86,9 +86,10 @@
     self.errorHandler = errorHandler;
     self.finishHandler = ^(MWFeedParser *parser) {
         [feed save];
-      //  [feed resetTotal];
         if(finishHandler){
-            finishHandler(parser);
+            [[GCDQueue mainQueue] queueBlock:^{
+                finishHandler(parser);
+            }];
         }
     };
     

@@ -53,6 +53,7 @@
         if(idx == 0){
             self.primaryKey = objc.primaryKey;
             self.savedInDatabase = objc.savedInDatabase;
+            self.createDate = objc.createDate;
             self.isRead = objc.isRead;
             self.isDislike = objc.isDislike;
             self.isFav = objc.isFav;
@@ -72,11 +73,51 @@
     return numberCount;
 }
 
++(NSArray *)getNewMessageList:(NSString *)time{
+    NSDictionary *map = @{
+                          @"_string":[NSString stringWithFormat:@" createDate >= %@",time],
+                          @"isRead":@(0)};
+    return [[[Rss Model] where:map]select];
+}
+
++(NSMutableString *)getMessage:(NSArray *)list{
+    NSMutableString *message = [NSMutableString stringWithString:@""];
+    [list enumerateObjectsUsingBlock:^(Rss *rss, NSUInteger idx, BOOL *stop) {
+        [message appendString:[NSString stringWithFormat:@"%@;",rss.title]];
+        if(idx >=3){
+            *stop = YES;
+        }
+    }];
+    return message;
+}
+
++(BOOL)notifyNewMessage{
+    NSString *time = [NSString stringWithFormat:@"%f",[NSDate dateWithTimeIntervalSinceNow:-30*60].timeIntervalSince1970];
+    NSArray *list = [self getNewMessageList:time];
+    NSMutableString *message = [self getMessage:list];
+    
+    if(![message isEmpty]){
+        UILocalNotification *notification=[[UILocalNotification alloc] init];
+        notification.repeatInterval = 0;//循环次数，
+        notification.timeZone=[NSTimeZone defaultTimeZone];
+        notification.soundName= UILocalNotificationDefaultSoundName;//声音，
+        notification.applicationIconBadgeNumber = [self totalNotReadedCount]; //应用的红色数字
+        notification.alertBody= message;//提示信息 弹出提示框
+        notification.alertAction = @"打开";  //提示框按钮
+        notification.hasAction = YES; //是否显示额外的按钮，为no时alertAction消失
+        notification.userInfo = @{@"time":time};
+        [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
 +(void)setUpNoti{
     UILocalNotification *notification=[[UILocalNotification alloc] init];
     if (notification!=nil) {
         NSDate *now=[NSDate new];
-        notification.fireDate=[now dateByAddingTimeInterval:60*60*3];//3小时后通知
+        notification.fireDate=[now dateByAddingTimeInterval:60*60*12];//应用12个小时未打开就通知
         notification.repeatInterval = kCFCalendarUnitDay;//循环次数，kCFCalendarUnitWeekday一周一次
         notification.timeZone=[NSTimeZone defaultTimeZone];
         notification.applicationIconBadgeNumber = [self totalNotReadedCount]; //应用的红色数字

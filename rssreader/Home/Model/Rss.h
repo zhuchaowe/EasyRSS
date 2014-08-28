@@ -35,5 +35,7 @@
 
 +(NSArray *)rssListInDb:(NSDictionary *)map page:(NSNumber *)page pageSize:(NSNumber *)pageSize;
 +(NSUInteger)totalNotReadedCount;
++(BOOL)notifyNewMessage;
++(NSArray *)getNewMessageList:(NSString *)time;
 +(void)setUpNoti;
 @end

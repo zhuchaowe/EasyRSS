@@ -1,49 +1,30 @@
 //
-//  FavoriteScene.m
+//  PresentRssList.m
 //  rssreader
 //
-//  Created by 朱潮 on 14-8-24.
+//  Created by 朱潮 on 14-8-27.
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import "FavoriteScene.h"
+#import "PresentRssList.h"
 #import "RssCell.h"
-#import "RssDetailScene.h"
-#import "FeedSceneModel.h"
-#import "FavSceneModel.h"
 #import "BlockActionSheet.h"
-#import "SHGestureRecognizerBlocks.h"
-@interface FavoriteScene ()
-@property(nonatomic,retain)FavSceneModel *favSceneModel;
+#import "RssDetailScene.h"
+#import "DataCenter.h"
+@interface PresentRssList ()
+
 @end
 
-@implementation FavoriteScene
-
+@implementation PresentRssList
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _favSceneModel = [FavSceneModel sharedInstance];
-    _tableView.SceneDelegate = self;
-    [_tableView addFooter];
-    [_tableView initPage];
-    @weakify(self);
-    [RACObserve(self.tableView, page)
-     subscribeNext:^(NSNumber *page) {
-          @strongify(self);
-         [[GCDQueue globalQueue] queueBlock:^{
-             [self.favSceneModel retData:page pageSize:_tableView.pageSize];
-         }];
-     }];
-    RAC(self.tableView,total) = RACObserve(self.favSceneModel, total);
-
-    [RACObserve(self.favSceneModel, favArray)
-    subscribeNext:^(NSArray* array) {
-        [[GCDQueue mainQueue] queueBlock:^{
-            @strongify(self);
-            [self.tableView successWithNewArray:array];
-            [self.tableView reloadData];
-        }];
-    }];
+    self.tableView.dataArray = [NSMutableArray arrayWithArray:[Rss getNewMessageList:[DataCenter sharedInstance].time]];
+    [DataCenter sharedInstance].time = @"";
+    [self showBarButton:NAV_RIGHT title:@"完成" fontColor:[UIColor whiteColor]];
     // Do any additional setup after loading the view.
+}
+-(void)rightButtonTouch{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,12 +32,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)handlePullLoader:(MJRefreshBaseView *)view state:(PullLoaderState)state{
-    [super handlePullLoader:view state:state];
-    if(state == REACH_BOTTOM){
-        self.tableView.page = @(self.tableView.page.integerValue + 1);
-    }
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     RssCell *cell = [self tableView:_tableView cellForRowAtIndexPath:indexPath];

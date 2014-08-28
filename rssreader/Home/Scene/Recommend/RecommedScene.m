@@ -35,11 +35,9 @@
      subscribeNext:^(ItemList *itemList) {
          [_tableView reloadData];
          _hud.mode = MBProgressHUDModeCustomView;
-         
          _hud.customView =  [IconFont labelWithIcon:[IconFont icon:@"fa_check" fromFont:fontAwesome] fontName:fontAwesome size:37.0f color:[UIColor whiteColor]];
          _hud.labelText = @"加载成功！";
          [_hud hide:YES afterDelay:0.5];
-         
      }];
     // Do any additional setup after loading the view.
 }

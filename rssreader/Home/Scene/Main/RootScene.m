@@ -11,17 +11,23 @@
 #import "AddScene.h"
 #import "RssListScene.h"
 #import "BlockActionSheet.h"
+#import "BlockAlertView.h"
 #import "SHGestureRecognizerBlocks.h"
 #import "FeedCell.h"
 #import "DiscoverySceneModel.h"
+#import "MWKProgressIndicator.h"
+#import "DataCenter.h"
+#import "PresentRssList.h"
 @interface RootScene ()
 @property(nonatomic,retain)FeedSceneModel *feedSceneModel;
+@property(nonatomic,assign)BOOL isReflashing;
 @end
 
 @implementation RootScene
             
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _isReflashing = NO;
     self.tableView.SceneDelegate = self;
     [self.tableView addHeader];   //添加下拉刷新
     
@@ -30,11 +36,26 @@
     UIButton *rssbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_rss" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
     [self showBarButton:NAV_RIGHT button:rssbutton];
     
+    if(![[DataCenter sharedInstance].time isEmpty]){
+        PresentRssList *presentRssListScene =  [self.storyboard instantiateViewControllerWithIdentifier:@"PresentRssList"];
+        CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:presentRssListScene];
+        [self presentViewController:centerNav animated:YES completion:nil];
+    }
+
+    
+    if ([[UIApplication sharedApplication] backgroundRefreshStatus] != UIBackgroundRefreshStatusAvailable) {
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"后台应用刷新" message:@"您没有开启后台刷新,请在 设置->通用->应用程序后台刷新 中开启。"];
+        [alert setCancelButtonWithTitle:@"确定" block:nil];
+        [alert show];
+    }
+    
+    @weakify(self);
     [RACObserve(self.feedSceneModel, feedList)
         subscribeNext:^(NSArray *list) {
+            @strongify(self);
             [Rss totalNotReadedCount];
-            [_tableView reloadData];
-            [_tableView.header endRefreshing];
+            [self.tableView reloadData];
+            [self.tableView.header endRefreshing];
         }];
 }
 
@@ -53,25 +74,25 @@
 -(void)handlePullLoader:(MJRefreshBaseView *)view state:(PullLoaderState)state{
     [super handlePullLoader:view state:state];
     if(state == HEADER_REFRESH){
-        
-        MBProgressHUD* _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        _hud.mode = MBProgressHUDModeDeterminate;
-        _hud.labelText = @"开始加载";
-        _hud.progress = 0;
-        _hud.tag = 0;
-        [_hud show:YES];
-        
-        [self.feedSceneModel reflashAllFeed:nil
-         each:^{
-             _hud.tag += 1;
-             _hud.progress += 1.0/self.feedSceneModel.feedList.count;
-             _hud.labelText = [NSString stringWithFormat:@"请耐心等待(%d/%d)",_hud.tag,self.feedSceneModel.feedList.count];
-         } finish:^{
-             _hud.mode = MBProgressHUDModeCustomView;
-             _hud.customView =  [IconFont labelWithIcon:[IconFont icon:@"fa_check" fromFont:fontAwesome] fontName:fontAwesome size:37.0f color:[UIColor whiteColor]];
-             _hud.labelText = @"刷新成功！";
-             [_hud hide:YES afterDelay:0.5];
-        }];
+        [self.tableView.header endRefreshing];
+        if(self.isReflashing == NO){
+            self.isReflashing = YES;
+            [MWKProgressIndicator show];
+            [MWKProgressIndicator updateMessage:@"正在刷新..."];
+            __block NSUInteger tag = 0;
+            @weakify(self);
+            [self.feedSceneModel reflashAllFeed:nil
+             each:^{
+                 @strongify(self);
+                 tag += 1;
+                 [MWKProgressIndicator updateProgress:1.0*tag/self.feedSceneModel.feedList.count];
+                 [MWKProgressIndicator updateMessage:[NSString stringWithFormat:@"正在刷新(%lu/%lu)",(unsigned long)tag,(unsigned long)self.feedSceneModel.feedList.count]];
+             } finish:^{
+                 @strongify(self);
+                 self.isReflashing = NO;
+                 [MWKProgressIndicator dismiss];
+            }];
+        }
     }
 }
 
@@ -97,13 +118,16 @@
             [sheet setCancelButtonWithTitle:@"分享" block:^{
 
             }];
+            @weakify(self);
             [sheet setDestructiveButtonWithTitle:@"删除" block:^{
                 [[GCDQueue globalQueue] queueBlock:^{
                     [feed deleteSelf];
                 }];
+                @strongify(self);
                 [self.feedSceneModel.feedList removeObjectAtIndex:indexPath.row];
                 [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
             }];
+            
             [sheet addButtonWithTitle:@"全部已读" block:^{
                 cell.numberLabel.text = @"";
                 [Rss setReadWhere:@{@"_fid":@(feed.primaryKey)}];

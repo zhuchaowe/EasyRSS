@@ -8,6 +8,7 @@
 
 #import "Feed.h"
 #import "GCDObjC.h"
+#import "RACEXTScope.h"
 @implementation Feed
 
 -(void)loadModel{
@@ -63,7 +64,9 @@
 -(void)afterSave{
     [super afterSave];
     if(self.primaryKey != 0){
-        [_rssList enumerateObjectsUsingBlock:^(Rss* obj, NSUInteger idx, BOOL *stop) {
+        @weakify(self);
+        [self.rssList enumerateObjectsUsingBlock:^(Rss* obj, NSUInteger idx, BOOL *stop) {
+            @strongify(self);
             obj._fid = self.primaryKey;
             [obj save];
         }];

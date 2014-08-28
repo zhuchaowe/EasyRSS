@@ -9,8 +9,10 @@
 #import "RssDetailScene.h"
 #import "swift-bridge.h"
 #import "UIColor+MLPFlatColors.h"
+#import "TOWebViewController.h"
 @interface RssDetailScene ()
-@property(nonatomic,retain)MBProgressHUD *hud;
+@property(nonatomic,retain)NSURL *url;
+@property(nonatomic,retain)NSURLRequest *req;
 @end
 
 @implementation RssDetailScene
@@ -21,17 +23,17 @@
     _webView.scalesPageToFit = YES;
     UIButton *leftbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_chevron_left" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
     [self showBarButton:NAV_LEFT button:leftbutton];
-    
-    _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    _hud.labelText = @"加载中...";
-    
+
     [self loadHTML:_rss];
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)rightButtonTouch{
+    [self presentWebView:_url];
 }
 
 - (void)loadHTML:(Rss*)rss
@@ -48,37 +50,34 @@
     if([rss.link isEmpty]){
        detailString = [detailString replace:RX(@"href=\"#link#\"") with:@""];
     }else{
+        _url = [NSURL URLWithString:rss.link];
+        UIButton *rightbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_external_link" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
+        [self showBarButton:NAV_RIGHT button:rightbutton];
        detailString = [detailString replace:RX(@"#link#") with:rss.link];
     }
     detailString = [detailString replace:RX(@"#author#") with:rss.author];
     detailString = [detailString replace:RX(@"#publishDate#") with:publishDate];
     detailString = [detailString replace:RX(@"#content#") with:rss.content];
     [_webView loadHTMLString:detailString baseURL:nil];
-    
 }
-
-- (void)setUrl:(NSString *)path
-{
-    if ([path isEmpty]) return;
-    [self openUrl:[NSURL URLWithString:path]];
-}
-
-- (void)openUrl:(NSURL *)url
-{
-    if ( nil == url )
-        return;
-    NSArray * cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-    
-    for ( NSHTTPCookie * cookie in cookies )
-    {
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+        [self presentWebView:[request URL]];
+        return NO;
     }
-    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
+    return YES;
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView{
-    [_hud show:YES];
-    [_hud hide:YES afterDelay:60];
+/**
+ *  打开一个webview
+ *
+ *  @param url NSURL
+ */
+-(void)presentWebView:(NSURL *)url{
+    TOWebViewController *webViewController = [[TOWebViewController alloc] initWithURL:url];
+    [webViewController setButtonTintColor:[UIColor flatDarkOrangeColor]];
+    [webViewController setLoadingBarTintColor:[UIColor flatDarkGreenColor]];
+    [self.navigationController pushViewController:webViewController animated:YES];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
@@ -86,14 +85,5 @@
     if([self.title isEqualToString:@"详情"]){
         self.title =[webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     }
-    [_hud hide:YES];
 }
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-    _hud.mode = MBProgressHUDModeCustomView;
-    _hud.customView =  [IconFont labelWithIcon:[IconFont icon:@"fa_times" fromFont:fontAwesome] fontName:fontAwesome size:37.0f color:[UIColor whiteColor]];
-    _hud.labelText = @"加载失败";
-    [_hud hide:YES afterDelay:0.5];
-}
-
 @end
