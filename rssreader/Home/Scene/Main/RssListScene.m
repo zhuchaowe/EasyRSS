@@ -12,7 +12,6 @@
 #import "RssDetailScene.h"
 #import "FeedSceneModel.h"
 #import "BlockActionSheet.h"
-#import "SHGestureRecognizerBlocks.h"
 #import "MWKProgressIndicator.h"
 @interface RssListScene ()
 @property(nonatomic,assign)BOOL isReflashing;

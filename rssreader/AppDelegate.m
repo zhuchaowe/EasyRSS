@@ -9,9 +9,6 @@
 #import "AppDelegate.h"
 #import "LeftScene.h"
 #import "CenterNav.h"
-#import "UIColor+MLPFlatColors.h"
-#import "CacheAction.h"
-#import "EasyKit.h"
 #import "RootScene.h"
 #import "MobClick.h"
 #import "Rss.h"
@@ -33,7 +30,7 @@
     if(notification !=nil && [notification.userInfo objectForKey:@"time"]){
         [DataCenter sharedInstance].time = [notification.userInfo objectForKey:@"time"];
     }
-    
+   
     [self setUpAnialytics];
     [self setUpBackGroundReflash];
 

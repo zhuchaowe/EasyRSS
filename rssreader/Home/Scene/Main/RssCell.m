@@ -7,7 +7,7 @@
 //
 
 #import "RssCell.h"
-#import "UIColor+MLPFlatColors.h"
+
 @interface RssCell()
 @property(nonatomic,retain)UIImageView *feedImage;
 @property(nonatomic,retain)EzUILabel *feedTitle;

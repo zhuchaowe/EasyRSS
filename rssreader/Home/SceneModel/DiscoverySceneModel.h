@@ -7,7 +7,7 @@
 //
 
 #import "SceneModel.h"
-#import "swift-bridge.h"
+
 @interface DiscoverySceneModel : SceneModel
 @property(nonatomic,retain)NSMutableArray *dataArray;
 /**

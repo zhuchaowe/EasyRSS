@@ -7,7 +7,7 @@
 //
 
 #import "FeedCell.h"
-#import "swift-bridge.h"
+
 @implementation FeedCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{

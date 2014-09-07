@@ -7,8 +7,7 @@
 //
 
 #import "Feed.h"
-#import "GCDObjC.h"
-#import "RACEXTScope.h"
+
 @implementation Feed
 
 -(void)loadModel{

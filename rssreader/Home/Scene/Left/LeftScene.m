@@ -7,13 +7,9 @@
 //
 
 #import "LeftScene.h"
-#import "UIColor+MLPFlatColors.h"
-#import "SceneCollectionView.h"
 #import "CSStickyHeaderFlowLayout.h"
 #import "LeftHeader.h"
-#import "UIView+FLKAutoLayout.h"
 #import "CSAlwaysOnTopHeader.h"
-#import "IconFont.h"
 #import "CenterNav.h"
 
 @interface LeftScene ()

@@ -7,7 +7,7 @@
 //
 
 #import "Scene.h"
-#import "SceneTableView.h"
+
 @interface PresentRssList : Scene
 @property (strong, nonatomic) IBOutlet SceneTableView *tableView;
 @end

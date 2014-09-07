@@ -8,7 +8,7 @@
 
 #import "FavSceneModel.h"
 #import "Rss.h"
-#import "swift-bridge.h"
+
 @implementation FavSceneModel
 /**
  *  生成单例

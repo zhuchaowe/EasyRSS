@@ -7,8 +7,6 @@
 //
 
 #import "BaseScene.h"
-#import "SceneTableView.h"
-
 
 @interface RootScene : BaseScene<SceneTableViewDelegate>
 @property (strong, nonatomic) IBOutlet SceneTableView *tableView;

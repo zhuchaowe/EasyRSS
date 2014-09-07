@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "swift-bridge.h"
 #import "Feed.h"
-#import "UIColor+MLPFlatColors.h"
+
 @interface RssCell : UITableViewCell
 -(void)reloadRss:(Rss *)rss;
 -(CGFloat)cellHeight;

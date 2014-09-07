@@ -7,8 +7,6 @@
 //
 
 #import "RssDetailScene.h"
-#import "swift-bridge.h"
-#import "UIColor+MLPFlatColors.h"
 #import "TOWebViewController.h"
 @interface RssDetailScene ()
 @property(nonatomic,retain)NSURL *url;

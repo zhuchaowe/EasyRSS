@@ -7,7 +7,7 @@
 //
 
 #import "RecommendSceneModel.h"
-#import "swift-bridge.h"
+
 
 @implementation RecommendSceneModel
 

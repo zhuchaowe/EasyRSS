@@ -8,10 +8,7 @@
 
 #import "CSAlwaysOnTopHeader.h"
 #import "CSStickyHeaderFlowLayoutAttributes.h"
-#import "UIView+FLKAutoLayout.h"
-#import "UIColor+MLPFlatColors.h"
-#import "ImageTool.h"
-#import "GCDObjC.h"
+
 @implementation CSAlwaysOnTopHeader
 
 - (id)initWithFrame:(CGRect)frame

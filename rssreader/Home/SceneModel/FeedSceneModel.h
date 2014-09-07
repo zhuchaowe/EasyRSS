@@ -7,7 +7,6 @@
 //
 
 #import "SceneModel.h"
-#import "swift-bridge.h"
 #import "MWFeedParser.h"
 #import "Feed.h"
 @interface FeedSceneModel : SceneModel<MWFeedParserDelegate>

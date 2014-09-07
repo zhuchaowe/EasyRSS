@@ -12,7 +12,7 @@
 #import "FeedSceneModel.h"
 #import "FavSceneModel.h"
 #import "BlockActionSheet.h"
-#import "SHGestureRecognizerBlocks.h"
+
 @interface FavoriteScene ()
 @property(nonatomic,retain)FavSceneModel *favSceneModel;
 @end

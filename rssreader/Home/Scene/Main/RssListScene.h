@@ -8,7 +8,7 @@
 
 #import "Scene.h"
 #import "Feed.h"
-#import "SceneTableView.h"
+
 @interface RssListScene : Scene<SceneTableViewDelegate>
 @property(nonatomic,strong) NSDictionary *map;
 @property(nonatomic,strong) NSString *url;

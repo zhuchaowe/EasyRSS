@@ -8,7 +8,6 @@
 
 #import "Rss.h"
 #import <UIKit/UIKit.h>
-#import "swift-bridge.h"
 #import "FavSceneModel.h"
 @implementation Rss
 

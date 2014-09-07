@@ -6,7 +6,6 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import "Model.h"
 #import "Rss.h"
 
 @protocol Rss <NSObject>

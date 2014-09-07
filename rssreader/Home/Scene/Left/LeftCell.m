@@ -7,7 +7,7 @@
 //
 
 #import "LeftCell.h"
-#import "UIView+FLKAutoLayout.h"
+
 @implementation LeftCell
 
 - (id)initWithFrame:(CGRect)frame
