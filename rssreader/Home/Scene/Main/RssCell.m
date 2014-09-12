@@ -67,6 +67,7 @@
 }
 
 -(void)reloadRss:(Rss *)rss{
+
     [_feedImage sd_setImageWithURL:[NSURL URLWithString:rss.feedFavicon] placeholderImage:[UIImage imageNamed:@"rssIcon"]];
     _time.text = [[NSDate dateWithTimeIntervalSince1970:rss.date] stringWithDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     _feedTitle.text = rss.feedTitle;
@@ -88,7 +89,7 @@
     }
     if(![rss.imageUrl isEmpty]){
         _rssImageView.frame = CGRectMake(_rssImageView.left, top, _rssImageView.width, _rssImageView.height);
-        [_rssImageView sd_setImageWithURL:[NSURL URLWithString:rss.imageUrl]];
+        [_rssImageView setImageWithURL:[NSURL URLWithString:rss.imageUrl] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [self.contentView addSubview:_rssImageView];
     }else{
         [_rssImageView removeFromSuperview];
