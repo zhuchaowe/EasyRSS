@@ -67,7 +67,7 @@
 }
 
 -(void)reloadRss:(Rss *)rss{
-    [_feedImage setImageFromURL:[NSURL URLWithString:rss.feedFavicon]  placeHolderImage:[UIImage imageNamed:@"rssIcon"] animation:YES];
+    [_feedImage sd_setImageWithURL:[NSURL URLWithString:rss.feedFavicon] placeholderImage:[UIImage imageNamed:@"rssIcon"]];
     _time.text = [[NSDate dateWithTimeIntervalSince1970:rss.date] stringWithDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     _feedTitle.text = rss.feedTitle;
     
@@ -88,7 +88,7 @@
     }
     if(![rss.imageUrl isEmpty]){
         _rssImageView.frame = CGRectMake(_rssImageView.left, top, _rssImageView.width, _rssImageView.height);
-        [_rssImageView setImageForReloadFromURL:[NSURL URLWithString:rss.imageUrl] placeHolderImage:nil animation:YES];
+        [_rssImageView sd_setImageWithURL:[NSURL URLWithString:rss.imageUrl]];
         [self.contentView addSubview:_rssImageView];
     }else{
         [_rssImageView removeFromSuperview];

@@ -33,14 +33,13 @@
 }
 
 -(void)reload:(Feed *)feed{
-    [_logoImageView setImageFromURL:[NSURL URLWithString:feed.favicon] placeHolderImage:[UIImage imageNamed:@"rssIcon"]];
+    [_logoImageView sd_setImageWithURL:[NSURL URLWithString:feed.favicon] placeholderImage:[UIImage imageNamed:@"rssIcon"]];
     _titleLabel.text = feed.title;
     if(feed.notReadedCount == 0){
         _numberLabel.text = @"";
     }else{
         _numberLabel.text = [NSString stringWithFormat:@"%ld",(long)feed.notReadedCount];
     }
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

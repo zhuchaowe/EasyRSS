@@ -35,7 +35,6 @@
     [self setUpBackGroundReflash];
 
     self.database = [[AppDatabase alloc]initWithMigrations];
-    [UIImageView setDefaultEngine:[CacheAction sharedInstance]];
     [$ swizzleClassMethod:@selector(objectAtIndex:) with:@selector(safeObjectAtIndex:) in:[NSArray class]];
     
     if (IOS7_OR_LATER) {
@@ -95,19 +94,26 @@
 }
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler{
+    
     [[$ rac_didNetworkChanges]
-     subscribeNext:^(Reachability* reach) {
-         if([reach isReachableViaWiFi]){ //正在使用Wi-Fi网络
-             [[FeedSceneModel sharedInstance]
-              reflashAllFeed:nil each:nil finish:^{
-                  if([Rss notifyNewMessage]){
-                      completionHandler(UIBackgroundFetchResultNewData);
-                  }else{
-                      completionHandler(UIBackgroundFetchResultNoData);
-                  }
-              }];
-         }else{
-             completionHandler(UIBackgroundFetchResultNoData);
+     subscribeNext:^(NSNumber *status) {
+         AFNetworkReachabilityStatus networkStatus = [status intValue];
+         switch (networkStatus) {
+             case AFNetworkReachabilityStatusUnknown:
+             case AFNetworkReachabilityStatusNotReachable:
+             case AFNetworkReachabilityStatusReachableViaWWAN:
+                 completionHandler(UIBackgroundFetchResultNoData);
+                 break;
+             case AFNetworkReachabilityStatusReachableViaWiFi:
+                 [[FeedSceneModel sharedInstance]
+                  reflashAllFeed:nil each:nil finish:^{
+                      if([Rss notifyNewMessage]){
+                          completionHandler(UIBackgroundFetchResultNewData);
+                      }else{
+                          completionHandler(UIBackgroundFetchResultNoData);
+                      }
+                  }];
+                 break;
          }
      }];
 }

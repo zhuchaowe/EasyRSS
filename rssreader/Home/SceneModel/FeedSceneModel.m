@@ -63,7 +63,7 @@
     };
     self.itemHandler = ^(MWFeedItem *item) {
         Rss *rss = [Rss Model];
-        rss.identifier = [item.title safeString].md5;
+        rss.identifier = [item.title safeString].MD5;
         rss.title = [item.title safeString];
         rss.link = [item.link safeString ];
         rss.subscribeUrl = feed.url;
