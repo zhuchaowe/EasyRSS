@@ -59,16 +59,6 @@
 		E162A456897B49C39563CC16 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A86CFD2511204D1485D569FC /* libPods.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		5F578295199A43D700FCA0EE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5F578276199A43D600FCA0EE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5F57827D199A43D600FCA0EE;
-			remoteInfo = rssreader;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		23F534577AD045DEBA85B7E1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		5BE4531319BC276900F8A0E9 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -141,7 +131,6 @@
 		5F578289199A43D700FCA0EE /* RootScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootScene.m; sourceTree = "<group>"; };
 		5F57828C199A43D700FCA0EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5F57828E199A43D700FCA0EE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5F578294199A43D700FCA0EE /* rssreaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rssreaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F5782AD199A4CAA00FCA0EE /* ICSDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSDrawerController.h; sourceTree = "<group>"; };
 		5F5782AE199A4CAA00FCA0EE /* ICSDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSDrawerController.m; sourceTree = "<group>"; };
 		5F5782AF199A4CAA00FCA0EE /* ICSDropShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSDropShadowView.h; sourceTree = "<group>"; };
@@ -170,13 +159,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E162A456897B49C39563CC16 /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5F578291199A43D700FCA0EE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,7 +307,6 @@
 			isa = PBXGroup;
 			children = (
 				5F57827E199A43D600FCA0EE /* rssreader.app */,
-				5F578294199A43D700FCA0EE /* rssreaderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -495,24 +476,6 @@
 			productReference = 5F57827E199A43D600FCA0EE /* rssreader.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5F578293199A43D700FCA0EE /* rssreaderTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5F5782A1199A43D700FCA0EE /* Build configuration list for PBXNativeTarget "rssreaderTests" */;
-			buildPhases = (
-				5F578290199A43D700FCA0EE /* Sources */,
-				5F578291199A43D700FCA0EE /* Frameworks */,
-				5F578292199A43D700FCA0EE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5F578296199A43D700FCA0EE /* PBXTargetDependency */,
-			);
-			name = rssreaderTests;
-			productName = rssreaderTests;
-			productReference = 5F578294199A43D700FCA0EE /* rssreaderTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -524,16 +487,12 @@
 				TargetAttributes = {
 					5F57827D199A43D600FCA0EE = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = 48M8PFTH74;
+						DevelopmentTeam = HDQ5J8KWBR;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
 						};
-					};
-					5F578293199A43D700FCA0EE = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = 5F57827D199A43D600FCA0EE;
 					};
 				};
 			};
@@ -551,7 +510,6 @@
 			projectRoot = "";
 			targets = (
 				5F57827D199A43D600FCA0EE /* rssreader */,
-				5F578293199A43D700FCA0EE /* rssreaderTests */,
 			);
 		};
 /* End PBXProject section */
@@ -572,13 +530,6 @@
 				5F0EBB7E19A82368001E8626 /* icon.png in Resources */,
 				5F2558E3199B579A00C79F8F /* bg.jpg in Resources */,
 				5F57828F199A43D700FCA0EE /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5F578292199A43D700FCA0EE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,22 +614,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5F578290199A43D700FCA0EE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5F578296199A43D700FCA0EE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5F57827D199A43D600FCA0EE /* rssreader */;
-			targetProxy = 5F578295199A43D700FCA0EE /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5F57828B199A43D700FCA0EE /* Main.storyboard */ = {
@@ -709,7 +645,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xinyu Li (XWYND9KE57)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinyu Li (XWYND9KE57)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -729,6 +666,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "5cc21e64-ba7f-4ad6-ba4b-c296698bb932";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -750,7 +688,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xinyu Li (XWYND9KE57)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinyu Li (XWYND9KE57)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -763,6 +702,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "5cc21e64-ba7f-4ad6-ba4b-c296698bb932";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -785,7 +725,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "30f76753-9512-49d5-9444-2b82b153ee77";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -806,47 +746,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "30f76753-9512-49d5-9444-2b82b153ee77";
-			};
-			name = Release;
-		};
-		5F5782A2199A43D700FCA0EE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "rssreader/Supporting Files/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rssreader.app/rssreader";
-			};
-			name = Debug;
-		};
-		5F5782A3199A43D700FCA0EE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "";
-				INFOPLIST_FILE = "rssreader/Supporting Files/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rssreader.app/rssreader";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -867,15 +767,6 @@
 			buildConfigurations = (
 				5F57829F199A43D700FCA0EE /* Debug */,
 				5F5782A0199A43D700FCA0EE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5F5782A1199A43D700FCA0EE /* Build configuration list for PBXNativeTarget "rssreaderTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5F5782A2199A43D700FCA0EE /* Debug */,
-				5F5782A3199A43D700FCA0EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

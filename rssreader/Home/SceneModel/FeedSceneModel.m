@@ -7,7 +7,7 @@
 //
 
 #import "FeedSceneModel.h"
-
+#import "DataCenter.h"
 @interface FeedSceneModel ()
 @property(copy, nonatomic) void (^finishHandler)(MWFeedParser *parser);
 @property(copy, nonatomic) void (^errorHandler)(MWFeedParser *parser);
@@ -76,6 +76,7 @@
         
         rss.summary = [[item.summary replace:RX(@"<[^>]*>|&(\\w+);") with:@""] trim];
         rss.imageUrl = [rss.content firstMatch:RX(@"(http|https|ftp|rtsp|mms)://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?[.]{1}(jpg|png|bmp)")];
+
         rss.author = item.author ?:feed.title;
         rss.feedFavicon = feed.favicon;
         rss.feedTitle = feed.title;

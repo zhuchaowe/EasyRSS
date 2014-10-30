@@ -23,6 +23,7 @@
     self = [super init];
     if(self){
         self.time = @"";
+        self.isWifi = NO;
     }
     return self;
 }

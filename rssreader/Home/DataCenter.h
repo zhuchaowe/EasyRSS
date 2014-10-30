@@ -10,6 +10,7 @@
 
 @interface DataCenter : NSObject
 @property(nonatomic,retain)NSString *time;
+@property(nonatomic,assign)BOOL isWifi;
 /**
  *  生成单例
  *
