@@ -37,7 +37,7 @@
         [[GCDQueue globalQueue] queueBlock:^{
             [self resetAll];
             [self update:@{@"isFav":@(self.isFav)}];
-            [[FavSceneModel sharedInstance] retData:@(1) pageSize:@10];
+            [FavSceneModel sharedInstance].pagination.page = @1;
         }];
     }
 }

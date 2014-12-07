@@ -8,7 +8,7 @@
 
 #import "ICSDrawerController.h"
 
-@interface CenterNav : UINavigationController<ICSDrawerControllerChild, ICSDrawerControllerPresenting>
+@interface CenterNav : EZNavigationController<ICSDrawerControllerChild, ICSDrawerControllerPresenting>
 
 @property(nonatomic, weak) ICSDrawerController *drawer;
 @property(nonatomic, assign) BOOL shouldOpen;

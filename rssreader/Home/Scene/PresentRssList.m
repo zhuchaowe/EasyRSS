@@ -12,13 +12,13 @@
 #import "RssDetailScene.h"
 #import "DataCenter.h"
 @interface PresentRssList ()
-
+@property(nonatomic,retain)NSMutableArray *dataArray;
 @end
 
 @implementation PresentRssList
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.dataArray = [NSMutableArray arrayWithArray:[Rss getNewMessageList:[DataCenter sharedInstance].time]];
+    self.dataArray = [NSMutableArray arrayWithArray:[Rss getNewMessageList:[DataCenter sharedInstance].time]];
     [DataCenter sharedInstance].time = @"";
     [self showBarButton:NAV_RIGHT title:@"完成" fontColor:[UIColor whiteColor]];
     // Do any additional setup after loading the view.
@@ -39,13 +39,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.tableView.dataArray.count;
+    return self.dataArray.count;
 }
 
 - (RssCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *SettingTableIdentifier = @"RssCell";
     RssCell *cell = [[RssCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingTableIdentifier];
-    Rss *rss = [self.tableView.dataArray objectAtIndex:indexPath.row];
+    Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
     [cell reloadRss:rss];
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -69,7 +69,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     RssDetailScene* scene =  [self.storyboard instantiateViewControllerWithIdentifier:@"RssDetailScene"];
-    scene.rss = [self.tableView.dataArray objectAtIndex:indexPath.row];
+    scene.rss = [self.dataArray objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:scene animated:YES];
 }
 

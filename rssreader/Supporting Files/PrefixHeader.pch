@@ -8,3 +8,5 @@
 
 #import "swift-bridge.h"
 #import "UIColor+MLPFlatColors.h"
+#import "PullFooter.h"
+#import "PullHeader.h"

@@ -15,6 +15,8 @@
 #import "FeedSceneModel.h"
 #import "PresentRssList.h"
 #import "DataCenter.h"
+#import "AddScene.h"
+
 #define CHANNEL_ID @"pgyer"
 #define UMAppKey @"53f8902ffd98c585ba02a156"
 @interface AppDelegate ()
@@ -110,6 +112,19 @@
         CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:presentRssListScene];
         [_rootScene presentViewController:centerNav animated:YES completion:nil];
     }
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    NSLog(@"%@", [url absoluteString]);
+    if ([url.scheme isEqualToString:@"feed"]) {
+        AddScene *addScene =  [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"AddScene"];
+        addScene.openUrl = [url.absoluteString stringByReplacingOccurrencesOfString:@"feed" withString:@"http"];
+
+        CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:addScene];
+        [_rootScene presentViewController:centerNav animated:YES completion:nil];
+    }
+    
+    return YES;
 }
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler{

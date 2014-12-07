@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LeftCell : UICollectionViewCell
-@property(nonatomic,retain) UILabel *textLabel;
+@interface LeftCell : UITableViewCell
+@property(nonatomic,retain) UILabel *titleLabel;
 @end

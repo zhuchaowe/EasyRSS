@@ -15,6 +15,7 @@
 
 @interface FavoriteScene ()
 @property(nonatomic,retain)FavSceneModel *favSceneModel;
+@property(nonatomic,retain)NSMutableArray *dataArray;
 @end
 
 @implementation FavoriteScene
@@ -22,24 +23,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _favSceneModel = [FavSceneModel sharedInstance];
-    _tableView.SceneDelegate = self;
-    [_tableView addFooter];
-    [_tableView initPage];
+    self.dataArray = [NSMutableArray array];
+    
     @weakify(self);
-    [RACObserve(self.tableView, page)
-     subscribeNext:^(NSNumber *page) {
-          @strongify(self);
-         [[GCDQueue globalQueue] queueBlock:^{
-             [self.favSceneModel retData:page pageSize:_tableView.pageSize];
-         }];
-     }];
-    RAC(self.tableView,total) = RACObserve(self.favSceneModel, total);
-
+    
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        @strongify(self);
+        self.favSceneModel.pagination.page = @1;
+    }];
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+         @strongify(self);
+        self.favSceneModel.pagination.page = [self.favSceneModel.pagination.page increase:@1];
+    }];
+    
     [RACObserve(self.favSceneModel, favArray)
     subscribeNext:^(NSArray* array) {
         [[GCDQueue mainQueue] queueBlock:^{
             @strongify(self);
-            [self.tableView successWithNewArray:array];
+            self.dataArray = [self.favSceneModel.pagination success:self.dataArray newArray:array];
             [self.tableView reloadData];
         }];
     }];
@@ -51,12 +53,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)handlePullLoader:(MJRefreshBaseView *)view state:(PullLoaderState)state{
-    [super handlePullLoader:view state:state];
-    if(state == REACH_BOTTOM){
-        self.tableView.page = @(self.tableView.page.integerValue + 1);
-    }
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     RssCell *cell = [self tableView:_tableView cellForRowAtIndexPath:indexPath];
@@ -64,13 +60,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.tableView.dataArray.count;
+    return self.dataArray.count;
 }
 
 - (RssCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *SettingTableIdentifier = @"RssCell";
     RssCell *cell = [[RssCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingTableIdentifier];
-    Rss *rss = [self.tableView.dataArray objectAtIndex:indexPath.row];
+    Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
     [cell reloadRss:rss];
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -94,7 +90,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     RssDetailScene* scene =  [self.storyboard instantiateViewControllerWithIdentifier:@"RssDetailScene"];
-    scene.rss = [self.tableView.dataArray objectAtIndex:indexPath.row];
+    scene.rss = [self.dataArray objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:scene animated:YES];
 }
 

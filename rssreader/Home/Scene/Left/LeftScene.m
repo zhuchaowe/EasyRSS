@@ -7,13 +7,11 @@
 //
 
 #import "LeftScene.h"
-#import "CSStickyHeaderFlowLayout.h"
 #import "LeftHeader.h"
-#import "CSAlwaysOnTopHeader.h"
 #import "CenterNav.h"
 
-@interface LeftScene ()
-@property (strong, nonatomic) IBOutlet SceneCollectionView *collectionView;
+@interface LeftScene ()<UITableViewDataSource,UITableViewDelegate>
+@property (strong, nonatomic) SceneTableView *tableView;
 @property (nonatomic, strong) NSArray *sections;
 @property (nonatomic, strong)CenterNav *navMain;
 @property (nonatomic, strong)CenterNav *navRecommend;
@@ -27,9 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-
-    self.sections = @[@[[NSString stringWithFormat:@"%@ 首页",
+    self.sections = @[[NSString stringWithFormat:@"%@ 首页",
                          [IconFont icon:@"ios7Home" fromFont:ionIcons]],
                         [NSString stringWithFormat:@"%@ 推荐",
                          [IconFont icon:@"androidPromotion" fromFont:ionIcons]],
@@ -39,66 +35,51 @@
                          [IconFont icon:@"ios7Star" fromFont:ionIcons]],
                         [NSString stringWithFormat:@"%@ 设置",
                          [IconFont icon:@"ios7Gear" fromFont:ionIcons]]
-                        ]];
+                      ];
     
-    CSStickyHeaderFlowLayout *layout = [[CSStickyHeaderFlowLayout alloc]init];
-    if ([layout isKindOfClass:[CSStickyHeaderFlowLayout class]]) {
-        layout.parallaxHeaderReferenceSize = CGSizeMake(self.collectionView.width, 226);
-        layout.parallaxHeaderMinimumReferenceSize = CGSizeMake(self.collectionView.width, 44);
-        layout.parallaxHeaderAlwaysOnTop = YES;
-        layout.disableStickyHeaders = YES;
-    }
-    [self.collectionView setCollectionViewLayout:layout];
+    self.tableView = [[SceneTableView alloc]init];
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.rowHeight = 50.0f;
+    [self.tableView registerClass:[LeftCell class] forCellReuseIdentifier:@"LeftCell"];
+    [self.view addSubview:self.tableView];
+    
+    UIImageView *imageView = [[UIImageView alloc]init];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.clipsToBounds = YES;
+    [imageView setImageWithURL:[NSURL URLWithString:@"http://p9.qhimg.com/t01dca89d51a1520316.jpg"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
 
-    self.collectionView.alwaysBounceVertical = YES;
-    [self.collectionView registerClass:[LeftCell class] forCellWithReuseIdentifier:@"LeftCell"];
-    [self.collectionView registerClass:[CSAlwaysOnTopHeader class]
-            forSupplementaryViewOfKind:CSStickyHeaderParallaxHeader withReuseIdentifier:@"header"];
-    [self.collectionView registerClass:[LeftHeader class]
-            forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"LeftHeader"];
+    [self.tableView addCover:imageView size:CGSizeMake(self.view.width, 300)];
+    [self.tableView alignToView:self.tableView.superview];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-
-#pragma mark --UICollectionViewDelegateFlowLayout
-//定义每个UICollectionView 的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-
-    return CGSizeMake(collectionView.width, 50);
-}
-//定义每个UICollectionView 的 margin
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(5, 5, 5, 5);
-}
 #pragma mark UICollectionViewDataSource
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [self.sections count];
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.sections[section] count];
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *obj = self.sections[indexPath.row];
     
-    NSString *obj = self.sections[indexPath.section][indexPath.row];
-    
-    LeftCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LeftCell"
-                                                             forIndexPath:indexPath];
-    cell.textLabel.font = [UIFont fontWithName:ionIcons size:18.0f];
-    cell.textLabel.text = obj;
-    
+    LeftCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LeftCell" forIndexPath:indexPath];
+    cell.titleLabel.font = [UIFont fontWithName:ionIcons size:18.0f];
+    cell.titleLabel.text = obj;
     return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
         if(_navMain == nil){
             _navMain = [[CenterNav alloc]initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"RootScene"]];
@@ -117,31 +98,12 @@
     }
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        
-        LeftHeader *cell = [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                                          withReuseIdentifier:@"LeftHeader"
-                                                                 forIndexPath:indexPath];
-        cell.backgroundColor = [UIColor flatDarkOrangeColor];
-        return cell;
-    } else if ([kind isEqualToString:CSStickyHeaderParallaxHeader]) {
-        UICollectionReusableView *cell = [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                                                            withReuseIdentifier:@"header"
-                                                                                   forIndexPath:indexPath];
-        
-        return cell;
-    }
-    return nil;
-}
-
-
 #pragma mark - ICSDrawerControllerPresenting
 
 -(BOOL)shouldDrawerControllerOpen:(ICSDrawerController *)drawerController{
     BOOL result = YES;
     if(result){
-        self.view.backgroundColor = _collectionView.backgroundColor = [UIColor randomFlatDarkColor];
+        self.view.backgroundColor = [UIColor randomFlatDarkColor];
         
         self.view.userInteractionEnabled = YES;
     }

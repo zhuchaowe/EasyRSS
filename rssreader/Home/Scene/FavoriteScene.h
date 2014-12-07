@@ -8,6 +8,6 @@
 
 #import "BaseScene.h"
 
-@interface FavoriteScene : BaseScene<SceneTableViewDelegate>
+@interface FavoriteScene : BaseScene
 @property (strong, nonatomic) IBOutlet SceneTableView *tableView;
 @end

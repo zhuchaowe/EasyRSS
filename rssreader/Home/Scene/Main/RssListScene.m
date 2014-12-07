@@ -13,8 +13,12 @@
 #import "FeedSceneModel.h"
 #import "BlockActionSheet.h"
 #import "MWKProgressIndicator.h"
+#import "Pagination.h"
+
 @interface RssListScene ()
 @property(nonatomic,assign)BOOL isReflashing;
+@property(nonatomic,retain)Pagination *pagination;
+@property(nonatomic,retain)NSMutableArray *dataArray;
 @end
 
 @implementation RssListScene
@@ -25,24 +29,54 @@
     self.view.backgroundColor = [UIColor whiteColor];
     UIButton *leftbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_chevron_left" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
     [self showBarButton:NAV_LEFT button:leftbutton];
-    _tableView.SceneDelegate = self;
-    [_tableView addHeader];
-    [_tableView addFooter];
-    [_tableView initPage];
+
+    _pagination = [Pagination Model];
+    _pagination.pageSize = @20;
+    _dataArray = [NSMutableArray array];
     
     @weakify(self);
-    [RACObserve(self.tableView, page)
+    [RACObserve(self.pagination, page)
      subscribeNext:^(NSNumber *page) {
          @strongify(self);
          [[GCDQueue globalQueue] queueBlock:^{
-             self.tableView.total = @([[[Rss Model] where:_map] getCount]);
-             NSArray *array = [Rss rssListInDb:_map page:page pageSize:_tableView.pageSize];
+             self.pagination.total = @([[[Rss Model] where:_map] getCount]);
+             NSArray *array = [Rss rssListInDb:_map page:page pageSize:self.pagination.pageSize];
              [[GCDQueue mainQueue] queueBlock:^{
-                 [self.tableView successWithNewArray:array];
+                 self.dataArray = [self.pagination success:self.dataArray newArray:array];
                  [self.tableView reloadData];
              }];
          }];
      }];
+    [self.tableView registerClass:[RssCell class] forCellReuseIdentifier:@"RssCell"];
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        @strongify(self);
+        [self.tableView.pullToRefreshView stopAnimating];
+        if(self.isReflashing == NO){
+            self.isReflashing = YES;
+            [MWKProgressIndicator show];
+            [MWKProgressIndicator updateMessage:@"正在刷新..."];
+            @weakify(self);
+            [[FeedSceneModel sharedInstance]
+             loadAFeed:self.url
+             start:^{
+                 [MWKProgressIndicator updateProgress:0.7];
+             }finish:^{
+                 @strongify(self);
+                 self.pagination.page = @1;
+                 self.isReflashing = NO;
+                 [MWKProgressIndicator updateProgress:1.0];
+                 [MWKProgressIndicator showSuccessMessage:@"刷新完成"];
+             }error:^{
+                 self.isReflashing = NO;
+                 [MWKProgressIndicator showErrorMessage:@"刷新失败"];
+             }];
+        }
+    }];
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        @strongify(self);
+        self.pagination.page = [self.pagination.page increase:@1];
+    }];
     // Do any additional setup after loading the view.
 }
 
@@ -51,50 +85,27 @@
     // Dispose of any resources that can be recreated.
 }
 
-
--(void)handlePullLoader:(MJRefreshBaseView *)view state:(PullLoaderState)state{
-    [super handlePullLoader:view state:state];
-
-    if(state == HEADER_REFRESH && ![_url isEmpty]){
-        [self.tableView.header endRefreshing];
-        if(self.isReflashing == NO){
-            self.isReflashing = YES;
-            [MWKProgressIndicator show];
-            [MWKProgressIndicator updateMessage:@"正在刷新..."];
-            @weakify(self);
-            [[FeedSceneModel sharedInstance]
-             loadAFeed:_url
-             start:^{
-                 [MWKProgressIndicator updateProgress:0.7];
-             }finish:^{
-                 @strongify(self);
-                 self.tableView.page = @1;
-                 self.isReflashing = NO;
-                 [MWKProgressIndicator updateProgress:1.0];
-                 [MWKProgressIndicator showSuccessMessage:@"刷新完成"];
-             }error:^{
-                 self.isReflashing = NO;
-                [MWKProgressIndicator showErrorMessage:@"刷新失败"];
-             }];
-        }
-    }else if(state == REACH_BOTTOM){
-        self.tableView.page = @(self.tableView.page.integerValue + 1);
-    }
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    RssCell *cell = [self tableView:_tableView cellForRowAtIndexPath:indexPath];
-    return cell.cellHeight;
+    Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
+    
+    CGFloat height = 45;
+    if (![rss.summary isEmpty]) {
+        height +=50;
+    }
+    
+    if(![rss.imageUrl isEmpty]){
+        height +=200;
+    }
+    return height;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.tableView.dataArray.count;
+    return self.dataArray.count;
 }
 
 - (RssCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *SettingTableIdentifier = @"RssCell";
-    RssCell *cell = [[RssCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingTableIdentifier];
-    Rss *rss = [self.tableView.dataArray objectAtIndex:indexPath.row];
+    RssCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RssCell" forIndexPath:indexPath];
+    Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
     [cell reloadRss:rss];
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -123,7 +134,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     RssDetailScene* scene =  [self.storyboard instantiateViewControllerWithIdentifier:@"RssDetailScene"];
-    scene.rss = [self.tableView.dataArray objectAtIndex:indexPath.row];
+    scene.rss = [self.dataArray objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:scene animated:YES];
 }
 

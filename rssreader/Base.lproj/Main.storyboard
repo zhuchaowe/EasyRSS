@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="kK0-ID-tCM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="kK0-ID-tCM">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--Left Scene-->
@@ -16,33 +16,8 @@
                     <view key="view" contentMode="scaleToFill" id="v3B-Dg-XIj">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0sD-Fh-ROf" customClass="SceneCollectionView">
-                                <rect key="frame" x="0.0" y="0.0" width="540" height="600"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JOZ-s8-JLk">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                                <connections>
-                                    <outlet property="dataSource" destination="kK0-ID-tCM" id="pWI-1T-A4k"/>
-                                    <outlet property="delegate" destination="kK0-ID-tCM" id="ghI-Dl-wvn"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="0sD-Fh-ROf" firstAttribute="leading" secondItem="v3B-Dg-XIj" secondAttribute="leading" id="Cbf-d3-GCb"/>
-                            <constraint firstItem="0sD-Fh-ROf" firstAttribute="top" secondItem="v3B-Dg-XIj" secondAttribute="top" id="f4U-Se-MYi"/>
-                            <constraint firstAttribute="trailing" secondItem="0sD-Fh-ROf" secondAttribute="trailing" constant="60" id="jRQ-se-rfZ"/>
-                            <constraint firstAttribute="bottom" secondItem="0sD-Fh-ROf" secondAttribute="bottom" id="tsw-sE-izU"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="collectionView" destination="0sD-Fh-ROf" id="W7P-lR-8WI"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C2K-9R-ZNB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -77,6 +52,7 @@
                             <constraint firstAttribute="bottom" secondItem="KvJ-wJ-lW7" secondAttribute="bottom" id="vvL-DX-v3H"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="RSS" id="QlW-1y-erE"/>
                     <connections>
                         <outlet property="tableView" destination="KvJ-wJ-lW7" id="H7W-Dg-djl"/>
@@ -343,6 +319,7 @@
                             <constraint firstAttribute="trailing" secondItem="znh-LV-CVC" secondAttribute="trailing" id="tKc-Ar-fTK"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="tableView" destination="znh-LV-CVC" id="a3B-xE-nLE"/>
                     </connections>

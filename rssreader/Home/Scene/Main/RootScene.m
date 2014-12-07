@@ -18,6 +18,8 @@
 #import "MWKProgressIndicator.h"
 #import "DataCenter.h"
 #import "PresentRssList.h"
+
+
 @interface RootScene ()
 @property(nonatomic,retain)FeedSceneModel *feedSceneModel;
 @property(nonatomic,assign)BOOL isReflashing;
@@ -28,8 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _isReflashing = NO;
-    self.tableView.SceneDelegate = self;
-    [self.tableView addHeader];   //添加下拉刷新
+    
+
     
     _feedSceneModel = [FeedSceneModel sharedInstance];
     
@@ -55,8 +57,32 @@
             @strongify(self);
             [Rss totalNotReadedCount];
             [self.tableView reloadData];
-            [self.tableView.header endRefreshing];
+            [self.tableView.pullToRefreshView stopAnimating];
         }];
+    
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        @strongify(self);
+        
+        [self.tableView.pullToRefreshView stopAnimating];
+        if(self.isReflashing == NO){
+            self.isReflashing = YES;
+            [MWKProgressIndicator show];
+            [MWKProgressIndicator updateMessage:@"正在刷新..."];
+            __block NSUInteger tag = 0;
+            @weakify(self);
+            [self.feedSceneModel reflashAllFeed:nil
+                                           each:^{
+                                               @strongify(self);
+                                               tag += 1;
+                                               [MWKProgressIndicator updateProgress:1.0*tag/self.feedSceneModel.feedList.count];
+                                               [MWKProgressIndicator updateMessage:[NSString stringWithFormat:@"正在刷新(%lu/%lu)",(unsigned long)tag,(unsigned long)self.feedSceneModel.feedList.count]];
+                                           } finish:^{
+                                               @strongify(self);
+                                               self.isReflashing = NO;
+                                               [MWKProgressIndicator dismiss];
+                                           }];
+        }
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -67,34 +93,10 @@
 -(void)rightButtonTouch{
     [super rightButtonTouch];
     AddScene *addScene =  [self.storyboard instantiateViewControllerWithIdentifier:@"AddScene"];
-    [self.navigationController pushViewController:addScene animated:YES];
+    CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:addScene];
+    [self presentViewController:centerNav animated:YES completion:nil];
 }
 
-
--(void)handlePullLoader:(MJRefreshBaseView *)view state:(PullLoaderState)state{
-    [super handlePullLoader:view state:state];
-    if(state == HEADER_REFRESH){
-        [self.tableView.header endRefreshing];
-        if(self.isReflashing == NO){
-            self.isReflashing = YES;
-            [MWKProgressIndicator show];
-            [MWKProgressIndicator updateMessage:@"正在刷新..."];
-            __block NSUInteger tag = 0;
-            @weakify(self);
-            [self.feedSceneModel reflashAllFeed:nil
-             each:^{
-                 @strongify(self);
-                 tag += 1;
-                 [MWKProgressIndicator updateProgress:1.0*tag/self.feedSceneModel.feedList.count];
-                 [MWKProgressIndicator updateMessage:[NSString stringWithFormat:@"正在刷新(%lu/%lu)",(unsigned long)tag,(unsigned long)self.feedSceneModel.feedList.count]];
-             } finish:^{
-                 @strongify(self);
-                 self.isReflashing = NO;
-                 [MWKProgressIndicator dismiss];
-            }];
-        }
-    }
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 50;

@@ -34,6 +34,10 @@
     UIButton *rightbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_check" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
     [self showBarButton:NAV_RIGHT button:rightbutton];
 
+    if (self.openUrl !=nil) {
+        _textView.text = self.openUrl;
+        [self rightButtonTouch];
+    }
     // Do any additional setup after loading the view.
 }
 
@@ -41,6 +45,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)leftButtonTouch{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /**
@@ -58,7 +66,7 @@
            start:nil
         finish:^{
             [hud hide:YES];
-            [self.navigationController popViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
         } error:^{
             hud.mode = MBProgressHUDModeCustomView;
             hud.customView =  [IconFont labelWithIcon:[IconFont icon:@"fa_times" fromFont:fontAwesome] fontName:fontAwesome size:37.0f color:[UIColor whiteColor]];

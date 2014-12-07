@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5F010A1A199B0A7C00051E83 /* CSAlwaysOnTopHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F010A18199B0A7C00051E83 /* CSAlwaysOnTopHeader.m */; };
 		5F0EBB5819A79117001E8626 /* RecommedScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB5719A79117001E8626 /* RecommedScene.m */; };
 		5F0EBB5B19A79827001E8626 /* BaseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB5A19A79827001E8626 /* BaseScene.m */; };
 		5F0EBB5E19A79F6F001E8626 /* RecommendSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB5D19A79F6F001E8626 /* RecommendSceneModel.m */; };
@@ -60,10 +59,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		23F534577AD045DEBA85B7E1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		4446E537F40BE1A10A479135 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		445A555592FDDF7A401F060B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		5BE4531319BC276900F8A0E9 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		5F010A17199B0A7C00051E83 /* CSAlwaysOnTopHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSAlwaysOnTopHeader.h; sourceTree = "<group>"; };
-		5F010A18199B0A7C00051E83 /* CSAlwaysOnTopHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSAlwaysOnTopHeader.m; sourceTree = "<group>"; };
 		5F0EBB5619A79117001E8626 /* RecommedScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommedScene.h; sourceTree = "<group>"; };
 		5F0EBB5719A79117001E8626 /* RecommedScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommedScene.m; sourceTree = "<group>"; };
 		5F0EBB5919A79827001E8626 /* BaseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseScene.h; sourceTree = "<group>"; };
@@ -173,11 +171,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		473FCC247D40836F13B9EBC2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				445A555592FDDF7A401F060B /* Pods.debug.xcconfig */,
+				4446E537F40BE1A10A479135 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5F010A11199B0A5E00051E83 /* Left */ = {
 			isa = PBXGroup;
 			children = (
-				5F010A17199B0A7C00051E83 /* CSAlwaysOnTopHeader.h */,
-				5F010A18199B0A7C00051E83 /* CSAlwaysOnTopHeader.m */,
 				5F5782B5199A525500FCA0EE /* LeftScene.h */,
 				5F5782B6199A525500FCA0EE /* LeftScene.m */,
 				5FA288D0199B0CF100F3CB8E /* LeftCell.h */,
@@ -298,8 +303,8 @@
 			children = (
 				5F578280199A43D600FCA0EE /* rssreader */,
 				5F57827F199A43D600FCA0EE /* Products */,
-				23F534577AD045DEBA85B7E1 /* Pods.xcconfig */,
 				1DE6A70E1A3C45EA99E6BC16 /* Frameworks */,
+				473FCC247D40836F13B9EBC2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -563,7 +568,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -574,7 +579,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F42DD1D19A0FF3200359866 /* Rss.m in Sources */,
-				5F010A1A199B0A7C00051E83 /* CSAlwaysOnTopHeader.m in Sources */,
 				5F42DD1A19A0FF2400359866 /* Feed.m in Sources */,
 				5F5782B1199A4CAA00FCA0EE /* ICSDrawerController.m in Sources */,
 				5F5782B7199A525500FCA0EE /* LeftScene.m in Sources */,
@@ -710,7 +714,7 @@
 		};
 		5F57829F199A43D700FCA0EE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 23F534577AD045DEBA85B7E1 /* Pods.xcconfig */;
+			baseConfigurationReference = 445A555592FDDF7A401F060B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -731,7 +735,7 @@
 		};
 		5F5782A0199A43D700FCA0EE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 23F534577AD045DEBA85B7E1 /* Pods.xcconfig */;
+			baseConfigurationReference = 4446E537F40BE1A10A479135 /* Pods.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

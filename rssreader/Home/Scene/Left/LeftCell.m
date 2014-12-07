@@ -10,17 +10,18 @@
 
 @implementation LeftCell
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor clearColor];
-        _textLabel = [[UILabel alloc]init];
-        _textLabel.textAlignment = NSTextAlignmentLeft;
-        _textLabel.textColor = [UIColor whiteColor];
-        [self.contentView addSubview:_textLabel];
-        [_textLabel alignCenterYWithView:self.contentView predicate:nil];
-        [_textLabel alignLeadingEdgeWithView:self.contentView predicate:@"40"];
+        _titleLabel = [[UILabel alloc]init];
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        _titleLabel.textColor = [UIColor whiteColor];
+        [self.contentView addSubview:_titleLabel];
+        [_titleLabel alignCenterYWithView:self.contentView predicate:nil];
+        [_titleLabel alignLeadingEdgeWithView:self.contentView predicate:@"40"];
     }
     return self;
 }

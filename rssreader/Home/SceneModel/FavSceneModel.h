@@ -7,11 +7,12 @@
 //
 
 #import "SceneModel.h"
+#import "Pagination.h"
 
 @interface FavSceneModel : SceneModel
 @property(nonatomic,retain)NSArray *favArray;
-@property(nonatomic,retain)NSNumber *total;
--(void)retData:(NSNumber *)page pageSize:(NSNumber *)pageSize;
+@property(nonatomic,retain)Pagination *pagination;
+-(void)retData;
 /**
  *  生成单例
  *

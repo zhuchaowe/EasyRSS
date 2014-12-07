@@ -9,6 +9,7 @@
 #import "RootScene.h"
 
 @interface AddScene : Scene<UITextFieldDelegate>
+@property(strong,nonatomic) NSString *openUrl;
 @property (strong, nonatomic) UITextField *textView;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollerView;
 
