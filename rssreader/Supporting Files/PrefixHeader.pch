@@ -10,3 +10,5 @@
 #import "UIColor+MLPFlatColors.h"
 #import "PullFooter.h"
 #import "PullHeader.h"
+#import "Easy-Extention.h"
+#import "EzUILabel.h"

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5BCD44A91A47B17400DBC537 /* EzUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCD44A81A47B17400DBC537 /* EzUILabel.m */; };
 		5F0EBB5819A79117001E8626 /* RecommedScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB5719A79117001E8626 /* RecommedScene.m */; };
 		5F0EBB5B19A79827001E8626 /* BaseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB5A19A79827001E8626 /* BaseScene.m */; };
 		5F0EBB5E19A79F6F001E8626 /* RecommendSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB5D19A79F6F001E8626 /* RecommendSceneModel.m */; };
@@ -61,6 +62,8 @@
 /* Begin PBXFileReference section */
 		4446E537F40BE1A10A479135 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		445A555592FDDF7A401F060B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		5BCD44A71A47B17400DBC537 /* EzUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EzUILabel.h; sourceTree = "<group>"; };
+		5BCD44A81A47B17400DBC537 /* EzUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EzUILabel.m; sourceTree = "<group>"; };
 		5BE4531319BC276900F8A0E9 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		5F0EBB5619A79117001E8626 /* RecommedScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommedScene.h; sourceTree = "<group>"; };
 		5F0EBB5719A79117001E8626 /* RecommedScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommedScene.m; sourceTree = "<group>"; };
@@ -378,6 +381,8 @@
 				5F0EBB8719A83C91001E8626 /* Main */,
 				5F0EBB8619A83C7A001E8626 /* Base */,
 				5F010A11199B0A5E00051E83 /* Left */,
+				5BCD44A71A47B17400DBC537 /* EzUILabel.h */,
+				5BCD44A81A47B17400DBC537 /* EzUILabel.m */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -593,6 +598,7 @@
 				5F5782BA199A63F900FCA0EE /* CenterNav.m in Sources */,
 				5FA288D5199B0E7400F3CB8E /* LeftHeader.m in Sources */,
 				5F0EBBE119AAD739001E8626 /* MWFeedItem.m in Sources */,
+				5BCD44A91A47B17400DBC537 /* EzUILabel.m in Sources */,
 				5F0EBBC219A9F9E2001E8626 /* Item.m in Sources */,
 				5F0EBBE219AAD739001E8626 /* MWFeedParser.m in Sources */,
 				5F42DD6419A353B200359866 /* RssListScene.m in Sources */,
