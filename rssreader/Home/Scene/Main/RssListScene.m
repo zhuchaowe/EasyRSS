@@ -33,17 +33,17 @@
     _pagination = [Pagination Model];
     _pagination.pageSize = @20;
     _dataArray = [NSMutableArray array];
-    
+    self.pagination.total = @([[[Rss Model] where:_map] getCount]);
     @weakify(self);
     [RACObserve(self.pagination, page)
      subscribeNext:^(NSNumber *page) {
          @strongify(self);
          [[GCDQueue globalQueue] queueBlock:^{
-             self.pagination.total = @([[[Rss Model] where:_map] getCount]);
              NSArray *array = [Rss rssListInDb:_map page:page pageSize:self.pagination.pageSize];
              [[GCDQueue mainQueue] queueBlock:^{
-                 self.dataArray = [self.pagination success:self.dataArray newArray:array];
+                 self.dataArray = [self.pagination setEndWithOrigin:self.dataArray newArray:array];
                  [self.tableView reloadData];
+                 [self.tableView endAllRefreshingWithIntEnd:self.pagination.isEnd.integerValue];
              }];
          }];
      }];
@@ -64,6 +64,7 @@
                  @strongify(self);
                  self.pagination.page = @1;
                  self.isReflashing = NO;
+                 self.pagination.total = @([[[Rss Model] where:self.map] getCount]);
                  [MWKProgressIndicator updateProgress:1.0];
                  [MWKProgressIndicator showSuccessMessage:@"刷新完成"];
              }error:^{
@@ -89,11 +90,12 @@
     Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
     
     CGFloat height = 45;
-    if (![rss.summary isEmpty]) {
+    
+    if (rss.summary.isNotEmpty) {
         height +=50;
     }
     
-    if(![rss.imageUrl isEmpty]){
+    if(rss.imageUrl.isNotEmpty){
         height +=200;
     }
     return height;

@@ -17,8 +17,7 @@
 #import "DataCenter.h"
 #import "AddScene.h"
 
-#define CHANNEL_ID @"pgyer"
-#define UMAppKey @"53f8902ffd98c585ba02a156"
+
 @interface AppDelegate ()
 @property(nonatomic,retain)RootScene *rootScene;
 @end
@@ -28,47 +27,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [[$ rac_didNetworkChanges]
-     subscribeNext:^(NSNumber *status) {
-         AFNetworkReachabilityStatus networkStatus = [status intValue];
-         switch (networkStatus) {
-             case AFNetworkReachabilityStatusUnknown:
-             case AFNetworkReachabilityStatusNotReachable:
-                 [DataCenter sharedInstance].isWifi = NO;
-                 [[DialogUtil sharedInstance] showDlg:self.window textOnly:@"网络连接不给力"];
-                 break;
-             case AFNetworkReachabilityStatusReachableViaWWAN:
-                 [DataCenter sharedInstance].isWifi = NO;
-                 [[DialogUtil sharedInstance] showDlg:self.window textOnly:@"当前使用移动数据网络"];
-                 break;
-             case AFNetworkReachabilityStatusReachableViaWiFi:
-                 [DataCenter sharedInstance].isWifi = YES;
-                 break;
-         }
-     }];
-    
     UILocalNotification * notification=[launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if(notification !=nil && [notification.userInfo objectForKey:@"time"]){
         [DataCenter sharedInstance].time = [notification.userInfo objectForKey:@"time"];
     }
-   
-    [self setUpAnialytics];
     [self setUpBackGroundReflash];
 
     self.database = [[AppDatabase alloc]initWithMigrations];
     [$ swizzleClassMethod:@selector(objectAtIndex:) with:@selector(safeObjectAtIndex:) in:[NSArray class]];
-    
-    if (IOS7_OR_LATER) {
-        [[UINavigationBar appearance] setBarTintColor:[UIColor flatDarkOrangeColor]];
-        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    }else{
-        [[UINavigationBar appearance] setTintColor:[UIColor flatDarkOrangeColor]];
-    }
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                          [UIColor whiteColor],NSForegroundColorAttributeName,
-                                                          [UIFont systemFontOfSize:18],NSFontAttributeName,
-                                                          nil]];
-    
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];
@@ -159,8 +125,5 @@
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:1800];
 }
 
--(void)setUpAnialytics{
-    [MobClick startWithAppkey:UMAppKey reportPolicy:SEND_INTERVAL   channelId:CHANNEL_ID];
-    [MobClick checkUpdate];
-}
+
 @end

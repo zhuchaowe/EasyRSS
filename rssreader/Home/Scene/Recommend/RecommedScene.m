@@ -21,23 +21,16 @@
     [super viewDidLoad];
     _sceneModel = [RecommendSceneModel SceneModel];
     [_sceneModel loadData];
-
-    MBProgressHUD* _hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    _hud.mode = MBProgressHUDModeIndeterminate;
-    _hud.labelText = @"加载中";
-    _hud.tag = 0;
-    [_hud show:YES];
-    
+    [self loadHud:self.view];
+                 
+    [self showHudIndeterminate:@"加载中"];
     [[RACObserve(self.sceneModel, itemList)
      filter:^BOOL(ItemList *itemList) {
          return itemList.list.count >0;
      }]
      subscribeNext:^(ItemList *itemList) {
          [_tableView reloadData];
-         _hud.mode = MBProgressHUDModeCustomView;
-         _hud.customView =  [IconFont labelWithIcon:[IconFont icon:@"fa_check" fromFont:fontAwesome] fontName:fontAwesome size:37.0f color:[UIColor whiteColor]];
-         _hud.labelText = @"加载成功！";
-         [_hud hide:YES afterDelay:0.5];
+         [self hideHudSuccess:@"加载成功"];
      }];
     // Do any additional setup after loading the view.
 }
@@ -72,22 +65,14 @@
     
     [sheet setCancelButtonWithTitle:@"取消" block:nil];
     [sheet setDestructiveButtonWithTitle:@"确定" block:^{
-        MBProgressHUD * hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.labelText = @"加载中...";
-        
+        [self showHudIndeterminate:@"加载中..."];
         [[FeedSceneModel sharedInstance]
          loadAFeed:item.url
          start:nil
          finish:^{
-             hud.mode = MBProgressHUDModeCustomView;
-             hud.customView =  [IconFont labelWithIcon:[IconFont icon:@"fa_check" fromFont:fontAwesome] fontName:fontAwesome size:37.0f color:[UIColor whiteColor]];
-             hud.labelText = @"添加成功！";
-             [hud hide:YES afterDelay:0.5];
+             [self hideHudSuccess:@"添加成功"];
          } error:^{
-             hud.mode = MBProgressHUDModeCustomView;
-             hud.customView =  [IconFont labelWithIcon:[IconFont icon:@"fa_times" fromFont:fontAwesome] fontName:fontAwesome size:37.0f color:[UIColor whiteColor]];
-             hud.labelText = @"添加失败";
-             [hud hide:YES afterDelay:0.5];
+             [self hideHudFailed:@"添加失败"];
          }];
     }];
     [sheet show];

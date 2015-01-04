@@ -1,6 +1,6 @@
 platform :ios, '7.0'
-pod 'EasyIOS', :git=>"https://github.com/zhuchaowe/EasyIOS.git"
-pod 'EasyIOS-Extention', :git=>"https://github.com/zhuchaowe/EasyIOS-Extention.git"
+pod 'EasyIOS', '~> 2.2'
+pod 'EasyIOS-Extention', '~> 1.0'
 pod 'UIColor+MLPFlatColors', '~> 1.0'
 pod 'UMengAnalytics', '~> 3.1.2'
 pod 'BlockAlertsAnd-ActionSheets', '~> 1.0.6'

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B01DD5F1A5812E9006C19A8 /* Aspect-Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B01DD5E1A5812E9006C19A8 /* Aspect-Network.m */; };
+		5B01DD611A58133A006C19A8 /* Aspect-UMengConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B01DD601A58133A006C19A8 /* Aspect-UMengConfig.m */; };
+		5B01DD631A5813FD006C19A8 /* Aspect-Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B01DD621A5813FD006C19A8 /* Aspect-Appearance.m */; };
 		5BCD44A91A47B17400DBC537 /* EzUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCD44A81A47B17400DBC537 /* EzUILabel.m */; };
 		5F0EBB5819A79117001E8626 /* RecommedScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB5719A79117001E8626 /* RecommedScene.m */; };
 		5F0EBB5B19A79827001E8626 /* BaseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0EBB5A19A79827001E8626 /* BaseScene.m */; };
@@ -62,6 +65,9 @@
 /* Begin PBXFileReference section */
 		4446E537F40BE1A10A479135 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		445A555592FDDF7A401F060B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		5B01DD5E1A5812E9006C19A8 /* Aspect-Network.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Aspect-Network.m"; sourceTree = "<group>"; };
+		5B01DD601A58133A006C19A8 /* Aspect-UMengConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Aspect-UMengConfig.m"; sourceTree = "<group>"; };
+		5B01DD621A5813FD006C19A8 /* Aspect-Appearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Aspect-Appearance.m"; sourceTree = "<group>"; };
 		5BCD44A71A47B17400DBC537 /* EzUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EzUILabel.h; sourceTree = "<group>"; };
 		5BCD44A81A47B17400DBC537 /* EzUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EzUILabel.m; sourceTree = "<group>"; };
 		5BE4531319BC276900F8A0E9 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -328,6 +334,9 @@
 				5F57828B199A43D700FCA0EE /* Main.storyboard */,
 				5F57828E199A43D700FCA0EE /* Images.xcassets */,
 				5F578281199A43D600FCA0EE /* Supporting Files */,
+				5B01DD601A58133A006C19A8 /* Aspect-UMengConfig.m */,
+				5B01DD5E1A5812E9006C19A8 /* Aspect-Network.m */,
+				5B01DD621A5813FD006C19A8 /* Aspect-Appearance.m */,
 			);
 			path = rssreader;
 			sourceTree = "<group>";
@@ -617,9 +626,12 @@
 				5F0EBBBF19A9F754001E8626 /* DiscoverySceneModel.m in Sources */,
 				5F0EBB6219A7A1F9001E8626 /* UIAlertView+Blocks.m in Sources */,
 				5F0EBB5819A79117001E8626 /* RecommedScene.m in Sources */,
+				5B01DD5F1A5812E9006C19A8 /* Aspect-Network.m in Sources */,
 				5F0EBBC519A9FAF1001E8626 /* ItemList.m in Sources */,
 				5FA288D2199B0CF100F3CB8E /* LeftCell.m in Sources */,
 				5F0EBC6D19AD8B55001E8626 /* MWKProgressIndicator.m in Sources */,
+				5B01DD631A5813FD006C19A8 /* Aspect-Appearance.m in Sources */,
+				5B01DD611A58133A006C19A8 /* Aspect-UMengConfig.m in Sources */,
 				5F0EBBE019AAD739001E8626 /* MWFeedInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

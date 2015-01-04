@@ -96,7 +96,7 @@
     _feedTitle.text = rss.feedTitle;
     _rssTitle.text = rss.title;
 
-    if(![rss.summary isEmpty]){
+    if(rss.summary.isNotEmpty){
         _summary.text = rss.summary;
         [self.contentView addSubview:_summary];
         [_summary constrainTopSpaceToView:_rssTitle predicate:@"0"];
@@ -106,7 +106,7 @@
         [_summary removeFromSuperview];
     }
     
-    if(![rss.imageUrl isEmpty]){
+    if(rss.imageUrl.isNotEmpty){
         [_rssImageView setImageWithURL:[NSURL URLWithString:rss.imageUrl] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [self.contentView addSubview:_rssImageView];
         

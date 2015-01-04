@@ -36,7 +36,7 @@
 
 - (void)loadHTML:(Rss*)rss
 {
-    if([rss isEmpty]) return;
+    if(!rss.isNotEmpty) return;
     rss.isRead = 1;
     [rss saveRead];
     [UIApplication sharedApplication].applicationIconBadgeNumber -=1;
@@ -45,7 +45,7 @@
     NSString *publishDate = [[NSDate dateWithTimeIntervalSince1970:rss.date] stringWithDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     detailString = [detailString replace:RX(@"#title#") with:rss.title];
-    if([rss.link isEmpty]){
+    if(rss.link.isNotEmpty){
        detailString = [detailString replace:RX(@"href=\"#link#\"") with:@""];
     }else{
         _url = [NSURL URLWithString:rss.link];
@@ -58,6 +58,7 @@
     detailString = [detailString replace:RX(@"#content#") with:rss.content];
     [_webView loadHTMLString:detailString baseURL:nil];
 }
+
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
         [self presentWebView:[request URL]];

@@ -95,7 +95,8 @@
     NSArray *list = [self getNewMessageList:time];
     NSMutableString *message = [self getMessage:list];
     
-    if(![message isEmpty]){
+    
+    if(message.isNotEmpty){
         UILocalNotification *notification=[[UILocalNotification alloc] init];
         notification.repeatInterval = 0;//循环次数，
         notification.timeZone=[NSTimeZone defaultTimeZone];

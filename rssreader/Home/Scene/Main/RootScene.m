@@ -38,7 +38,7 @@
     UIButton *rssbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_rss" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
     [self showBarButton:NAV_RIGHT button:rssbutton];
     
-    if(![[DataCenter sharedInstance].time isEmpty]){
+    if([DataCenter sharedInstance].time.isNotEmpty){
         PresentRssList *presentRssListScene =  [self.storyboard instantiateViewControllerWithIdentifier:@"PresentRssList"];
         CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:presentRssListScene];
         [self presentViewController:centerNav animated:NO completion:nil];

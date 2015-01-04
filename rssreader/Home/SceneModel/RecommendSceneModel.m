@@ -12,7 +12,7 @@
 @implementation RecommendSceneModel
 
 -(void)loadData{
-    [JSONHTTPClient getJSONFromURLWithString:@"https://raw.githubusercontent.com/zhuchaowe/EasyRSS/master/lists.json"
+    [JSONHTTPClient getJSONFromURLWithString:@"http://7tsz2s.com1.z0.glb.clouddn.com/lists.txt"
                                        params:nil
                                    completion:^(NSDictionary* json, JSONModelError *err) {
                                        self.itemList = [[ItemList alloc] initWithDictionary:json error:nil];

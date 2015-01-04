@@ -80,7 +80,7 @@
         rss.author = item.author ?:feed.title;
         rss.feedFavicon = feed.favicon;
         rss.feedTitle = feed.title;
-        if(![rss.title isEmpty] && rss.title != nil){
+        if(rss.title.isNotEmpty){
             [feed.rssList addObject:rss];
         }
     };
