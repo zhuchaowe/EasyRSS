@@ -41,7 +41,8 @@
          [[GCDQueue globalQueue] queueBlock:^{
              NSArray *array = [Rss rssListInDb:_map page:page pageSize:self.pagination.pageSize];
              [[GCDQueue mainQueue] queueBlock:^{
-                 self.dataArray = [self.pagination setEndWithOrigin:self.dataArray newArray:array];
+                //  self.dataArray = [self.pagination setEndWithOrigin:self.dataArray newArray:array];
+                    self.dataArray = [self.pagination success:self.dataArray newArray:array];
                  [self.tableView reloadData];
                  [self.tableView endAllRefreshingWithIntEnd:self.pagination.isEnd.integerValue];
              }];
