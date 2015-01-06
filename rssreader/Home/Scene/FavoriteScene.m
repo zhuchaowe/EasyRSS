@@ -55,8 +55,21 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    RssCell *cell = [self tableView:_tableView cellForRowAtIndexPath:indexPath];
-    return cell.cellHeight;
+Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
+    
+    CGFloat height = 45;
+    
+    if (rss.summary.isNotEmpty) {
+        height +=50;
+    }
+    
+    if(rss.imageUrl.isNotEmpty){
+        height +=200;
+    }
+    return height;
+    
+    // RssCell *cell = [self tableView:_tableView cellForRowAtIndexPath:indexPath];
+    // return cell.cellHeight;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
