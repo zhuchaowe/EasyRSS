@@ -8,10 +8,9 @@
 
 #import "PresentRssList.h"
 #import "RssCell.h"
-#import "BlockActionSheet.h"
 #import "RssDetailScene.h"
 #import "DataCenter.h"
-@interface PresentRssList ()
+@interface PresentRssList ()<SWTableViewCellDelegate>
 @property(nonatomic,retain)NSMutableArray *dataArray;
 @end
 
@@ -34,8 +33,15 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    RssCell *cell = [self tableView:_tableView cellForRowAtIndexPath:indexPath];
-    return cell.cellHeight;
+    Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
+    CGFloat height = 45;
+    if (rss.summary.isNotEmpty) {
+        height +=50;
+    }
+    if(rss.imageUrl.isNotEmpty){
+        height +=200;
+    }
+    return height;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -45,25 +51,13 @@
 - (RssCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *SettingTableIdentifier = @"RssCell";
     RssCell *cell = [[RssCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingTableIdentifier];
+    cell.delegate = self;
+    cell.rightUtilityButtons = [self rightButtons];
     Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
     [cell reloadRss:rss];
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    UILongPressGestureRecognizer *longPress = [UILongPressGestureRecognizer SH_gestureRecognizerWithBlock:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        if(state == UIGestureRecognizerStateBegan){
-            BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:rss.title];
-            [sheet setCancelButtonWithTitle:@"取消收藏" block:^{
-                rss.isFav = 0;
-                [rss saveFav];
-            }];
-            [sheet addButtonWithTitle:@"取消" block:nil];
-            [sheet showInView:self.view];
-        }
-    }];
-    [longPress setMinimumPressDuration:0.5f];
-    [longPress setAllowableMovement:50.0];
-    [cell addGestureRecognizer:longPress];
     return cell;
 }
 
@@ -72,6 +66,28 @@
     scene.rss = [self.dataArray objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:scene animated:YES];
 }
+
+- (NSArray *)rightButtons
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithString:@"#20F298"]
+                                                title:@"取消收藏"];
+    return rightUtilityButtons;
+}
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    if (index == 0) { //删除
+        Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
+        rss.isFav = 0;
+        [rss saveFav];
+        [self.dataArray removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    }
+}
+
 
 
 @end

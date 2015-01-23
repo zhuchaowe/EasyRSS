@@ -1,0 +1,33 @@
+<?php 
+	$json = file_get_contents("http://mayi.maichong.me/shadowsocks.json");
+	echo file_put_contents("shadowsocks.json", $json);
+	echo "<br/>";
+	system("sudo supervisorctl restart shadowsocks");
+	$obj = json_decode($json);
+
+	foreach ($obj->port_password as $key => $value) {
+		echo "<br/>";
+		system("sudo /usr/share/nginx/html/vpncallback/uniqueIpTable.sh -A OUTPUT -s ".$obj->server."/32 -p tcp -m tcp --sport ".$key);
+	}
+
+?>
+
+<?php 
+	$data = file_get_contents("data.txt");
+	$array = explode("@", $data);
+
+	$list = [];
+	foreach ($array as  $value) {
+		if($value !=""){
+			 $d = = explode(":", $value);
+			 $list[$d[0]] = $d[1];
+		}
+	}
+
+	$yestdayTime = mktime(0,0,0,date('m'),date('d')-1,date('Y'));
+
+	echo $file = "data/".date("Y-m-d",$yestdayTime).".json";
+	echo "/n";
+	file_put_contents($file, json_encode($list));
+
+?>

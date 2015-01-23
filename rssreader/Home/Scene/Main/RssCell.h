@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Feed.h"
 
-@interface RssCell : UITableViewCell
+#import "SWTableViewCell.h"
+@interface RssCell : SWTableViewCell
 -(void)reloadRss:(Rss *)rss;
 -(CGFloat)cellHeight;
 @end

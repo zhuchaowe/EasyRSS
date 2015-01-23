@@ -10,9 +10,6 @@
 #import "FeedSceneModel.h"
 #import "AddScene.h"
 #import "RssListScene.h"
-#import "BlockActionSheet.h"
-#import "BlockAlertView.h"
-#import "SHGestureRecognizerBlocks.h"
 #import "FeedCell.h"
 #import "DiscoverySceneModel.h"
 #import "MWKProgressIndicator.h"
@@ -20,7 +17,7 @@
 #import "PresentRssList.h"
 
 
-@interface RootScene ()
+@interface RootScene ()<SWTableViewCellDelegate>
 @property(nonatomic,retain)FeedSceneModel *feedSceneModel;
 @property(nonatomic,assign)BOOL isReflashing;
 @end
@@ -46,9 +43,7 @@
 
     
     if ([[UIApplication sharedApplication] backgroundRefreshStatus] != UIBackgroundRefreshStatusAvailable) {
-        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"后台应用刷新" message:@"您没有开启后台刷新,请在 设置->通用->应用程序后台刷新 中开启。"];
-        [alert setCancelButtonWithTitle:@"确定" block:nil];
-        [alert show];
+        [RMUniversalAlert showAlertInViewController:self withTitle:@"后台应用刷新" message:@"您没有开启后台刷新,请在 设置->通用->应用程序后台刷新 中开启。" cancelButtonTitle:@"确定" destructiveButtonTitle:nil otherButtonTitles:nil tapBlock:nil];
     }
     
     @weakify(self);
@@ -109,38 +104,12 @@
 - (FeedCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *SettingTableIdentifier = @"FeedCell";
     FeedCell *cell = [[FeedCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingTableIdentifier];
+    cell.delegate = self;
+    cell.rightUtilityButtons = [self rightButtons];
     Feed *feed = [self.feedSceneModel.feedList objectAtIndex:indexPath.row];
     [cell reload:feed];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell setAccessoryType:UITableViewCellAccessoryNone];
-    
-    UILongPressGestureRecognizer *longPress = [UILongPressGestureRecognizer SH_gestureRecognizerWithBlock:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        if(state == UIGestureRecognizerStateBegan){
-            BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:feed.title];
-            [sheet setCancelButtonWithTitle:@"分享" block:^{
-
-            }];
-            @weakify(self);
-            [sheet setDestructiveButtonWithTitle:@"删除" block:^{
-                [[GCDQueue globalQueue] queueBlock:^{
-                    [feed deleteSelf];
-                }];
-                @strongify(self);
-                [self.feedSceneModel.feedList removeObjectAtIndex:indexPath.row];
-                [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-            }];
-            
-            [sheet addButtonWithTitle:@"全部已读" block:^{
-                cell.numberLabel.text = @"";
-                [Rss setReadWhere:@{@"_fid":@(feed.primaryKey)}];
-            }];
-            [sheet addButtonWithTitle:@"取消" block:nil];
-            [sheet showInView:self.view];
-        }
-    }];
-    [longPress setMinimumPressDuration:0.5f];
-    [longPress setAllowableMovement:50.0];
-    [cell addGestureRecognizer:longPress];
     return cell;
 }
 
@@ -151,6 +120,44 @@
     scene.url = feed.url;
     [self.navigationController pushViewController:scene animated:YES];
     self.nav.shouldOpen = NO;
+}
+
+- (NSArray *)rightButtons
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithString:@"#20F298"]
+                                                title:@"分享"];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithString:@"#20CCF2"]
+                                                title:@"已读"];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:
+     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
+                                                title:@"删除"];
+    
+    return rightUtilityButtons;
+}
+
+- (void)swipeableTableViewCell:(FeedCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    Feed *feed = [self.feedSceneModel.feedList objectAtIndex:indexPath.row];
+    if (index == 2) { //删除
+        [RMUniversalAlert showActionSheetInViewController:self withTitle:@"确认删除" message:feed.title cancelButtonTitle:@"取消" destructiveButtonTitle:@"确认" otherButtonTitles:nil popoverPresentationControllerBlock:nil tapBlock:^(RMUniversalAlert *alert, NSInteger buttonIndex) {
+            if(alert.destructiveButtonIndex == buttonIndex){
+                [[GCDQueue globalQueue] queueBlock:^{
+                    [feed deleteSelf];
+                }];
+                [self.feedSceneModel.feedList removeObjectAtIndex:indexPath.row];
+                [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            }
+        }];
+    }else if(index == 1){
+        cell.numberLabel.text = @"";
+        [Rss setReadWhere:@{@"_fid":@(feed.primaryKey)}];
+    }
+    [cell hideUtilityButtonsAnimated:YES];
 }
 
 @end

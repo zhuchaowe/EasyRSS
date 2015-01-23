@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Feed.h"
-@interface FeedCell : UITableViewCell
+#import "SWTableViewCell.h"
+@interface FeedCell : SWTableViewCell
 @property(nonatomic,retain)UIImageView *logoImageView;
 @property(nonatomic,retain)UILabel *titleLabel;
 @property(nonatomic,retain)UILabel *numberLabel;

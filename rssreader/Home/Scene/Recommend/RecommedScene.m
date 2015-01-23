@@ -10,7 +10,6 @@
 #import "RecommendSceneModel.h"
 #import "UIAlertView+Blocks.h"
 #import "FeedSceneModel.h"
-#import "BlockAlertView.h"
 @interface RecommedScene ()
 @property(nonatomic,retain)RecommendSceneModel *sceneModel;
 @end
@@ -61,21 +60,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Item *item = [self.sceneModel.itemList.list objectAtIndex:indexPath.row];
-    BlockAlertView *sheet = [BlockAlertView alertWithTitle:@"添加rss源" message:[NSString stringWithFormat:@"您即将添加[%@]",item.name]];
     
-    [sheet setCancelButtonWithTitle:@"取消" block:nil];
-    [sheet setDestructiveButtonWithTitle:@"确定" block:^{
-        [self showHudIndeterminate:@"加载中..."];
-        [[FeedSceneModel sharedInstance]
-         loadAFeed:item.url
-         start:nil
-         finish:^{
-             [self hideHudSuccess:@"添加成功"];
-         } error:^{
-             [self hideHudFailed:@"添加失败"];
-         }];
+    [RMUniversalAlert showAlertInViewController:self withTitle:@"添加rss源"
+                                        message:[NSString stringWithFormat:@"您即将添加[%@]",item.name]
+                              cancelButtonTitle:@"取消"
+                         destructiveButtonTitle:@"确定"
+                              otherButtonTitles:nil
+                                       tapBlock:^(RMUniversalAlert *alert, NSInteger buttonIndex) {
+        if(alert.destructiveButtonIndex == buttonIndex){
+            [self showHudIndeterminate:@"加载中..."];
+            [[FeedSceneModel sharedInstance]
+             loadAFeed:item.url
+             start:nil
+             finish:^{
+                 [self hideHudSuccess:@"添加成功"];
+             } error:^{
+                 [self hideHudFailed:@"添加失败"];
+             }];
+        }
     }];
-    [sheet show];
 }
 
 @end

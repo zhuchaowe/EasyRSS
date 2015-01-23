@@ -27,15 +27,34 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    // IOS8 新系统需要使用新的代码咯
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings
+                                                                             settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)
+                                                                             categories:nil]];
+        
+        
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+    else
+    {
+        //这里还是原来的代码
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+         (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
+    }
+    
+    
     UILocalNotification * notification=[launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if(notification !=nil && [notification.userInfo objectForKey:@"time"]){
         [DataCenter sharedInstance].time = [notification.userInfo objectForKey:@"time"];
     }
     [self setUpBackGroundReflash];
 
+    
     self.database = [[AppDatabase alloc]initWithMigrations];
     [$ swizzleClassMethod:@selector(objectAtIndex:) with:@selector(safeObjectAtIndex:) in:[NSArray class]];
-    // Override point for customization after application launch.
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];
     

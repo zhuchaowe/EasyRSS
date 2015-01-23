@@ -1,0 +1,19 @@
+
+iptables -vxn -L OUTPUT | awk  '{if($10 != ""){printf("%s:%s@",substr($10,5,4), $2)}}'  >/root/file2
+
+
+
+iptables -A OUTPUT -s 104.131.106.177/32 -p tcp -m tcp --sport 5192
+iptables -D OUTPUT -s 104.131.106.177/32 -p tcp -m tcp --sport 5192
+
+
+if($10 != ""){
+	if(NR == 1){
+		printf("{%s:%s}", $2,substr($10,5,4))
+	}else{
+		printf(",{%s:%s}", $2,substr($10,5,4))
+	}
+}
+
+
+if($10 != ""){printf("{%s:%s}",substr($10,5,4), $2)}
