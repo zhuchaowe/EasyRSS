@@ -1,5 +1,6 @@
 platform :ios, '7.0'
 pod 'EasyIOS', '~> 2.2'
+pod 'ReactiveCocoa', '~> 2.4.4'
 pod 'EasyIOS-Extention', '~> 1.1'
 pod 'UIColor+MLPFlatColors', '~> 1.0'
 pod 'UMengAnalytics', '~> 3.1.2'
