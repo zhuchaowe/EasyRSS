@@ -9,6 +9,8 @@
 #import "LeftScene.h"
 #import "LeftHeader.h"
 #import "CenterNav.h"
+#import "RootScene.h"
+
 
 @interface LeftScene ()<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) SceneTableView *tableView;
@@ -25,11 +27,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.sections = @[[NSString stringWithFormat:@"%@ 首页",
+    self.sections = @[[NSString stringWithFormat:@"%@ 广场",
                          [IconFont icon:@"ios7Home" fromFont:ionIcons]],
                         [NSString stringWithFormat:@"%@ 推荐",
                          [IconFont icon:@"androidPromotion" fromFont:ionIcons]],
-                        [NSString stringWithFormat:@"%@ 发现",
+                        [NSString stringWithFormat:@"%@ 订阅",
                          [IconFont icon:@"socialRss" fromFont:ionIcons]],
                         [NSString stringWithFormat:@"%@ 收藏",
                          [IconFont icon:@"ios7Star" fromFont:ionIcons]],
@@ -82,20 +84,21 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
         if(_navMain == nil){
-            _navMain = [[CenterNav alloc]initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"RootScene"]];
+            _navMain = [[CenterNav alloc]initWithRootViewController:[[RootScene alloc]init]];
         }
         [self.drawer replaceCenterViewControllerWithViewController:_navMain];
-    }else if (indexPath.row == 1){
-        if(_navRecommend == nil){
-            _navRecommend = [[CenterNav alloc]initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"RecommedScene"]];
-        }
-        [self.drawer replaceCenterViewControllerWithViewController:_navRecommend];
-    }else if(indexPath.row == 3){
-        if(_navFav == nil){
-            _navFav = [[CenterNav alloc]initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FavoriteScene"]];
-        }
-        [self.drawer replaceCenterViewControllerWithViewController:_navFav];
     }
+//    else if (indexPath.row == 1){
+//        if(_navRecommend == nil){
+//            _navRecommend = [[CenterNav alloc]initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"RecommedScene"]];
+//        }
+//        [self.drawer replaceCenterViewControllerWithViewController:_navRecommend];
+//    }else if(indexPath.row == 3){
+//        if(_navFav == nil){
+//            _navFav = [[CenterNav alloc]initWithRootViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FavoriteScene"]];
+//        }
+//        [self.drawer replaceCenterViewControllerWithViewController:_navFav];
+//    }
 }
 
 #pragma mark - ICSDrawerControllerPresenting

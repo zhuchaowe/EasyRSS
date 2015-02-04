@@ -12,3 +12,4 @@
 #import "PullHeader.h"
 #import "Easy-Extention.h"
 #import "EzUILabel.h"
+#define DEFAULT_PAGE_SIZE @20

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Feed.h"
+#import "RssEntity.h"
+#import "FeedEntity.h"
+#import "ALBaseCell.h"
 
-#import "SWTableViewCell.h"
-@interface RssCell : SWTableViewCell
--(void)reloadRss:(Rss *)rss;
--(CGFloat)cellHeight;
+@interface RssCell : ALBaseCell
+-(void)reloadRss:(RssEntity *)rss with:(FeedEntity *)feed;
 @end

@@ -16,68 +16,74 @@
 @property(nonatomic,retain)EzUILabel *time;
 @property(nonatomic,retain)UIView *rightColorView;
 @property(nonatomic,retain)UIImageView *rssImageView;
+@property(nonatomic,retain)NSMutableArray *imageConstrainArray;
 @end
 
 @implementation RssCell
 
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if(self){
-        _feedTitle = [[EzUILabel alloc]init];
-        _feedTitle.textAlignment = NSTextAlignmentLeft;
-        _feedTitle.font = [UIFont systemFontOfSize:12.0f];
-        _feedTitle.textColor = [UIColor grayColor];
-        [self.contentView addSubview:_feedTitle];
-        
-        _feedImage = [[UIImageView alloc]init];
-        [self.contentView addSubview:_feedImage];
-        
-        _time = [[EzUILabel alloc]init];
-        _time.textAlignment = NSTextAlignmentRight;
-        _time.font = [UIFont systemFontOfSize:12.0f];
-        _time.textColor = [UIColor grayColor];
-        [self.contentView addSubview:_time];
-        
-        _rightColorView = [[UIView alloc]init];
-        [self.contentView addSubview:_rightColorView];
-        
-        
-        _rssTitle = [[EzUILabel alloc]init];
-        _rssTitle.numberOfLines = 1;
-        _rssTitle.lineBreakMode = NSLineBreakByWordWrapping|NSLineBreakByTruncatingTail;
-        _rssTitle.textAlignment = NSTextAlignmentLeft;
-        _rssTitle.font = [UIFont systemFontOfSize:18.0f];
-        _rssTitle.textColor = [UIColor blackColor];
-        [self.contentView addSubview:_rssTitle];
-        
-        _summary = [[EzUILabel alloc]init];
-        _summary.numberOfLines = 1;
-        _summary.lineBreakMode = NSLineBreakByWordWrapping|NSLineBreakByTruncatingTail;
-        _summary.textAlignment = NSTextAlignmentLeft;
-        _summary.font = [UIFont systemFontOfSize:16.0f];
-        _summary.textColor = [UIColor grayColor];
+-(void)commonInit{
+    [super commonInit];
+    
+    self.accessoryType = UITableViewCellAccessoryNone;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 
-        _rssImageView = [[UIImageView alloc]init];
-        _rssImageView.contentMode = UIViewContentModeScaleAspectFill;
-        _rssImageView.clipsToBounds = YES;
-        
-        [self loadAutolayout];
-    }
-    return self;
+    _feedTitle = [[EzUILabel alloc]init];
+    _feedTitle.textAlignment = NSTextAlignmentLeft;
+    _feedTitle.font = [UIFont systemFontOfSize:12.0f];
+    _feedTitle.textColor = [UIColor grayColor];
+    [self.contentView addSubview:_feedTitle];
+    
+    _feedImage = [[UIImageView alloc]init];
+    [self.contentView addSubview:_feedImage];
+    
+    _time = [[EzUILabel alloc]init];
+    _time.textAlignment = NSTextAlignmentRight;
+    _time.font = [UIFont systemFontOfSize:12.0f];
+    _time.textColor = [UIColor grayColor];
+    [self.contentView addSubview:_time];
+    
+    _rightColorView = [[UIView alloc]init];
+    [self.contentView addSubview:_rightColorView];
+    
+    _rssTitle = [[EzUILabel alloc]init];
+    _rssTitle.numberOfLines = 0;
+    _rssTitle.lineBreakMode = NSLineBreakByWordWrapping|NSLineBreakByTruncatingTail;
+    _rssTitle.textAlignment = NSTextAlignmentLeft;
+    _rssTitle.font = [UIFont systemFontOfSize:18.0f];
+    _rssTitle.textColor = [UIColor blackColor];
+    [self.contentView addSubview:_rssTitle];
+    
+    _summary = [[EzUILabel alloc]init];
+    _summary.numberOfLines = 1;
+    _summary.lineBreakMode = NSLineBreakByWordWrapping|NSLineBreakByTruncatingTail;
+    _summary.textAlignment = NSTextAlignmentLeft;
+    _summary.font = [UIFont systemFontOfSize:16.0f];
+    _summary.textColor = [UIColor grayColor];
+    [self.contentView addSubview:_summary];
+    
+    _rssImageView = [[UIImageView alloc]init];
+    _rssImageView.contentMode = UIViewContentModeScaleAspectFill;
+    _rssImageView.clipsToBounds = YES;
+    [self.contentView addSubview:_rssImageView];
+    
+    
+    [self loadAutolayout];
 }
 
 -(void)loadAutolayout{
     
+    _imageConstrainArray = [NSMutableArray array];
+    
     [_feedTitle alignTop:@"10" leading:@"10" toView:_feedTitle.superview];
-    [_feedTitle constrainHeight:@"20"];
+    [_feedTitle constrainHeight:@"20@999"];
     
     [_time alignTopEdgeWithView:_feedTitle predicate:@"0"];
     [_time alignTrailingEdgeWithView:_time.superview predicate:@"-10"];
-    [_time constrainHeight:@"20"];
+    [_time constrainHeight:@"20@999"];
     
     [_feedImage alignLeadingEdgeWithView:_feedTitle predicate:@"0"];
     [_feedImage constrainTopSpaceToView:_feedTitle predicate:@"5"];
-    [_feedImage constrainWidth:@"16" height:@"16"];
+    [_feedImage constrainWidth:@"16" height:@"16@999"];
     
     [_rightColorView constrainHeight:@"5"];
     [_rightColorView alignTop:@"0" leading:@"0" bottom:nil
@@ -87,57 +93,45 @@
     [_rssTitle constrainLeadingSpaceToView:_feedImage predicate:@"5"];
     [_rssTitle alignTrailingEdgeWithView:_time predicate:@"0"];
     
+    [_summary constrainTopSpaceToView:_rssTitle predicate:@"0"];
+    [_summary alignLeading:@"0" trailing:@"0" toView:_rssTitle];
+    
+    [_rssImageView constrainTopSpaceToView:_summary predicate:@"5"];
+    [_rssImageView alignTop:nil leading:@"0" bottom:@"-5" trailing:@"0" toView:_rssImageView.superview];
 }
 
--(void)reloadRss:(Rss *)rss{
-
-    [_feedImage sd_setImageWithURL:[NSURL URLWithString:rss.feedFavicon] placeholderImage:[UIImage imageNamed:@"rssIcon"]];
-    _time.text = [[NSDate dateWithTimeIntervalSince1970:rss.date] stringWithDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    _feedTitle.text = rss.feedTitle;
+-(void)reloadRss:(RssEntity *)rss with:(FeedEntity *)feed{
+    
+    [_feedImage sd_setImageWithURL:[NSURL URLWithString:feed.favicon] placeholderImage:[UIImage imageNamed:@"rssIcon"]];
+    _time.text = rss.date;
+    _feedTitle.text = feed.title;
     _rssTitle.text = rss.title;
+    _summary.text = rss.summary;
 
-    if(rss.summary.isNotEmpty){
-        _summary.text = rss.summary;
-        [self.contentView addSubview:_summary];
-        [_summary constrainTopSpaceToView:_rssTitle predicate:@"0"];
-        [_summary constrainHeight:@"30"];
-        [_summary alignLeading:@"0" trailing:@"0" toView:_rssTitle];
+    if(rss.image.isNotEmpty){
+        [_rssImageView removeConstraints:_imageConstrainArray];
+        [_imageConstrainArray removeAllObjects];
+        [_rssImageView setImageWithURL:[NSURL URLWithString:rss.image] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [_imageConstrainArray addObjectsFromArray:[_rssImageView constrainHeight:@"200@999"]];
     }else{
-        [_summary removeFromSuperview];
+        [_rssImageView removeConstraints:_imageConstrainArray];
+        [_imageConstrainArray removeAllObjects];
+        [_imageConstrainArray addObjectsFromArray:[_rssImageView constrainHeight:@"0"]];
     }
-    
-    if(rss.imageUrl.isNotEmpty){
-        [_rssImageView setImageWithURL:[NSURL URLWithString:rss.imageUrl] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        [self.contentView addSubview:_rssImageView];
-        
-        if([self.contentView.subviews containsObject:_summary]){
-            [_rssImageView constrainTopSpaceToView:_summary predicate:@"0"];
-        }else{
-            [_rssImageView constrainTopSpaceToView:_rssTitle predicate:@"0"];
-        }
-        [_rssImageView alignLeading:@"0" trailing:@"0" toView:_rssImageView.superview];
-        [_rssImageView constrainHeight:@"200"];
-    }else{
-        [_rssImageView removeFromSuperview];
-    }
-    
-    if(rss.isRead == 0){
-        _rightColorView.backgroundColor = [UIColor flatOrangeColor];
-    }else{
-        _rightColorView.backgroundColor = [UIColor clearColor];
-    }
+    _rightColorView.backgroundColor = [UIColor flatOrangeColor];
+
 }
 
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    
-    [super setSelected:selected animated:animated];
-    if (selected) {
-        _rightColorView.backgroundColor = [UIColor clearColor];
-        self.contentView.backgroundColor = [UIColor flatWhiteColor];
-    } else {
-        self.contentView.backgroundColor = [UIColor whiteColor];
-    }
-}
+//- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+//    
+//    [super setSelected:selected animated:animated];
+//    if (selected) {
+//        _rightColorView.backgroundColor = [UIColor clearColor];
+//        self.contentView.backgroundColor = [UIColor flatWhiteColor];
+//    } else {
+//        self.contentView.backgroundColor = [UIColor whiteColor];
+//    }
+//}
 
 @end

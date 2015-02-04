@@ -7,10 +7,8 @@
 //
 
 #import "Scene.h"
-#import "Feed.h"
+#import "FeedEntity.h"
 
 @interface RssListScene : Scene
-@property(nonatomic,strong) NSDictionary *map;
-@property(nonatomic,strong) NSString *url;
-@property (strong, nonatomic) IBOutlet SceneTableView *tableView;
+@property(nonatomic,strong) FeedEntity *feed;
 @end
