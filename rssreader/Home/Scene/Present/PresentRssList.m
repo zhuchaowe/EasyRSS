@@ -45,7 +45,7 @@
     static NSString *SettingTableIdentifier = @"RssCell";
     RssCell *cell = [[RssCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingTableIdentifier];
     cell.delegate = self;
-//    cell.rightUtilityButtons = [self rightButtons];
+
 //    Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
 //    [cell reloadRss:rss];
     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -68,7 +68,6 @@
 //                                                title:@"取消收藏"];
 //    return rightUtilityButtons;
 //}
-
 //- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
 
 //    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
