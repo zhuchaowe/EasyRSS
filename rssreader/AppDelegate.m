@@ -11,11 +11,13 @@
 #import "CenterNav.h"
 #import "RootScene.h"
 #import "MobClick.h"
-#import "Rss.h"
+#import "RssEntity.h"
 #import "FeedSceneModel.h"
 #import "PresentRssList.h"
 #import "DataCenter.h"
 #import "AddScene.h"
+#import "RootScene.h"
+
 
 
 @interface AppDelegate ()
@@ -44,22 +46,29 @@
          (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
     }
     
+//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
+ 
     UILocalNotification * notification=[launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if(notification !=nil && [notification.userInfo objectForKey:@"time"]){
         [DataCenter sharedInstance].time = [notification.userInfo objectForKey:@"time"];
     }
     [self setUpBackGroundReflash];
+    
 
     
     self.database = [[AppDatabase alloc]initWithMigrations];
+    
+    [Action actionConfigHost:@"rss.iosx.me" client:@"easyios" codeKey:@"Code" rightCode:0 msgKey:@"Msg"];
+    
+    
     [$ swizzleClassMethod:@selector(objectAtIndex:) with:@selector(safeObjectAtIndex:) in:[NSArray class]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];
     
     LeftScene *leftScene = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LeftScene"];
-    _rootScene = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"RootScene"];
+    _rootScene = [[RootScene alloc]init];
     CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:_rootScene];
 
     ICSDrawerController *drawer = [[ICSDrawerController alloc]
@@ -71,7 +80,7 @@
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    [Rss setUpNoti];
+//    [Rss setUpNoti];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -126,14 +135,15 @@
                  break;
              case AFNetworkReachabilityStatusReachableViaWiFi:
                  [DataCenter sharedInstance].isWifi = YES;
-                 [[FeedSceneModel sharedInstance]
-                  reflashAllFeed:nil each:nil finish:^{
-                      if([Rss notifyNewMessage]){
-                          completionHandler(UIBackgroundFetchResultNewData);
-                      }else{
-                          completionHandler(UIBackgroundFetchResultNoData);
-                      }
-                  }];
+                 completionHandler(UIBackgroundFetchResultNoData);
+//                 [[FeedSceneModel sharedInstance]
+//                  reflashAllFeed:nil each:nil finish:^{
+//                      if([Rss notifyNewMessage]){
+//                          completionHandler(UIBackgroundFetchResultNewData);
+//                      }else{
+//                          completionHandler(UIBackgroundFetchResultNoData);
+//                      }
+//                  }];
                  break;
          }
      }];

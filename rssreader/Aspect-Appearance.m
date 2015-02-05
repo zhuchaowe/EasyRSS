@@ -16,12 +16,10 @@
 @classPatchField(AppDelegate)
 AspectPatch(-, BOOL, application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions)
 {
-    if (IOS7_OR_LATER) {
-        [[UINavigationBar appearance] setBarTintColor:[UIColor flatDarkOrangeColor]];
-        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    }else{
-        [[UINavigationBar appearance] setTintColor:[UIColor flatDarkOrangeColor]];
-    }
+    [[UINavigationBar appearance] setBarTintColor:[UIColor flatDarkOrangeColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTranslucent:NO];
+
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           [UIColor whiteColor],NSForegroundColorAttributeName,
                                                           [UIFont systemFontOfSize:18],NSFontAttributeName,

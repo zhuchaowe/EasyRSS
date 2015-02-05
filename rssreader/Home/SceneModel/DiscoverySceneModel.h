@@ -10,10 +10,5 @@
 
 @interface DiscoverySceneModel : SceneModel
 @property(nonatomic,retain)NSMutableArray *dataArray;
-/**
- *  生成单例
- *
- *  @return instancetype FeedSceneModel单例
- */
-+ (instancetype)sharedInstance;
+
 @end

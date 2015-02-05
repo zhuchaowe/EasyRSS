@@ -8,7 +8,8 @@
 
 #import "RssDetailScene.h"
 #import "TOWebViewController.h"
-@interface RssDetailScene ()
+@interface RssDetailScene ()<UIWebViewDelegate>
+@property (strong, nonatomic) UIWebView *webView;
 @property(nonatomic,retain)NSURL *url;
 @property(nonatomic,retain)NSURLRequest *req;
 @end
@@ -17,6 +18,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.webView = [[UIWebView alloc]init];
+    [self.view addSubview:self.webView];
+    [self.webView alignToView:self.view];
+    
     self.webView.backgroundColor = [UIColor flatWhiteColor];
     _webView.scalesPageToFit = YES;
     UIButton *leftbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_chevron_left" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
@@ -34,27 +39,26 @@
     [self presentWebView:_url];
 }
 
-- (void)loadHTML:(Rss*)rss
+- (void)loadHTML:(RssEntity*)rss
 {
     if(!rss.isNotEmpty) return;
-    rss.isRead = 1;
-    [rss saveRead];
-    [UIApplication sharedApplication].applicationIconBadgeNumber -=1;
+    
+//    [UIApplication sharedApplication].applicationIconBadgeNumber -=1;
+    
     self.title = rss.title;
     NSString *detailString = [NSMutableString stringFromResFile:@"detail.html" encoding:NSUTF8StringEncoding];
-    NSString *publishDate = [[NSDate dateWithTimeIntervalSince1970:rss.date] stringWithDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
+
     detailString = [detailString replace:RX(@"#title#") with:rss.title];
     if(rss.link.isNotEmpty){
-       detailString = [detailString replace:RX(@"href=\"#link#\"") with:@""];
-    }else{
         _url = [NSURL URLWithString:rss.link];
         UIButton *rightbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_external_link" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
         [self showBarButton:NAV_RIGHT button:rightbutton];
-       detailString = [detailString replace:RX(@"#link#") with:rss.link];
+        detailString = [detailString replace:RX(@"#link#") with:rss.link];
+    }else{
+        detailString = [detailString replace:RX(@"href=\"#link#\"") with:@""];
     }
     detailString = [detailString replace:RX(@"#author#") with:rss.author];
-    detailString = [detailString replace:RX(@"#publishDate#") with:publishDate];
+    detailString = [detailString replace:RX(@"#publishDate#") with:rss.date];
     detailString = [detailString replace:RX(@"#content#") with:rss.content];
     [_webView loadHTMLString:detailString baseURL:nil];
 }

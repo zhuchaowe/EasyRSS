@@ -10,15 +10,6 @@
 
 @implementation DiscoverySceneModel
 
-/**
- *  生成单例
- *
- *  @return FeedSceneModel单例
- */
-+ (instancetype)sharedInstance {
-    GCDSharedInstance(^{ return [self SceneModel]; });
-}
-
 -(void)loadSceneModel{
     
 }

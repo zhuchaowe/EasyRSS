@@ -13,10 +13,4 @@
 @property(nonatomic,retain)NSArray *favArray;
 @property(nonatomic,retain)Pagination *pagination;
 -(void)retData;
-/**
- *  生成单例
- *
- *  @return instancetype FeedSceneModel单例
- */
-+ (instancetype)sharedInstance;
 @end

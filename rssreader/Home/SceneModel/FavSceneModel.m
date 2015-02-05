@@ -7,7 +7,7 @@
 //
 
 #import "FavSceneModel.h"
-#import "Rss.h"
+//#import "Rss.h"
 
 @implementation FavSceneModel
 /**
@@ -21,8 +21,8 @@
 
 -(void)retData{
     NSDictionary *map =  @{@"isFav":@(1)};
-    self.pagination.total = @([[[Rss Model] where:map] getCount]);
-    self.favArray = [Rss rssListInDb:map page:self.pagination.page pageSize:self.pagination.pageSize];
+//    self.pagination.total = @([[[Rss Model] where:map] getCount]);
+//    self.favArray = [Rss rssListInDb:map page:self.pagination.page pageSize:self.pagination.pageSize];
 }
 
 -(void)loadSceneModel{

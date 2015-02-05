@@ -7,10 +7,8 @@
 //
 
 #import "Scene.h"
-#import "Rss.h"
-@interface RssDetailScene : Scene<UIWebViewDelegate>
-@property (strong, nonatomic) IBOutlet UIWebView *webView;
-@property(nonatomic,retain)Rss *rss;
+#import "RssEntity.h"
+@interface RssDetailScene : Scene
+@property(nonatomic,retain)RssEntity *rss;
 
-- (void)loadHTML:(Rss*)rss;
 @end

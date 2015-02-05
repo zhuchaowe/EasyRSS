@@ -10,14 +10,14 @@
 #import "RssCell.h"
 #import "RssDetailScene.h"
 #import "DataCenter.h"
-@interface PresentRssList ()<SWTableViewCellDelegate>
+@interface PresentRssList ()
 @property(nonatomic,retain)NSMutableArray *dataArray;
 @end
 
 @implementation PresentRssList
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataArray = [NSMutableArray arrayWithArray:[Rss getNewMessageList:[DataCenter sharedInstance].time]];
+//    self.dataArray = [NSMutableArray arrayWithArray:[Rss getNewMessageList:[DataCenter sharedInstance].time]];
     [DataCenter sharedInstance].time = @"";
     [self showBarButton:NAV_RIGHT title:@"完成" fontColor:[UIColor whiteColor]];
     // Do any additional setup after loading the view.
@@ -33,15 +33,8 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
-    CGFloat height = 45;
-    if (rss.summary.isNotEmpty) {
-        height +=50;
-    }
-    if(rss.imageUrl.isNotEmpty){
-        height +=200;
-    }
-    return height;
+
+    return 200;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -52,9 +45,9 @@
     static NSString *SettingTableIdentifier = @"RssCell";
     RssCell *cell = [[RssCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingTableIdentifier];
     cell.delegate = self;
-    cell.rightUtilityButtons = [self rightButtons];
-    Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
-    [cell reloadRss:rss];
+//    cell.rightUtilityButtons = [self rightButtons];
+//    Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
+//    [cell reloadRss:rss];
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -67,26 +60,26 @@
     [self.navigationController pushViewController:scene animated:YES];
 }
 
-- (NSArray *)rightButtons
-{
-    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithString:@"#20F298"]
-                                                title:@"取消收藏"];
-    return rightUtilityButtons;
-}
+//- (NSArray *)rightButtons
+//{
+//    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+//    [rightUtilityButtons sw_addUtilityButtonWithColor:
+//     [UIColor colorWithString:@"#20F298"]
+//                                                title:@"取消收藏"];
+//    return rightUtilityButtons;
+//}
 
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
-    
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    if (index == 0) { //删除
-        Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
-        rss.isFav = 0;
-        [rss saveFav];
-        [self.dataArray removeObjectAtIndex:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-    }
-}
+//- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
+
+//    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+//    if (index == 0) { //删除
+////        Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
+////        rss.isFav = 0;
+////        [rss saveFav];
+//        [self.dataArray removeObjectAtIndex:indexPath.row];
+//        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+//    }
+//}
 
 
 

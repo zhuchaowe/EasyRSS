@@ -46,22 +46,16 @@
     [_numberLabel constrainHeight:@"20"];
     [_numberLabel alignTrailingEdgeWithView:_numberLabel.superview predicate:@"-15"];
     [_numberLabel constrainLeadingSpaceToView:_titleLabel predicate:@"10"];
-    
 }
--(void)reload:(Feed *)feed{
+
+-(void)reload:(FeedEntity *)feed{
     [_logoImageView sd_setImageWithURL:[NSURL URLWithString:feed.favicon] placeholderImage:[UIImage imageNamed:@"rssIcon"]];
     _titleLabel.text = feed.title;
-    if(feed.notReadedCount == 0){
-        _numberLabel.text = @"";
-    }else{
-        _numberLabel.text = [NSString stringWithFormat:@"%ld",(long)feed.notReadedCount];
-    }
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+//    if(feed.notReadedCount == 0){
+//        _numberLabel.text = @"";
+//    }else{
+//        _numberLabel.text = [NSString stringWithFormat:@"%ld",(long)feed.notReadedCount];
+//    }
 }
 
 @end

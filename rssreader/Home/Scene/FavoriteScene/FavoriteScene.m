@@ -12,7 +12,7 @@
 #import "FeedSceneModel.h"
 #import "FavSceneModel.h"
 
-@interface FavoriteScene ()<SWTableViewCellDelegate>
+@interface FavoriteScene ()
 @property(nonatomic,retain)FavSceneModel *favSceneModel;
 @property(nonatomic,retain)NSMutableArray *dataArray;
 @end
@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _favSceneModel = [FavSceneModel sharedInstance];
+    _favSceneModel = [FavSceneModel SceneModel];
     self.dataArray = [NSMutableArray array];
     
     @weakify(self);
@@ -54,15 +54,15 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
-    CGFloat height = 45;
-    if (rss.summary.isNotEmpty) {
-        height +=50;
-    }
-    if(rss.imageUrl.isNotEmpty){
-        height +=200;
-    }
-    return height;
+//    Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
+//    CGFloat height = 45;
+//    if (rss.summary.isNotEmpty) {
+//        height +=50;
+//    }
+//    if(rss.imageUrl.isNotEmpty){
+//        height +=200;
+//    }
+    return 200;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -73,9 +73,9 @@
     static NSString *SettingTableIdentifier = @"RssCell";
     RssCell *cell = [[RssCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingTableIdentifier];
     cell.delegate = self;
-    cell.rightUtilityButtons = [self rightButtons];
-    Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
-    [cell reloadRss:rss];
+//    cell.rightUtilityButtons = [self rightButtons];
+//    Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
+//    [cell reloadRss:rss];
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -83,30 +83,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     RssDetailScene* scene =  [self.storyboard instantiateViewControllerWithIdentifier:@"RssDetailScene"];
-    scene.rss = [self.dataArray objectAtIndex:indexPath.row];
+//    scene.rss = [self.dataArray objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:scene animated:YES];
 }
 
-
-- (NSArray *)rightButtons
-{
-    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithString:@"#20F298"]
-                                                title:@"取消收藏"];
-    return rightUtilityButtons;
-}
-
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    if (index == 0) { //删除
-        Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
-                rss.isFav = 0;
-                [rss saveFav];
-        [self.dataArray removeObjectAtIndex:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-    }
-}
+//
+//- (NSArray *)rightButtons
+//{
+//    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+//    [rightUtilityButtons sw_addUtilityButtonWithColor:
+//     [UIColor colorWithString:@"#20F298"]
+//                                                title:@"取消收藏"];
+//    return rightUtilityButtons;
+//}
+//
+//- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
+//    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+//    if (index == 0) { //删除
+////        Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
+////                rss.isFav = 0;
+////                [rss saveFav];
+//        [self.dataArray removeObjectAtIndex:indexPath.row];
+//        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+//    }
+//}
 
 
 

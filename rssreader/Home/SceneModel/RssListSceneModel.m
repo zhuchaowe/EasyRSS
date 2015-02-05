@@ -1,28 +1,24 @@
 //
-//  FeedSceneModel.m
+//  RssListSceneModel.m
 //  rssreader
 //
-//  Created by 朱潮 on 14-8-18.
-//  Copyright (c) 2014年 zhuchao. All rights reserved.
+//  Created by zhuchao on 15/2/4.
+//  Copyright (c) 2015年 zhuchao. All rights reserved.
 //
 
-#import "FeedSceneModel.h"
-#import "DataCenter.h"
-@interface FeedSceneModel ()
-@end
+#import "RssListSceneModel.h"
 
-@implementation FeedSceneModel
-
+@implementation RssListSceneModel
 /**
  *   初始化加载SceneModel
  */
 -(void)loadSceneModel{
     [super loadSceneModel];
     [self.action useCache];
-    self.feedList = nil;
+    self.rssList = nil;
     self.dataArray = [NSMutableArray array];
     @weakify(self);
-    _request = [FeedListRequest RequestWithBlock:^{  // 初始化请求回调
+    _request = [RssListRequest RequestWithBlock:^{  // 初始化请求回调
         @strongify(self)
         [self SEND_IQ_ACTION:self.request];
     }];
@@ -36,7 +32,7 @@
      subscribeNext:^(NSNumber *state) {
          @strongify(self);
          NSError *error;
-         self.feedList = [[FeedList alloc] initWithDictionary:[self.request.output objectForKey:@"Data"] error:&error];//Model的ORM操作，dictionary to object
+         self.rssList = [[RssList alloc] initWithDictionary:[self.request.output objectForKey:@"Data"] error:&error];//Model的ORM操作，dictionary to object
      }];
 }
 
