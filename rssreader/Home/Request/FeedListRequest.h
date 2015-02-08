@@ -11,5 +11,4 @@
 @interface FeedListRequest : Request
 @property(nonatomic,strong) NSNumber *pageSize;
 @property(nonatomic,strong) NSNumber *page;
-
 @end

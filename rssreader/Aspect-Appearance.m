@@ -16,10 +16,11 @@
 @classPatchField(AppDelegate)
 AspectPatch(-, BOOL, application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions)
 {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setBarTintColor:[UIColor flatDarkOrangeColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setTranslucent:NO];
 
+    [[UITabBar appearance] setTintColor:[UIColor flatDarkOrangeColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                           [UIColor whiteColor],NSForegroundColorAttributeName,
                                                           [UIFont systemFontOfSize:18],NSFontAttributeName,

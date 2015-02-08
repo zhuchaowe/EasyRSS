@@ -46,6 +46,7 @@
 //    [UIApplication sharedApplication].applicationIconBadgeNumber -=1;
     
     self.title = rss.title;
+    
     NSString *detailString = [NSMutableString stringFromResFile:@"detail.html" encoding:NSUTF8StringEncoding];
 
     detailString = [detailString replace:RX(@"#title#") with:rss.title];
@@ -60,7 +61,7 @@
     detailString = [detailString replace:RX(@"#author#") with:rss.author];
     detailString = [detailString replace:RX(@"#publishDate#") with:rss.date];
     detailString = [detailString replace:RX(@"#content#") with:rss.content];
-    [_webView loadHTMLString:detailString baseURL:nil];
+    [_webView loadHTMLString:detailString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{

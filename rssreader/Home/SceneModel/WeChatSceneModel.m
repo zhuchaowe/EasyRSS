@@ -1,27 +1,27 @@
 //
-//  AddFeedSceneModel.m
+//  WeChatSceneModel.m
 //  rssreader
 //
-//  Created by zhuchao on 15/2/4.
+//  Created by zhuchao on 15/2/5.
 //  Copyright (c) 2015年 zhuchao. All rights reserved.
 //
 
-#import "AddFeedSceneModel.h"
-
-@implementation AddFeedSceneModel
-
+#import "WeChatSceneModel.h"
+@implementation WeChatSceneModel
 /**
  *   初始化加载SceneModel
  */
 -(void)loadSceneModel{
     [super loadSceneModel];
-    self.feed = nil;
+    [self.action useCache];
+    self.searchList = nil;
+    self.dataArray = [NSMutableArray array];
     @weakify(self);
-    _request = [AddFeedRequest RequestWithBlock:^{  // 初始化请求回调
+    self.request = [SearchWeChatRequest RequestWithBlock:^{  // 初始化请求回调
         @strongify(self)
-        [self SEND_ACTION:self.request];
+        [self SEND_IQ_ACTION:self.request];
     }];
-
+    
     [[RACObserve(self.request, state) //监控 网络请求的状态
       filter:^BOOL(NSNumber *state) { //过滤请求状态
           @strongify(self);
@@ -30,9 +30,9 @@
      subscribeNext:^(NSNumber *state) {
          @strongify(self);
          NSError *error;
-         self.feed = [[FeedEntity alloc] initWithDictionary:[self.request.output objectAtPath:@"Data/feed"] error:&error];//Model的ORM操作，dictionary to object
+         self.searchList = [[FeedList alloc] initWithDictionary:[self.request.output objectForKey:@"Data"] error:&error];//Model的ORM操作，dictionary to object
      }];
-    
 
 }
+
 @end

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import "RootScene.h"
+#import "SubscribeScene.h"
 #import "FeedSceneModel.h"
 #import "AddScene.h"
 #import "RssListScene.h"
@@ -14,19 +14,21 @@
 #import "DiscoverySceneModel.h"
 #import "DataCenter.h"
 #import "PresentRssList.h"
+#import "RDNavigationController.h"
+#import "UserCenter.h"
 
-
-@interface RootScene ()<SWTableViewCellDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface SubscribeScene ()<SWTableViewCellDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) SceneTableView *tableView;
-
 @property(nonatomic,retain)FeedSceneModel *feedSceneModel;
+
 @end
 
-@implementation RootScene
+@implementation SubscribeScene
             
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"广场";
+    self.title = @"订阅";
+
     _feedSceneModel = [FeedSceneModel SceneModel];
     
     UIButton *rssbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_rss" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
@@ -76,6 +78,18 @@
          [self.tableView reloadData];
          [self.tableView endAllRefreshingWithIntEnd:value.pagination.isEnd.integerValue];
      }];
+    
+    [[RACObserve(self.feedSceneModel.request, state)
+      filter:^BOOL(NSNumber *state) {
+          @strongify(self);
+          return self.feedSceneModel.request.failed;
+      }]
+     subscribeNext:^(id x) {
+         @strongify(self);
+         self.feedSceneModel.request.page = self.feedSceneModel.feedList.pagination.page?:@1;
+         [self.tableView endAllRefreshingWithIntEnd:self.feedSceneModel.feedList.pagination.isEnd.integerValue];
+     }];
+    
     [self.tableView triggerPullToRefresh];
 }
 
@@ -84,8 +98,8 @@
 }
 
 -(void)rightButtonTouch{
-    CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:[[AddScene alloc]init]];
-    [self presentViewController:centerNav animated:YES completion:nil];
+    RDNavigationController *nav = [[RDNavigationController alloc]initWithRootViewController:[[AddScene alloc]init]];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -111,8 +125,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     RssListScene *scene =  [[RssListScene alloc]init];
     scene.feed =  [self.feedSceneModel.dataArray objectAtIndex:indexPath.row];
+    scene.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:scene animated:YES];
-    self.nav.shouldOpen = NO;
 }
 
 - (NSArray *)rightButtons

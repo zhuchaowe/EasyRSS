@@ -7,7 +7,6 @@
 //
 
 #import "RssListRequest.h"
-
 @implementation RssListRequest
 -(void)loadRequest{
     [super loadRequest];
@@ -16,6 +15,7 @@
     self.pageSize = DEFAULT_PAGE_SIZE;
     self.page = @1;
     self.feedId = @0;
+    
 }
 
 -(NSString *)pathInfo{

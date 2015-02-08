@@ -7,21 +7,19 @@
 //
 
 #import "AppDelegate.h"
-#import "LeftScene.h"
-#import "CenterNav.h"
-#import "RootScene.h"
+#import "SubscribeScene.h"
 #import "MobClick.h"
 #import "RssEntity.h"
 #import "FeedSceneModel.h"
 #import "PresentRssList.h"
 #import "DataCenter.h"
 #import "AddScene.h"
-#import "RootScene.h"
-
-
+#import "SubscribeScene.h"
+#import "RDNavigationController.h"
+#import "TabBarController.h"
 
 @interface AppDelegate ()
-@property(nonatomic,retain)RootScene *rootScene;
+@property(nonatomic,retain)SubscribeScene *rootScene;
 @end
 
 @implementation AppDelegate
@@ -67,14 +65,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];
     
-    LeftScene *leftScene = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LeftScene"];
-    _rootScene = [[RootScene alloc]init];
-    CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:_rootScene];
+//    LeftScene *leftScene = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LeftScene"];
+//    _rootScene = [[SqureScene alloc]init];
+    TabBarController *centerNav = [[TabBarController alloc]init];
 
-    ICSDrawerController *drawer = [[ICSDrawerController alloc]
-                                   initWithLeftViewController:leftScene
-                                   centerViewController:centerNav];
-    self.window.rootViewController = drawer;
+    self.window.rootViewController = centerNav;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -103,23 +98,22 @@
     if([notification.userInfo objectForKey:@"time"]){
         [DataCenter sharedInstance].time = [notification.userInfo objectForKey:@"time"];
         PresentRssList *presentRssListScene =  [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"PresentRssList"];
-        CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:presentRssListScene];
-        [_rootScene presentViewController:centerNav animated:YES completion:nil];
+        RDNavigationController *nav = [[RDNavigationController alloc]initWithRootViewController:presentRssListScene];
+        [_rootScene presentViewController:nav animated:YES completion:nil];
     }
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    NSLog(@"%@", [url absoluteString]);
-    if ([url.scheme isEqualToString:@"feed"]) {
-        AddScene *addScene =  [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"AddScene"];
-        addScene.openUrl = [url.absoluteString stringByReplacingOccurrencesOfString:@"feed" withString:@"http"];
-
-        CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:addScene];
-        [_rootScene presentViewController:centerNav animated:YES completion:nil];
-    }
-    
-    return YES;
-}
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+//    NSLog(@"%@", [url absoluteString]);
+//    if ([url.scheme isEqualToString:@"feed"]) {
+//        AddScene *addScene =  [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"AddScene"];
+//
+//        CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:addScene];
+//        [_rootScene presentViewController:centerNav animated:YES completion:nil];
+//    }
+//    
+//    return YES;
+//}
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler{
     

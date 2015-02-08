@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B6BE9AE1A863A6100284BF9 /* UserCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6BE9AD1A863A6100284BF9 /* UserCenter.m */; };
+		5B6BE9B31A8664EA00284BF9 /* FeedListScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6BE9B21A8664EA00284BF9 /* FeedListScene.m */; };
+		5B824C811A86701000C31139 /* RecommendRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B824C801A86701000C31139 /* RecommendRequest.m */; };
+		5BCF1FB41A874E4200A82D1A /* FeedRssEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF1FB31A874E4200A82D1A /* FeedRssEntity.m */; };
+		5BCF1FB71A87685400A82D1A /* TagListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF1FB61A87685400A82D1A /* TagListRequest.m */; };
 		5BEF011D1A8372D6000D2E62 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00C61A8372D6000D2E62 /* DataCenter.m */; };
 		5BEF011E1A8372D6000D2E62 /* FeedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00C91A8372D6000D2E62 /* FeedEntity.m */; };
 		5BEF011F1A8372D6000D2E62 /* FeedList.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00CB1A8372D6000D2E62 /* FeedList.m */; };
@@ -19,39 +24,39 @@
 		5BEF01261A8372D6000D2E62 /* Default-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF00D91A8372D6000D2E62 /* Default-568h.png */; };
 		5BEF01271A8372D6000D2E62 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF00DA1A8372D6000D2E62 /* Default.png */; };
 		5BEF01281A8372D6000D2E62 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF00DB1A8372D6000D2E62 /* Default@2x.png */; };
-		5BEF01291A8372D6000D2E62 /* detail.html in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF00DC1A8372D6000D2E62 /* detail.html */; };
 		5BEF012A1A8372D6000D2E62 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF00DD1A8372D6000D2E62 /* icon.png */; };
 		5BEF012B1A8372D6000D2E62 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF00DE1A8372D6000D2E62 /* icon@2x.png */; };
 		5BEF012C1A8372D6000D2E62 /* rssIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF00DF1A8372D6000D2E62 /* rssIcon@2x.png */; };
 		5BEF012D1A8372D6000D2E62 /* BaseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00E31A8372D6000D2E62 /* BaseScene.m */; };
-		5BEF012E1A8372D6000D2E62 /* DiscoveryScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00E61A8372D6000D2E62 /* DiscoveryScene.m */; };
-		5BEF012F1A8372D6000D2E62 /* EzUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00E81A8372D6000D2E62 /* EzUILabel.m */; };
 		5BEF01301A8372D6000D2E62 /* FavoriteScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00EB1A8372D6000D2E62 /* FavoriteScene.m */; };
-		5BEF01311A8372D6000D2E62 /* LeftCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00EE1A8372D6000D2E62 /* LeftCell.m */; };
-		5BEF01321A8372D6000D2E62 /* LeftHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00F01A8372D6000D2E62 /* LeftHeader.m */; };
-		5BEF01331A8372D6000D2E62 /* LeftScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00F21A8372D6000D2E62 /* LeftScene.m */; };
 		5BEF01341A8372D6000D2E62 /* AddScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00F51A8372D6000D2E62 /* AddScene.m */; };
-		5BEF01351A8372D6000D2E62 /* CenterNav.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00F71A8372D6000D2E62 /* CenterNav.m */; };
 		5BEF01361A8372D6000D2E62 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00F91A8372D6000D2E62 /* FeedCell.m */; };
-		5BEF01371A8372D6000D2E62 /* RootScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00FB1A8372D6000D2E62 /* RootScene.m */; };
+		5BEF01371A8372D6000D2E62 /* SubscribeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00FB1A8372D6000D2E62 /* SubscribeScene.m */; };
 		5BEF01381A8372D6000D2E62 /* RssCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00FD1A8372D6000D2E62 /* RssCell.m */; };
 		5BEF01391A8372D6000D2E62 /* RssDetailScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF00FF1A8372D6000D2E62 /* RssDetailScene.m */; };
 		5BEF013A1A8372D6000D2E62 /* RssListScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF01011A8372D6000D2E62 /* RssListScene.m */; };
 		5BEF013B1A8372D6000D2E62 /* PresentRssList.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF01041A8372D6000D2E62 /* PresentRssList.m */; };
-		5BEF013C1A8372D6000D2E62 /* RecommedScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF01071A8372D6000D2E62 /* RecommedScene.m */; };
 		5BEF013D1A8372D6000D2E62 /* AddFeedSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF010A1A8372D6000D2E62 /* AddFeedSceneModel.m */; };
 		5BEF013E1A8372D6000D2E62 /* DiscoverySceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF010C1A8372D6000D2E62 /* DiscoverySceneModel.m */; };
 		5BEF013F1A8372D6000D2E62 /* FavSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF010E1A8372D6000D2E62 /* FavSceneModel.m */; };
 		5BEF01401A8372D6000D2E62 /* FeedSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF01101A8372D6000D2E62 /* FeedSceneModel.m */; };
 		5BEF01411A8372D6000D2E62 /* RecommendSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF01121A8372D6000D2E62 /* RecommendSceneModel.m */; };
 		5BEF01421A8372D6000D2E62 /* RssListSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF01141A8372D6000D2E62 /* RssListSceneModel.m */; };
-		5BEF01431A8372D6000D2E62 /* ICSDrawerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF01181A8372D6000D2E62 /* ICSDrawerController.m */; };
-		5BEF01441A8372D6000D2E62 /* ICSDropShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF011A1A8372D6000D2E62 /* ICSDropShadowView.m */; };
 		5BEF014B1A8372EC000D2E62 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF01471A8372EC000D2E62 /* AppDelegate.m */; };
 		5BEF014C1A8372EC000D2E62 /* Aspect-Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF01481A8372EC000D2E62 /* Aspect-Appearance.m */; };
 		5BEF014D1A8372EC000D2E62 /* Aspect-Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF01491A8372EC000D2E62 /* Aspect-Network.m */; };
 		5BEF014E1A8372EC000D2E62 /* Aspect-UMengConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF014A1A8372EC000D2E62 /* Aspect-UMengConfig.m */; };
 		5BEF01501A8372F6000D2E62 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF014F1A8372F6000D2E62 /* Launch Screen.xib */; };
+		5BEF01561A8385F2000D2E62 /* SearchWeChatRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF01551A8385F2000D2E62 /* SearchWeChatRequest.m */; };
+		5BEF01591A8386C0000D2E62 /* WeChatListScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF01581A8386C0000D2E62 /* WeChatListScene.m */; };
+		5BEF015C1A83872F000D2E62 /* WeChatSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF015B1A83872F000D2E62 /* WeChatSceneModel.m */; };
+		5BEF01691A83A886000D2E62 /* detail.html in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF01661A83A886000D2E62 /* detail.html */; };
+		5BEF016A1A83A886000D2E62 /* page_mp_article_improve236317.css in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF01671A83A886000D2E62 /* page_mp_article_improve236317.css */; };
+		5BEF016B1A83A886000D2E62 /* page_mp_article_improve_combo238f07.css in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF01681A83A886000D2E62 /* page_mp_article_improve_combo238f07.css */; };
+		5BEF016E1A847C9A000D2E62 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF016D1A847C9A000D2E62 /* TabBarController.m */; };
+		5BEF01711A847D61000D2E62 /* RDNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF01701A847D61000D2E62 /* RDNavigationController.m */; };
+		5BEF01741A848701000D2E62 /* SquareScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF01731A848701000D2E62 /* SquareScene.m */; };
+		5BEF017C1A848C8F000D2E62 /* MineScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEF017B1A848C8F000D2E62 /* MineScene.m */; };
 		5F578284199A43D700FCA0EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F578283199A43D700FCA0EE /* main.m */; };
 		5F57828D199A43D700FCA0EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F57828B199A43D700FCA0EE /* Main.storyboard */; };
 		5F57828F199A43D700FCA0EE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F57828E199A43D700FCA0EE /* Images.xcassets */; };
@@ -61,6 +66,16 @@
 /* Begin PBXFileReference section */
 		4446E537F40BE1A10A479135 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		445A555592FDDF7A401F060B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		5B6BE9AC1A863A6100284BF9 /* UserCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenter.h; sourceTree = "<group>"; };
+		5B6BE9AD1A863A6100284BF9 /* UserCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenter.m; sourceTree = "<group>"; };
+		5B6BE9B11A8664EA00284BF9 /* FeedListScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedListScene.h; sourceTree = "<group>"; };
+		5B6BE9B21A8664EA00284BF9 /* FeedListScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedListScene.m; sourceTree = "<group>"; };
+		5B824C7F1A86701000C31139 /* RecommendRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendRequest.h; sourceTree = "<group>"; };
+		5B824C801A86701000C31139 /* RecommendRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendRequest.m; sourceTree = "<group>"; };
+		5BCF1FB21A874E4200A82D1A /* FeedRssEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedRssEntity.h; sourceTree = "<group>"; };
+		5BCF1FB31A874E4200A82D1A /* FeedRssEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedRssEntity.m; sourceTree = "<group>"; };
+		5BCF1FB51A87685400A82D1A /* TagListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagListRequest.h; sourceTree = "<group>"; };
+		5BCF1FB61A87685400A82D1A /* TagListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagListRequest.m; sourceTree = "<group>"; };
 		5BE4531319BC276900F8A0E9 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		5BEF00C51A8372D6000D2E62 /* DataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCenter.h; sourceTree = "<group>"; };
 		5BEF00C61A8372D6000D2E62 /* DataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCenter.m; sourceTree = "<group>"; };
@@ -82,42 +97,27 @@
 		5BEF00D91A8372D6000D2E62 /* Default-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h.png"; sourceTree = "<group>"; };
 		5BEF00DA1A8372D6000D2E62 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		5BEF00DB1A8372D6000D2E62 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		5BEF00DC1A8372D6000D2E62 /* detail.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = detail.html; sourceTree = "<group>"; };
 		5BEF00DD1A8372D6000D2E62 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		5BEF00DE1A8372D6000D2E62 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		5BEF00DF1A8372D6000D2E62 /* rssIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rssIcon@2x.png"; sourceTree = "<group>"; };
 		5BEF00E21A8372D6000D2E62 /* BaseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseScene.h; sourceTree = "<group>"; };
 		5BEF00E31A8372D6000D2E62 /* BaseScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseScene.m; sourceTree = "<group>"; };
-		5BEF00E51A8372D6000D2E62 /* DiscoveryScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryScene.h; sourceTree = "<group>"; };
-		5BEF00E61A8372D6000D2E62 /* DiscoveryScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryScene.m; sourceTree = "<group>"; };
-		5BEF00E71A8372D6000D2E62 /* EzUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EzUILabel.h; sourceTree = "<group>"; };
-		5BEF00E81A8372D6000D2E62 /* EzUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EzUILabel.m; sourceTree = "<group>"; };
 		5BEF00EA1A8372D6000D2E62 /* FavoriteScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteScene.h; sourceTree = "<group>"; };
 		5BEF00EB1A8372D6000D2E62 /* FavoriteScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteScene.m; sourceTree = "<group>"; };
-		5BEF00ED1A8372D6000D2E62 /* LeftCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftCell.h; sourceTree = "<group>"; };
-		5BEF00EE1A8372D6000D2E62 /* LeftCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftCell.m; sourceTree = "<group>"; };
-		5BEF00EF1A8372D6000D2E62 /* LeftHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftHeader.h; sourceTree = "<group>"; };
-		5BEF00F01A8372D6000D2E62 /* LeftHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftHeader.m; sourceTree = "<group>"; };
-		5BEF00F11A8372D6000D2E62 /* LeftScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftScene.h; sourceTree = "<group>"; };
-		5BEF00F21A8372D6000D2E62 /* LeftScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftScene.m; sourceTree = "<group>"; };
 		5BEF00F41A8372D6000D2E62 /* AddScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddScene.h; sourceTree = "<group>"; };
 		5BEF00F51A8372D6000D2E62 /* AddScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddScene.m; sourceTree = "<group>"; };
-		5BEF00F61A8372D6000D2E62 /* CenterNav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterNav.h; sourceTree = "<group>"; };
-		5BEF00F71A8372D6000D2E62 /* CenterNav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterNav.m; sourceTree = "<group>"; };
 		5BEF00F81A8372D6000D2E62 /* FeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCell.h; sourceTree = "<group>"; };
 		5BEF00F91A8372D6000D2E62 /* FeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCell.m; sourceTree = "<group>"; };
-		5BEF00FA1A8372D6000D2E62 /* RootScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootScene.h; sourceTree = "<group>"; };
-		5BEF00FB1A8372D6000D2E62 /* RootScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootScene.m; sourceTree = "<group>"; };
-		5BEF00FC1A8372D6000D2E62 /* RssCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssCell.h; sourceTree = "<group>"; };
-		5BEF00FD1A8372D6000D2E62 /* RssCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RssCell.m; sourceTree = "<group>"; };
-		5BEF00FE1A8372D6000D2E62 /* RssDetailScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssDetailScene.h; sourceTree = "<group>"; };
-		5BEF00FF1A8372D6000D2E62 /* RssDetailScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RssDetailScene.m; sourceTree = "<group>"; };
-		5BEF01001A8372D6000D2E62 /* RssListScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssListScene.h; sourceTree = "<group>"; };
-		5BEF01011A8372D6000D2E62 /* RssListScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RssListScene.m; sourceTree = "<group>"; };
+		5BEF00FA1A8372D6000D2E62 /* SubscribeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscribeScene.h; path = Main/SubscribeScene.h; sourceTree = "<group>"; };
+		5BEF00FB1A8372D6000D2E62 /* SubscribeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscribeScene.m; path = Main/SubscribeScene.m; sourceTree = "<group>"; };
+		5BEF00FC1A8372D6000D2E62 /* RssCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssCell.h; path = Main/RssCell.h; sourceTree = "<group>"; };
+		5BEF00FD1A8372D6000D2E62 /* RssCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssCell.m; path = Main/RssCell.m; sourceTree = "<group>"; };
+		5BEF00FE1A8372D6000D2E62 /* RssDetailScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssDetailScene.h; path = Main/RssDetailScene.h; sourceTree = "<group>"; };
+		5BEF00FF1A8372D6000D2E62 /* RssDetailScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssDetailScene.m; path = Main/RssDetailScene.m; sourceTree = "<group>"; };
+		5BEF01001A8372D6000D2E62 /* RssListScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RssListScene.h; path = Main/RssListScene.h; sourceTree = "<group>"; };
+		5BEF01011A8372D6000D2E62 /* RssListScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RssListScene.m; path = Main/RssListScene.m; sourceTree = "<group>"; };
 		5BEF01031A8372D6000D2E62 /* PresentRssList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentRssList.h; sourceTree = "<group>"; };
 		5BEF01041A8372D6000D2E62 /* PresentRssList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentRssList.m; sourceTree = "<group>"; };
-		5BEF01061A8372D6000D2E62 /* RecommedScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommedScene.h; sourceTree = "<group>"; };
-		5BEF01071A8372D6000D2E62 /* RecommedScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommedScene.m; sourceTree = "<group>"; };
 		5BEF01091A8372D6000D2E62 /* AddFeedSceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFeedSceneModel.h; sourceTree = "<group>"; };
 		5BEF010A1A8372D6000D2E62 /* AddFeedSceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFeedSceneModel.m; sourceTree = "<group>"; };
 		5BEF010B1A8372D6000D2E62 /* DiscoverySceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverySceneModel.h; sourceTree = "<group>"; };
@@ -130,16 +130,29 @@
 		5BEF01121A8372D6000D2E62 /* RecommendSceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendSceneModel.m; sourceTree = "<group>"; };
 		5BEF01131A8372D6000D2E62 /* RssListSceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RssListSceneModel.h; sourceTree = "<group>"; };
 		5BEF01141A8372D6000D2E62 /* RssListSceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RssListSceneModel.m; sourceTree = "<group>"; };
-		5BEF01171A8372D6000D2E62 /* ICSDrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSDrawerController.h; sourceTree = "<group>"; };
-		5BEF01181A8372D6000D2E62 /* ICSDrawerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSDrawerController.m; sourceTree = "<group>"; };
-		5BEF01191A8372D6000D2E62 /* ICSDropShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICSDropShadowView.h; sourceTree = "<group>"; };
-		5BEF011A1A8372D6000D2E62 /* ICSDropShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICSDropShadowView.m; sourceTree = "<group>"; };
 		5BEF01461A8372EC000D2E62 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5BEF01471A8372EC000D2E62 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5BEF01481A8372EC000D2E62 /* Aspect-Appearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Aspect-Appearance.m"; sourceTree = "<group>"; };
 		5BEF01491A8372EC000D2E62 /* Aspect-Network.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Aspect-Network.m"; sourceTree = "<group>"; };
 		5BEF014A1A8372EC000D2E62 /* Aspect-UMengConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Aspect-UMengConfig.m"; sourceTree = "<group>"; };
 		5BEF014F1A8372F6000D2E62 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		5BEF01541A8385F2000D2E62 /* SearchWeChatRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchWeChatRequest.h; sourceTree = "<group>"; };
+		5BEF01551A8385F2000D2E62 /* SearchWeChatRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchWeChatRequest.m; sourceTree = "<group>"; };
+		5BEF01571A8386C0000D2E62 /* WeChatListScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeChatListScene.h; path = Main/WeChatListScene.h; sourceTree = "<group>"; };
+		5BEF01581A8386C0000D2E62 /* WeChatListScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WeChatListScene.m; path = Main/WeChatListScene.m; sourceTree = "<group>"; };
+		5BEF015A1A83872F000D2E62 /* WeChatSceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatSceneModel.h; sourceTree = "<group>"; };
+		5BEF015B1A83872F000D2E62 /* WeChatSceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatSceneModel.m; sourceTree = "<group>"; };
+		5BEF01661A83A886000D2E62 /* detail.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = detail.html; sourceTree = "<group>"; };
+		5BEF01671A83A886000D2E62 /* page_mp_article_improve236317.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = page_mp_article_improve236317.css; sourceTree = "<group>"; };
+		5BEF01681A83A886000D2E62 /* page_mp_article_improve_combo238f07.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = page_mp_article_improve_combo238f07.css; sourceTree = "<group>"; };
+		5BEF016C1A847C9A000D2E62 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		5BEF016D1A847C9A000D2E62 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		5BEF016F1A847D61000D2E62 /* RDNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDNavigationController.h; sourceTree = "<group>"; };
+		5BEF01701A847D61000D2E62 /* RDNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDNavigationController.m; sourceTree = "<group>"; };
+		5BEF01721A848701000D2E62 /* SquareScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SquareScene.h; path = Main/SquareScene.h; sourceTree = "<group>"; };
+		5BEF01731A848701000D2E62 /* SquareScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SquareScene.m; path = Main/SquareScene.m; sourceTree = "<group>"; };
+		5BEF017A1A848C8F000D2E62 /* MineScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineScene.h; sourceTree = "<group>"; };
+		5BEF017B1A848C8F000D2E62 /* MineScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineScene.m; sourceTree = "<group>"; };
 		5F57827E199A43D600FCA0EE /* rssreader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rssreader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F578282199A43D600FCA0EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F578283199A43D700FCA0EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -177,6 +190,27 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		5B6BE9AF1A863B4500284BF9 /* Rss */ = {
+			isa = PBXGroup;
+			children = (
+				5BEF01771A848861000D2E62 /* Detail */,
+				5BEF00FC1A8372D6000D2E62 /* RssCell.h */,
+				5BEF00FD1A8372D6000D2E62 /* RssCell.m */,
+				5BEF01001A8372D6000D2E62 /* RssListScene.h */,
+				5BEF01011A8372D6000D2E62 /* RssListScene.m */,
+			);
+			name = Rss;
+			sourceTree = "<group>";
+		};
+		5B6BE9B01A86649D00284BF9 /* FeedList */ = {
+			isa = PBXGroup;
+			children = (
+				5B6BE9B11A8664EA00284BF9 /* FeedListScene.h */,
+				5B6BE9B21A8664EA00284BF9 /* FeedListScene.m */,
+			);
+			name = FeedList;
+			sourceTree = "<group>";
+		};
 		5BEF00C31A8372D6000D2E62 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,7 +220,6 @@
 				5BEF00D71A8372D6000D2E62 /* Rescource */,
 				5BEF00E01A8372D6000D2E62 /* Scene */,
 				5BEF01081A8372D6000D2E62 /* SceneModel */,
-				5BEF01151A8372D6000D2E62 /* Vendor */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -196,6 +229,8 @@
 			children = (
 				5BEF00C51A8372D6000D2E62 /* DataCenter.h */,
 				5BEF00C61A8372D6000D2E62 /* DataCenter.m */,
+				5B6BE9AC1A863A6100284BF9 /* UserCenter.h */,
+				5B6BE9AD1A863A6100284BF9 /* UserCenter.m */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -211,6 +246,8 @@
 				5BEF00CD1A8372D6000D2E62 /* RssEntity.m */,
 				5BEF00CE1A8372D6000D2E62 /* RssList.h */,
 				5BEF00CF1A8372D6000D2E62 /* RssList.m */,
+				5BCF1FB21A874E4200A82D1A /* FeedRssEntity.h */,
+				5BCF1FB31A874E4200A82D1A /* FeedRssEntity.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -224,6 +261,12 @@
 				5BEF00D41A8372D6000D2E62 /* FeedListRequest.m */,
 				5BEF00D51A8372D6000D2E62 /* RssListRequest.h */,
 				5BEF00D61A8372D6000D2E62 /* RssListRequest.m */,
+				5BEF01541A8385F2000D2E62 /* SearchWeChatRequest.h */,
+				5BEF01551A8385F2000D2E62 /* SearchWeChatRequest.m */,
+				5B824C7F1A86701000C31139 /* RecommendRequest.h */,
+				5B824C801A86701000C31139 /* RecommendRequest.m */,
+				5BCF1FB51A87685400A82D1A /* TagListRequest.h */,
+				5BCF1FB61A87685400A82D1A /* TagListRequest.m */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -231,11 +274,11 @@
 		5BEF00D71A8372D6000D2E62 /* Rescource */ = {
 			isa = PBXGroup;
 			children = (
+				5BEF01651A83A886000D2E62 /* html */,
 				5BEF00D81A8372D6000D2E62 /* bg.jpg */,
 				5BEF00D91A8372D6000D2E62 /* Default-568h.png */,
 				5BEF00DA1A8372D6000D2E62 /* Default.png */,
 				5BEF00DB1A8372D6000D2E62 /* Default@2x.png */,
-				5BEF00DC1A8372D6000D2E62 /* detail.html */,
 				5BEF00DD1A8372D6000D2E62 /* icon.png */,
 				5BEF00DE1A8372D6000D2E62 /* icon@2x.png */,
 				5BEF00DF1A8372D6000D2E62 /* rssIcon@2x.png */,
@@ -246,15 +289,19 @@
 		5BEF00E01A8372D6000D2E62 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				5B6BE9B01A86649D00284BF9 /* FeedList */,
+				5B6BE9AF1A863B4500284BF9 /* Rss */,
+				5BEF01791A848C6D000D2E62 /* Mine */,
+				5BEF01781A848871000D2E62 /* Subscribe */,
+				5BEF01761A84884A000D2E62 /* Search */,
+				5BEF01751A84882A000D2E62 /* Square */,
 				5BEF00E11A8372D6000D2E62 /* Base */,
-				5BEF00E41A8372D6000D2E62 /* Discovery */,
-				5BEF00E71A8372D6000D2E62 /* EzUILabel.h */,
-				5BEF00E81A8372D6000D2E62 /* EzUILabel.m */,
-				5BEF00E91A8372D6000D2E62 /* FavoriteScene */,
-				5BEF00EC1A8372D6000D2E62 /* Left */,
 				5BEF00F31A8372D6000D2E62 /* Main */,
 				5BEF01021A8372D6000D2E62 /* Present */,
-				5BEF01051A8372D6000D2E62 /* Recommend */,
+				5BEF016C1A847C9A000D2E62 /* TabBarController.h */,
+				5BEF016D1A847C9A000D2E62 /* TabBarController.m */,
+				5BEF016F1A847D61000D2E62 /* RDNavigationController.h */,
+				5BEF01701A847D61000D2E62 /* RDNavigationController.m */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -268,15 +315,6 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		5BEF00E41A8372D6000D2E62 /* Discovery */ = {
-			isa = PBXGroup;
-			children = (
-				5BEF00E51A8372D6000D2E62 /* DiscoveryScene.h */,
-				5BEF00E61A8372D6000D2E62 /* DiscoveryScene.m */,
-			);
-			path = Discovery;
-			sourceTree = "<group>";
-		};
 		5BEF00E91A8372D6000D2E62 /* FavoriteScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,36 +324,13 @@
 			path = FavoriteScene;
 			sourceTree = "<group>";
 		};
-		5BEF00EC1A8372D6000D2E62 /* Left */ = {
-			isa = PBXGroup;
-			children = (
-				5BEF00ED1A8372D6000D2E62 /* LeftCell.h */,
-				5BEF00EE1A8372D6000D2E62 /* LeftCell.m */,
-				5BEF00EF1A8372D6000D2E62 /* LeftHeader.h */,
-				5BEF00F01A8372D6000D2E62 /* LeftHeader.m */,
-				5BEF00F11A8372D6000D2E62 /* LeftScene.h */,
-				5BEF00F21A8372D6000D2E62 /* LeftScene.m */,
-			);
-			path = Left;
-			sourceTree = "<group>";
-		};
 		5BEF00F31A8372D6000D2E62 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				5BEF00F41A8372D6000D2E62 /* AddScene.h */,
 				5BEF00F51A8372D6000D2E62 /* AddScene.m */,
-				5BEF00F61A8372D6000D2E62 /* CenterNav.h */,
-				5BEF00F71A8372D6000D2E62 /* CenterNav.m */,
 				5BEF00F81A8372D6000D2E62 /* FeedCell.h */,
 				5BEF00F91A8372D6000D2E62 /* FeedCell.m */,
-				5BEF00FA1A8372D6000D2E62 /* RootScene.h */,
-				5BEF00FB1A8372D6000D2E62 /* RootScene.m */,
-				5BEF00FC1A8372D6000D2E62 /* RssCell.h */,
-				5BEF00FD1A8372D6000D2E62 /* RssCell.m */,
-				5BEF00FE1A8372D6000D2E62 /* RssDetailScene.h */,
-				5BEF00FF1A8372D6000D2E62 /* RssDetailScene.m */,
-				5BEF01001A8372D6000D2E62 /* RssListScene.h */,
-				5BEF01011A8372D6000D2E62 /* RssListScene.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -327,15 +342,6 @@
 				5BEF01041A8372D6000D2E62 /* PresentRssList.m */,
 			);
 			path = Present;
-			sourceTree = "<group>";
-		};
-		5BEF01051A8372D6000D2E62 /* Recommend */ = {
-			isa = PBXGroup;
-			children = (
-				5BEF01061A8372D6000D2E62 /* RecommedScene.h */,
-				5BEF01071A8372D6000D2E62 /* RecommedScene.m */,
-			);
-			path = Recommend;
 			sourceTree = "<group>";
 		};
 		5BEF01081A8372D6000D2E62 /* SceneModel */ = {
@@ -353,27 +359,66 @@
 				5BEF01121A8372D6000D2E62 /* RecommendSceneModel.m */,
 				5BEF01131A8372D6000D2E62 /* RssListSceneModel.h */,
 				5BEF01141A8372D6000D2E62 /* RssListSceneModel.m */,
+				5BEF015A1A83872F000D2E62 /* WeChatSceneModel.h */,
+				5BEF015B1A83872F000D2E62 /* WeChatSceneModel.m */,
 			);
 			path = SceneModel;
 			sourceTree = "<group>";
 		};
-		5BEF01151A8372D6000D2E62 /* Vendor */ = {
+		5BEF01651A83A886000D2E62 /* html */ = {
 			isa = PBXGroup;
 			children = (
-				5BEF01161A8372D6000D2E62 /* ICSDrawerController */,
+				5BEF01661A83A886000D2E62 /* detail.html */,
+				5BEF01671A83A886000D2E62 /* page_mp_article_improve236317.css */,
+				5BEF01681A83A886000D2E62 /* page_mp_article_improve_combo238f07.css */,
 			);
-			path = Vendor;
+			path = html;
 			sourceTree = "<group>";
 		};
-		5BEF01161A8372D6000D2E62 /* ICSDrawerController */ = {
+		5BEF01751A84882A000D2E62 /* Square */ = {
 			isa = PBXGroup;
 			children = (
-				5BEF01171A8372D6000D2E62 /* ICSDrawerController.h */,
-				5BEF01181A8372D6000D2E62 /* ICSDrawerController.m */,
-				5BEF01191A8372D6000D2E62 /* ICSDropShadowView.h */,
-				5BEF011A1A8372D6000D2E62 /* ICSDropShadowView.m */,
+				5BEF01721A848701000D2E62 /* SquareScene.h */,
+				5BEF01731A848701000D2E62 /* SquareScene.m */,
 			);
-			path = ICSDrawerController;
+			name = Square;
+			sourceTree = "<group>";
+		};
+		5BEF01761A84884A000D2E62 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				5BEF01571A8386C0000D2E62 /* WeChatListScene.h */,
+				5BEF01581A8386C0000D2E62 /* WeChatListScene.m */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		5BEF01771A848861000D2E62 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				5BEF00FE1A8372D6000D2E62 /* RssDetailScene.h */,
+				5BEF00FF1A8372D6000D2E62 /* RssDetailScene.m */,
+			);
+			name = Detail;
+			sourceTree = "<group>";
+		};
+		5BEF01781A848871000D2E62 /* Subscribe */ = {
+			isa = PBXGroup;
+			children = (
+				5BEF00FA1A8372D6000D2E62 /* SubscribeScene.h */,
+				5BEF00FB1A8372D6000D2E62 /* SubscribeScene.m */,
+			);
+			name = Subscribe;
+			sourceTree = "<group>";
+		};
+		5BEF01791A848C6D000D2E62 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				5BEF00E91A8372D6000D2E62 /* FavoriteScene */,
+				5BEF017A1A848C8F000D2E62 /* MineScene.h */,
+				5BEF017B1A848C8F000D2E62 /* MineScene.m */,
+			);
+			name = Mine;
 			sourceTree = "<group>";
 		};
 		5F578275199A43D600FCA0EE = {
@@ -489,13 +534,15 @@
 				5BEF01281A8372D6000D2E62 /* Default@2x.png in Resources */,
 				5BEF01261A8372D6000D2E62 /* Default-568h.png in Resources */,
 				5F57828D199A43D700FCA0EE /* Main.storyboard in Resources */,
+				5BEF016B1A83A886000D2E62 /* page_mp_article_improve_combo238f07.css in Resources */,
 				5BEF01251A8372D6000D2E62 /* bg.jpg in Resources */,
 				5BEF012A1A8372D6000D2E62 /* icon.png in Resources */,
+				5BEF01691A83A886000D2E62 /* detail.html in Resources */,
 				5BEF01501A8372F6000D2E62 /* Launch Screen.xib in Resources */,
 				5F57828F199A43D700FCA0EE /* Images.xcassets in Resources */,
 				5BEF012C1A8372D6000D2E62 /* rssIcon@2x.png in Resources */,
+				5BEF016A1A83A886000D2E62 /* page_mp_article_improve236317.css in Resources */,
 				5BEF01271A8372D6000D2E62 /* Default.png in Resources */,
-				5BEF01291A8372D6000D2E62 /* detail.html in Resources */,
 				5BEF012B1A8372D6000D2E62 /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -541,39 +588,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BEF01221A8372D6000D2E62 /* AddFeedRequest.m in Sources */,
-				5BEF013C1A8372D6000D2E62 /* RecommedScene.m in Sources */,
 				5BEF01231A8372D6000D2E62 /* FeedListRequest.m in Sources */,
-				5BEF01351A8372D6000D2E62 /* CenterNav.m in Sources */,
-				5BEF01431A8372D6000D2E62 /* ICSDrawerController.m in Sources */,
 				5BEF013D1A8372D6000D2E62 /* AddFeedSceneModel.m in Sources */,
 				5BEF013F1A8372D6000D2E62 /* FavSceneModel.m in Sources */,
+				5B824C811A86701000C31139 /* RecommendRequest.m in Sources */,
+				5BCF1FB41A874E4200A82D1A /* FeedRssEntity.m in Sources */,
 				5BEF01411A8372D6000D2E62 /* RecommendSceneModel.m in Sources */,
 				5BEF01301A8372D6000D2E62 /* FavoriteScene.m in Sources */,
 				5BEF01361A8372D6000D2E62 /* FeedCell.m in Sources */,
 				5BEF013A1A8372D6000D2E62 /* RssListScene.m in Sources */,
-				5BEF012F1A8372D6000D2E62 /* EzUILabel.m in Sources */,
+				5B6BE9AE1A863A6100284BF9 /* UserCenter.m in Sources */,
+				5BEF01561A8385F2000D2E62 /* SearchWeChatRequest.m in Sources */,
 				5BEF011E1A8372D6000D2E62 /* FeedEntity.m in Sources */,
-				5BEF01371A8372D6000D2E62 /* RootScene.m in Sources */,
+				5BEF01371A8372D6000D2E62 /* SubscribeScene.m in Sources */,
+				5BEF01741A848701000D2E62 /* SquareScene.m in Sources */,
 				5BEF014E1A8372EC000D2E62 /* Aspect-UMengConfig.m in Sources */,
+				5BEF015C1A83872F000D2E62 /* WeChatSceneModel.m in Sources */,
 				5BEF01341A8372D6000D2E62 /* AddScene.m in Sources */,
+				5BEF01591A8386C0000D2E62 /* WeChatListScene.m in Sources */,
 				5BEF01211A8372D6000D2E62 /* RssList.m in Sources */,
+				5BEF016E1A847C9A000D2E62 /* TabBarController.m in Sources */,
 				5BEF013B1A8372D6000D2E62 /* PresentRssList.m in Sources */,
+				5BEF017C1A848C8F000D2E62 /* MineScene.m in Sources */,
 				5BEF01381A8372D6000D2E62 /* RssCell.m in Sources */,
+				5B6BE9B31A8664EA00284BF9 /* FeedListScene.m in Sources */,
 				5BEF01401A8372D6000D2E62 /* FeedSceneModel.m in Sources */,
 				5BEF014D1A8372EC000D2E62 /* Aspect-Network.m in Sources */,
-				5BEF01321A8372D6000D2E62 /* LeftHeader.m in Sources */,
 				5BEF013E1A8372D6000D2E62 /* DiscoverySceneModel.m in Sources */,
 				5F578284199A43D700FCA0EE /* main.m in Sources */,
 				5BEF01391A8372D6000D2E62 /* RssDetailScene.m in Sources */,
-				5BEF01311A8372D6000D2E62 /* LeftCell.m in Sources */,
-				5BEF01331A8372D6000D2E62 /* LeftScene.m in Sources */,
 				5BEF012D1A8372D6000D2E62 /* BaseScene.m in Sources */,
 				5BEF01421A8372D6000D2E62 /* RssListSceneModel.m in Sources */,
-				5BEF01441A8372D6000D2E62 /* ICSDropShadowView.m in Sources */,
+				5BEF01711A847D61000D2E62 /* RDNavigationController.m in Sources */,
 				5BEF011F1A8372D6000D2E62 /* FeedList.m in Sources */,
-				5BEF012E1A8372D6000D2E62 /* DiscoveryScene.m in Sources */,
 				5BEF014C1A8372EC000D2E62 /* Aspect-Appearance.m in Sources */,
 				5BEF01201A8372D6000D2E62 /* RssEntity.m in Sources */,
+				5BCF1FB71A87685400A82D1A /* TagListRequest.m in Sources */,
 				5BEF011D1A8372D6000D2E62 /* DataCenter.m in Sources */,
 				5BEF01241A8372D6000D2E62 /* RssListRequest.m in Sources */,
 				5BEF014B1A8372EC000D2E62 /* AppDelegate.m in Sources */,

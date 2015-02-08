@@ -7,15 +7,12 @@
 //
 
 #import "RssListScene.h"
-#import "CenterNav.h"
 #import "RssCell.h"
 #import "RssDetailScene.h"
 #import "FeedSceneModel.h"
-#import "Pagination.h"
 #import "RssListSceneModel.h"
 
 @interface RssListScene ()<ALTableViewCellFactoryDelegate,UITableViewDataSource,UITableViewDelegate>
-
 @property (nonatomic,strong)RssListSceneModel *rssSceneModel;
 @property (strong, nonatomic) ALTableView *tableView;
 @end
@@ -30,10 +27,11 @@
     [self showBarButton:NAV_LEFT button:leftbutton];
     
     self.tableView = [[ALTableView alloc]init];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.cellFactory.delegate = self;
-    self.tableView.estimatedRowHeight = 200.0f;
+    self.tableView.estimatedRowHeight = 250.0f;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     [self.view addSubview:self.tableView];
@@ -70,6 +68,16 @@
          [self.tableView endAllRefreshingWithIntEnd:value.pagination.isEnd.integerValue];
      }];
     
+    [[RACObserve(self.rssSceneModel.request, state)
+      filter:^BOOL(NSNumber *state) {
+          @strongify(self);
+          return self.rssSceneModel.request.failed;
+      }]
+     subscribeNext:^(id x) {
+         @strongify(self);
+         self.rssSceneModel.request.page = self.rssSceneModel.rssList.pagination.page?:@1;
+         [self.tableView endAllRefreshingWithIntEnd:self.rssSceneModel.rssList.pagination.isEnd.integerValue];
+     }];
     
     [self.tableView triggerPullToRefresh];
     
@@ -85,8 +93,7 @@
 - (void)tableView:(UITableView *)tableView configureCell:(RssCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.delegate = self;
-    [cell reloadRss:[self.rssSceneModel.dataArray objectAtIndex:indexPath.row]
-               with:self.rssSceneModel.rssList.feed];
+    [cell reloadRss:[self.rssSceneModel.dataArray objectAtIndex:indexPath.row]];
 }
 
 - (CGFloat)tableView:(ALTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -102,8 +109,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     RssDetailScene* scene =  [[RssDetailScene alloc]init];
-    scene.rss = [self.rssSceneModel.dataArray objectAtIndex:indexPath.row];
+    FeedRssEntity *feedRss =  [self.rssSceneModel.dataArray objectAtIndex:indexPath.row];
+    scene.rss = feedRss.rss;
     [self.navigationController pushViewController:scene animated:YES];
 }
 //

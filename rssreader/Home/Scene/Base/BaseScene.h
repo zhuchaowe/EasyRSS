@@ -6,8 +6,7 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import "CenterNav.h"
+#import "Scene.h"
 
 @interface BaseScene : Scene
-@property(nonatomic,retain)CenterNav *nav;
 @end

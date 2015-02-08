@@ -7,6 +7,7 @@
 //
 
 #import "FeedListRequest.h"
+#import "UserCenter.h"
 
 @implementation FeedListRequest
 
@@ -16,6 +17,8 @@
     self.METHOD = @"GET";
     self.pageSize = DEFAULT_PAGE_SIZE;
     self.page = @1;
+    self.httpHeaderFields = @{@"M-API-KEY":[UserCenter sharedInstance].token};
+
 }
 
 -(NSString *)pathInfo{

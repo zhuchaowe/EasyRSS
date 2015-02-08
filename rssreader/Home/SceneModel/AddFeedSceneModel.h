@@ -10,6 +10,7 @@
 #import "AddFeedRequest.h"
 #import "FeedEntity.h"
 
+
 @interface AddFeedSceneModel : SceneModel
 @property(nonatomic,retain)FeedEntity *feed;
 @property(nonatomic,retain)AddFeedRequest *request;

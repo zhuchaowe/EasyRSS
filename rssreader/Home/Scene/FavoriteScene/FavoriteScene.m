@@ -15,13 +15,23 @@
 @interface FavoriteScene ()
 @property(nonatomic,retain)FavSceneModel *favSceneModel;
 @property(nonatomic,retain)NSMutableArray *dataArray;
+@property (strong, nonatomic) SceneTableView *tableView;
+
 @end
 
 @implementation FavoriteScene
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"收藏";
     _favSceneModel = [FavSceneModel SceneModel];
+    
+    self.tableView = [[SceneTableView alloc]init];
+    //    self.tableView.delegate = self;
+    //    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
+    [self.tableView alignToView:self.view];
+    
     self.dataArray = [NSMutableArray array];
     
     @weakify(self);

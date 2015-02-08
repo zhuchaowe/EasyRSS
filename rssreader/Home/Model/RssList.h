@@ -7,12 +7,10 @@
 //
 
 #import "Model.h"
-#import "FeedEntity.h"
-#import "RssEntity.h"
+#import "FeedRssEntity.h"
 #import "Pagination.h"
 
 @interface RssList : Model
-@property(nonatomic,strong)FeedEntity *feed;
-@property(nonatomic,strong)NSMutableArray<RssEntity,Optional> *list;
+@property(nonatomic,strong)NSMutableArray<FeedRssEntity,Optional> *list;
 @property(nonatomic,strong)Pagination *pagination;
 @end

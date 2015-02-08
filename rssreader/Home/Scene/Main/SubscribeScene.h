@@ -8,8 +8,7 @@
 
 #import "BaseScene.h"
 
-@interface RootScene : BaseScene
-
+@interface SubscribeScene : BaseScene
 
 @end
 

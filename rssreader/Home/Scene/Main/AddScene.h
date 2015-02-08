@@ -6,10 +6,9 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import "RootScene.h"
+#import "SubscribeScene.h"
 
 @interface AddScene : Scene<UITextFieldDelegate>
-@property(strong,nonatomic) NSString *openUrl;
 @property (strong, nonatomic) UITextField *textView;
 
 @end

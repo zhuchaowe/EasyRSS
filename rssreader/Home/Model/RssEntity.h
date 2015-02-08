@@ -7,6 +7,7 @@
 //
 
 #import "Model.h"
+#import "FeedEntity.h"
 
 @interface RssEntity : Model
 

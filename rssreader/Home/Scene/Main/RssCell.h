@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RssEntity.h"
-#import "FeedEntity.h"
+#import "FeedRssEntity.h"
 #import "ALBaseCell.h"
 
 @interface RssCell : ALBaseCell
--(void)reloadRss:(RssEntity *)rss with:(FeedEntity *)feed;
+-(void)reloadRss:(FeedRssEntity *)rss;
 @end
