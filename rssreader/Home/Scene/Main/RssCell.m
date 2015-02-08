@@ -14,9 +14,7 @@
 @property(nonatomic,retain)UILabel *rssTitle;
 @property(nonatomic,retain)UILabel *summary;
 @property(nonatomic,retain)UILabel *time;
-//@property(nonatomic,retain)UIView *rightColorView;
 @property(nonatomic,retain)UIImageView *rssImageView;
-//@property(nonatomic,retain)NSMutableArray *imageConstrainArray;
 @end
 
 @implementation RssCell
@@ -61,15 +59,6 @@
     _rssTitle.textColor = [UIColor whiteColor];
     [self.contentView addSubview:_rssTitle];
     
-//    _summary = [[UILabel alloc]init];
-//    _summary.numberOfLines = 2;
-//    _summary.lineBreakMode = NSLineBreakByWordWrapping|NSLineBreakByTruncatingTail;
-//    _summary.textAlignment = NSTextAlignmentLeft;
-//    _summary.font = [UIFont systemFontOfSize:16.0f];
-//    _summary.textColor = [UIColor whiteColor];
-//    [self.contentView addSubview:_summary];
-//    
-    
     [self loadAutolayout];
 }
 
@@ -93,13 +82,7 @@
     [_rssTitle alignCenterYWithView:_rssTitle.superview predicate:@"0"];
     [_rssTitle alignLeading:@"15" trailing:@"-15" toView:_rssTitle.superview];
 
-    
-//    [_rssTitle alignTop:@"15" leading:@"15" bottom:nil trailing:@"-15" toView:_rssTitle.superview];
-    
-//    [_summary constrainTopSpaceToView:_rssTitle predicate:@"20"];
-//    [_summary alignLeading:@"0" trailing:@"0" toView:_rssTitle];
-//    [_feedImage constrainTopSpaceToView:_summary predicate:@"10"];
-//    
+
 }
 
 -(void)reloadRss:(FeedRssEntity *)feedRss{
@@ -110,39 +93,15 @@
     _time.text = rss.date;
     _feedTitle.text = feed.title;
     _rssTitle.text = rss.title;
-//    _summary.text = rss.summary;
 
+    UIImage *placeHoderImage = [UIImage imageWithColor:[UIColor randomFlatColor] size:CGSizeMake(_rssImageView.width, _rssImageView.height)];
+    
     if(rss.image.isNotEmpty){
-        [_rssImageView setImageWithURL:[NSURL URLWithString:rss.image] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-
+        [_rssImageView sd_setImageWithURL:[NSURL URLWithString:rss.image]  placeholderImage:placeHoderImage];
     }else{
-        [_rssImageView setImage:[UIImage imageWithColor:[UIColor randomFlatLightColor] size:CGSizeMake(_rssImageView.width, _rssImageView.height)]];
-        
+        [_rssImageView setImage:placeHoderImage];
     }
-//    if(rss.image.isNotEmpty){
-//        [_rssImageView removeConstraints:_imageConstrainArray];
-//        [_imageConstrainArray removeAllObjects];
-//        [_rssImageView setImageWithURL:[NSURL URLWithString:rss.image] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//        [_imageConstrainArray addObjectsFromArray:[_rssImageView constrainHeight:@"200@999"]];
-//    }else{
-//        [_rssImageView removeConstraints:_imageConstrainArray];
-//        [_imageConstrainArray removeAllObjects];
-//        [_imageConstrainArray addObjectsFromArray:[_rssImageView constrainHeight:@"0"]];
-//    }
-//    _rightColorView.backgroundColor = [UIColor flatOrangeColor];
-
 }
 
-
-//- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-//    
-//    [super setSelected:selected animated:animated];
-//    if (selected) {
-//        _rightColorView.backgroundColor = [UIColor clearColor];
-//        self.contentView.backgroundColor = [UIColor flatWhiteColor];
-//    } else {
-//        self.contentView.backgroundColor = [UIColor whiteColor];
-//    }
-//}
 
 @end

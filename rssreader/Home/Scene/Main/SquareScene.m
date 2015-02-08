@@ -29,9 +29,10 @@
     self.selectionList.dataSource = self;
     [self.selectionList setTitleColor:[UIColor flatDarkOrangeColor] forState:UIControlStateSelected];
     self.selectionList.selectionIndicatorColor = [UIColor flatDarkOrangeColor];
+    self.selectionList.bottomTrimColor = [UIColor flatDarkOrangeColor];
     [self.view addSubview:self.selectionList];
     [self.selectionList alignTop:@"0" leading:@"0" bottom:nil trailing:@"0" toView:self.selectionList.superview];
-    [self.selectionList constrainHeight:@"30"];
+    [self.selectionList constrainHeight:@"40"];
     
     self.title = @"易阅";
     self.tableView = [[ALTableView alloc]init];
