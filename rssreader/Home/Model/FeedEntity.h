@@ -14,6 +14,7 @@
 @property(nonatomic,strong)NSString *link;
 @property(nonatomic,strong)NSString<Optional> *summary;
 @property(nonatomic,strong)NSString *title;
+@property(nonatomic,strong)NSNumber *feedType;
 @end
 
 @protocol FeedEntity

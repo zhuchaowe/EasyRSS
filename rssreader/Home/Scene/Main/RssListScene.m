@@ -11,6 +11,7 @@
 #import "RssDetailScene.h"
 #import "FeedSceneModel.h"
 #import "RssListSceneModel.h"
+#import "AddFeedSceneModel.h"
 
 @interface RssListScene ()<ALTableViewCellFactoryDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong)RssListSceneModel *rssSceneModel;
@@ -26,6 +27,8 @@
     UIButton *leftbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_chevron_left" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
     [self showBarButton:NAV_LEFT button:leftbutton];
     
+    [self showBarButton:NAV_RIGHT title:@"订阅" fontColor:[UIColor whiteColor]];
+    
     self.tableView = [[ALTableView alloc]init];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;
@@ -39,6 +42,7 @@
     
     [self.tableView registerClass:[RssCell class] forCellReuseIdentifier:@"RssCell"];
     
+
     _rssSceneModel = [RssListSceneModel SceneModel];
     _rssSceneModel.request.feedId = _feed.feedId;
     @weakify(self);
@@ -80,16 +84,26 @@
      }];
     
     [self.tableView triggerPullToRefresh];
-    
+    [self loadHud:self.view];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)rightButtonTouch{
+    AddFeedSceneModel* addFeedSceneModel = [AddFeedSceneModel SceneModel];
+    addFeedSceneModel.request.feedUrl = _feed.link;
+    addFeedSceneModel.request.feedType = _feed.feedType;
+    addFeedSceneModel.request.requestNeedActive = YES;
+    [self showHudIndeterminate:@"正在加载"];
+    [RACObserve(addFeedSceneModel.request, state)
+    subscribeNext:^(id x) {
+        if(addFeedSceneModel.request.succeed){
+            [self hideHudSuccess:@"订阅成功"];
+        }else if(addFeedSceneModel.request.failed){
+            [self hideHudFailed:@"订阅失败"];
+        }
+    }];
 }
 
 #pragma mark - ALTableViewCellFactoryDelegate
-
 - (void)tableView:(UITableView *)tableView configureCell:(RssCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.delegate = self;
@@ -112,22 +126,7 @@
     
     RssDetailScene* scene =  [[RssDetailScene alloc]init];
     FeedRssEntity *feedRss =  [self.rssSceneModel.dataArray objectAtIndex:indexPath.row];
-    scene.rss = feedRss.rss;
+    scene.feedRss = feedRss;
     [self.navigationController pushViewController:scene animated:YES];
 }
-//
-//- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
-////    
-////    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-////    if (index == 0) { //收藏
-////        Rss *rss = [self.dataArray objectAtIndex:indexPath.row];
-////        if (rss.isFav == 0) {
-////            rss.isFav = 1;
-////        }else{
-////            rss.isFav = 0;
-////        }
-////        [rss saveFav];
-////    }
-//     [cell hideUtilityButtonsAnimated:YES];
-//}
 @end

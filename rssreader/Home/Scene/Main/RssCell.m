@@ -88,8 +88,9 @@
 -(void)reloadRss:(FeedRssEntity *)feedRss{
     RssEntity *rss = feedRss.rss;
     FeedEntity *feed = feedRss.feed;
-    [_feedImage sd_setImageWithURL:[NSURL URLWithString:feed.favicon] placeholderImage:[UIImage imageNamed:@"rssIcon"]];
-
+    [_feedImage sd_setImageWithURL:[NSURL URLWithString:feed.favicon] placeholderImage:
+     [[UIImage imageNamed:@"rssIcon"] tintWithColor:[UIColor whiteColor]]];
+    
     _time.text = rss.date;
     _feedTitle.text = feed.title;
     _rssTitle.text = rss.title;
@@ -102,6 +103,8 @@
         [_rssImageView setImage:placeHoderImage];
     }
 }
+
+
 
 
 @end

@@ -32,7 +32,5 @@
          NSError *error;
          self.feed = [[FeedEntity alloc] initWithDictionary:[self.request.output objectAtPath:@"Data/feed"] error:&error];//Model的ORM操作，dictionary to object
      }];
-    
-
 }
 @end

@@ -8,6 +8,8 @@
 
 #import "RssDetailScene.h"
 #import "TOWebViewController.h"
+#import "RssListScene.h"
+
 @interface RssDetailScene ()<UIWebViewDelegate>
 @property (strong, nonatomic) UIWebView *webView;
 @property(nonatomic,retain)NSURL *url;
@@ -27,7 +29,11 @@
     UIButton *leftbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_chevron_left" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
     [self showBarButton:NAV_LEFT button:leftbutton];
 
-    [self loadHTML:_rss];
+    
+    UIButton *rightbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_external_link" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
+    [self showBarButton:NAV_RIGHT button:rightbutton];
+    
+    [self loadHTML:_feedRss.rss];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,15 +42,22 @@
 }
 
 -(void)rightButtonTouch{
-    [self presentWebView:_url];
+    
+    [RMUniversalAlert showActionSheetInViewController:self withTitle:@"请选择" message:@"" cancelButtonTitle:@"取消" destructiveButtonTitle:@"查看原文" otherButtonTitles:@[@"查看订阅源",@"收藏"] popoverPresentationControllerBlock:nil tapBlock:^(RMUniversalAlert *alert, NSInteger buttonIndex) {
+        if(alert.destructiveButtonIndex == buttonIndex){
+            
+            [self presentWebView:_url];
+        }else if (alert.firstOtherButtonIndex == buttonIndex){
+            RssListScene *scene =  [[RssListScene alloc]init];
+            scene.feed = _feedRss.feed;
+            [self.navigationController pushViewController:scene animated:YES];
+        }
+    }];
 }
 
 - (void)loadHTML:(RssEntity*)rss
 {
     if(!rss.isNotEmpty) return;
-    
-//    [UIApplication sharedApplication].applicationIconBadgeNumber -=1;
-    
     self.title = rss.title;
     
     NSString *detailString = [NSMutableString stringFromResFile:@"detail.html" encoding:NSUTF8StringEncoding];
@@ -52,8 +65,6 @@
     detailString = [detailString replace:RX(@"#title#") with:rss.title];
     if(rss.link.isNotEmpty){
         _url = [NSURL URLWithString:rss.link];
-        UIButton *rightbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_external_link" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
-        [self showBarButton:NAV_RIGHT button:rightbutton];
         detailString = [detailString replace:RX(@"#link#") with:rss.link];
     }else{
         detailString = [detailString replace:RX(@"href=\"#link#\"") with:@""];

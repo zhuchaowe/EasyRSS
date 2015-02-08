@@ -124,10 +124,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     FeedEntity *feed = [self.sceneModel.dataArray objectAtIndex:indexPath.row];
-    
     [self showHudIndeterminate:@"加载中..."];
     self.addFeedSceneModel.request.feedUrl = feed.link;
-    self.addFeedSceneModel.request.type = @"wechat";
+    self.addFeedSceneModel.request.feedType = @1;
     self.addFeedSceneModel.request.requestNeedActive = YES;
 }
 

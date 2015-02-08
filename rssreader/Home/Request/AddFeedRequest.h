@@ -10,5 +10,5 @@
 
 @interface AddFeedRequest : Request
 @property(nonatomic,retain)NSString *feedUrl;
-@property(nonatomic,retain)NSString *type;
+@property(nonatomic,retain)NSNumber *feedType;
 @end

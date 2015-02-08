@@ -132,7 +132,7 @@
     
     RssDetailScene* scene =  [[RssDetailScene alloc]init];
     FeedRssEntity *feedRss =  [self.sceneModel.dataArray objectAtIndex:indexPath.row];
-    scene.rss = feedRss.rss;
+    scene.feedRss = feedRss;
     scene.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:scene animated:YES];
 }

@@ -14,7 +14,7 @@
     self.PATH = @"/addFeed";
     self.METHOD = @"POST";
     self.feedUrl = @"";
-    self.type = @"rss";
+    self.feedType = @0;
     self.httpHeaderFields = @{@"M-API-KEY":[UserCenter sharedInstance].token};
 }
 @end
