@@ -6,34 +6,37 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import "SubscribeScene.h"
+#import "FavScene.h"
 #import "FeedSceneModel.h"
 #import "AddScene.h"
 #import "RssListScene.h"
 #import "FeedCell.h"
 #import "DiscoverySceneModel.h"
 #import "DataCenter.h"
-#import "PresentRssList.h"
 #import "RDNavigationController.h"
 #import "UserCenter.h"
+#import "ActionSceneModel.h"
+#import "DeleteSubscribeRequest.h"
+#import "UIColor+RSS.h"
 
-@interface SubscribeScene ()<SWTableViewCellDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface FavScene ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) SceneTableView *tableView;
 @property(nonatomic,retain)FeedSceneModel *feedSceneModel;
 
 @end
 
-@implementation SubscribeScene
+@implementation FavScene
             
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"订阅";
+    self.title = @"订阅频道";
 
-    _feedSceneModel = [FeedSceneModel SceneModel];
-    
     UIButton *rssbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_rss" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
     [self showBarButton:NAV_RIGHT button:rssbutton];
     
+    
+    _feedSceneModel = [FeedSceneModel SceneModel];
+
 //    if([DataCenter sharedInstance].time.isNotEmpty){
 //        PresentRssList *presentRssListScene =  [self.storyboard instantiateViewControllerWithIdentifier:@"PresentRssList"];
 //        CenterNav *centerNav = [[CenterNav alloc]initWithRootViewController:presentRssListScene];
@@ -46,9 +49,13 @@
 //    }
     
     self.tableView = [[SceneTableView alloc]init];
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
+    [self.tableView registerClass:[FeedCell class] forCellReuseIdentifier:@"FeedCell"];
+    
     [self.tableView alignToView:self.view];
     
     @weakify(self);
@@ -91,10 +98,8 @@
      }];
     
     [self.tableView triggerPullToRefresh];
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+    [self loadHud:self.view];
+    
 }
 
 -(void)rightButtonTouch{
@@ -102,8 +107,9 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    return 84;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -111,10 +117,8 @@
 }
 
 - (FeedCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *SettingTableIdentifier = @"FeedCell";
-    FeedCell *cell = [[FeedCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingTableIdentifier];
-    cell.delegate = self;
-    cell.rightUtilityButtons = [self rightButtons];
+    FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FeedCell" forIndexPath:indexPath];
+    cell.backGroundView.backgroundColor = [UIColor colorAtIndex:indexPath.row];
     FeedEntity *feed = [self.feedSceneModel.dataArray objectAtIndex:indexPath.row];
     [cell reload:feed];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -123,48 +127,34 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    RssListScene *scene =  [[RssListScene alloc]init];
-    scene.feed =  [self.feedSceneModel.dataArray objectAtIndex:indexPath.row];
-    scene.hidesBottomBarWhenPushed = YES;
+    FeedEntity *feed =  [self.feedSceneModel.dataArray objectAtIndex:indexPath.row];
+    UIViewController *scene = [UIViewController initFromString:feed.openUrl];
     [self.navigationController pushViewController:scene animated:YES];
 }
 
-- (NSArray *)rightButtons
-{
-    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
-    
-    [rightUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithString:@"#20F298"]
-                                                title:@"分享"];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithString:@"#20CCF2"]
-                                                title:@"已读"];
-    [rightUtilityButtons sw_addUtilityButtonWithColor:
-     [UIColor colorWithRed:1.0f green:0.231f blue:0.188 alpha:1.0f]
-                                                title:@"删除"];
-    
-    return rightUtilityButtons;
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
 }
 
-- (void)swipeableTableViewCell:(FeedCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index{
-    
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-//    Feed *feed = [self.feedSceneModel.feedList objectAtIndex:indexPath.row];
-//    if (index == 2) { //删除
-//        [RMUniversalAlert showActionSheetInViewController:self withTitle:@"确认删除" message:feed.title cancelButtonTitle:@"取消" destructiveButtonTitle:@"确认" otherButtonTitles:nil popoverPresentationControllerBlock:nil tapBlock:^(RMUniversalAlert *alert, NSInteger buttonIndex) {
-//            if(alert.destructiveButtonIndex == buttonIndex){
-//                [[GCDQueue globalQueue] queueBlock:^{
-//                    [feed deleteSelf];
-//                }];
-//                [self.feedSceneModel.feedList removeObjectAtIndex:indexPath.row];
-//                [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-//            }
-//        }];
-//    }else if(index == 1){
-//        cell.numberLabel.text = @"";
-//        [Rss setReadWhere:@{@"_fid":@(feed.primaryKey)}];
-//    }
-    [cell hideUtilityButtonsAnimated:YES];
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"取消订阅";
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        FeedEntity *feed =[self.feedSceneModel.dataArray objectAtIndex:indexPath.row];
+        DeleteSubscribeRequest *req = [DeleteSubscribeRequest Request];
+        req.feedId = feed.feedId;
+        [self showHudIndeterminate:@"正在取消"];
+        [[ActionSceneModel sharedInstance] sendRequest:req success:^{
+            [self hideHud];
+            [self.feedSceneModel.dataArray removeObjectAtIndex:indexPath.row];
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]withRowAnimation:UITableViewRowAnimationFade];
+        } error:^{
+            [self hideHudFailed:@"取消订阅失败"];
+        }];
+    }
 }
 
 @end

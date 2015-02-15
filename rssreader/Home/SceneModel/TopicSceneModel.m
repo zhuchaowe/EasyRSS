@@ -1,16 +1,14 @@
 //
-//  RecommendSceneModel.m
+//  TopicSceneModel.m
 //  rssreader
 //
-//  Created by 朱潮 on 14-8-22.
-//  Copyright (c) 2014年 zhuchao. All rights reserved.
+//  Created by zhuchao on 15/2/14.
+//  Copyright (c) 2015年 zhuchao. All rights reserved.
 //
 
-#import "RecommendSceneModel.h"
+#import "TopicSceneModel.h"
 
-
-@implementation RecommendSceneModel
-
+@implementation TopicSceneModel
 /**
  *   初始化加载SceneModel
  */
@@ -21,7 +19,7 @@
     self.tagList =  [NSMutableArray array];
     self.dataArray = [NSMutableArray array];
     @weakify(self);
-    _request = [RecommendRequest RequestWithBlock:^{  // 初始化请求回调
+    _request = [TopicRecommendRequest RequestWithBlock:^{  // 初始化请求回调
         @strongify(self)
         [self SEND_CACHE_ACTION:self.request];
     }];
@@ -34,7 +32,7 @@
      subscribeNext:^(NSNumber *state) {
          @strongify(self);
          NSError *error;
-         self.list = [[RssList alloc] initWithDictionary:[self.request.output objectAtPath:@"Data"] error:&error];//Model的ORM操作，dictionary to object
+         self.list = [[FeedList alloc] initWithDictionary:[self.request.output objectAtPath:@"Data"] error:&error];//Model的ORM操作，dictionary to object
      }];
     
     _tagRequest = [TagListRequest RequestWithBlock:^{
@@ -50,6 +48,7 @@
      subscribeNext:^(NSNumber *state) {
          @strongify(self);
          self.tagList = [self.tagRequest.output objectAtPath:@"Data/list"];
-    }];
+     }];
 }
+
 @end

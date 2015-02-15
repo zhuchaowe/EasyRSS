@@ -7,16 +7,18 @@
 //
 
 #import "TabBarController.h"
-#import "SubscribeScene.h"
+#import "TopicScene.h"
+
 #import "RDNavigationController.h"
-#import "FavoriteScene.h"
 #import "SquareScene.h"
 #import "MineScene.h"
-#import "FeedListScene.h"
+#import "ChannelScene.h"
+
 
 @interface TabBarController ()<UITabBarControllerDelegate>
 @property(nonatomic,retain)RDNavigationController *subscribeNavController;
 @property(nonatomic,retain)RDNavigationController *squreNavController;
+@property(nonatomic,retain)RDNavigationController *topicNavController;
 @property(nonatomic,retain)RDNavigationController *mineNavController;
 @end
 
@@ -30,26 +32,32 @@
                            [[SquareScene alloc]init]];
     
     _subscribeNavController = [[RDNavigationController alloc]initWithRootViewController:
-                               [[SubscribeScene alloc]init]];
+                               [[ChannelScene alloc]init]];
 
-    
+    _topicNavController = [[RDNavigationController alloc]initWithRootViewController:
+                        [[TopicScene alloc]init]];
+
     _mineNavController = [[RDNavigationController alloc]initWithRootViewController:
                           [[MineScene alloc]init]];
-    self.viewControllers = [NSArray arrayWithObjects:_squreNavController,_subscribeNavController,_mineNavController,nil];
+    self.viewControllers = [NSArray arrayWithObjects:_squreNavController,_subscribeNavController,_topicNavController,_mineNavController,nil];
     
     [_squreNavController.tabBarItem setTitle:@"易阅"];
     [_squreNavController.tabBarItem setImage:
      [IconFont imageWithIcon:[IconFont icon:@"ios7Home" fromFont:ionIcons]
                     fontName:ionIcons iconColor:[UIColor whiteColor] iconSize:25]];
     
-    
-    [_subscribeNavController.tabBarItem setTitle:@"订阅"];
+    [_subscribeNavController.tabBarItem setTitle:@"频道"];
     [_subscribeNavController.tabBarItem setImage:
      [IconFont imageWithIcon:[IconFont icon:@"socialRss" fromFont:ionIcons]
                     fontName:ionIcons iconColor:[UIColor whiteColor] iconSize:25]];
     
     
-
+    [_topicNavController.tabBarItem setTitle:@"话题"];
+    [_topicNavController.tabBarItem setImage:
+     [IconFont imageWithIcon:[IconFont icon:@"ios7Star" fromFont:ionIcons]
+                    fontName:ionIcons iconColor:[UIColor whiteColor] iconSize:25]];
+    
+    
     [_mineNavController.tabBarItem setTitle:@"我的"];
     [_mineNavController.tabBarItem setImage:
      [IconFont imageWithIcon:[IconFont icon:@"ios7Person" fromFont:ionIcons]

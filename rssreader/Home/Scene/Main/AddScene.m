@@ -8,14 +8,12 @@
 
 #import "AddScene.h"
 #import "FeedSceneModel.h"
-#import "AddFeedSceneModel.h"
 #import "RssListScene.h"
 #import "WeChatListScene.h"
-
+#import "ActionSceneModel.h"
+#import "AddFeedRequest.h"
 @interface AddScene ()
 @property (strong, nonatomic) SceneScrollView *scrollerView;
-@property (nonatomic,strong) AddFeedSceneModel *sceneModel;
-
 @property (nonatomic,strong) UISegmentedControl *segmented;
 @end
 
@@ -24,16 +22,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _segmented = [[UISegmentedControl alloc]initWithItems:@[@"RSS",@"微信"]];
-    [_segmented setFrame:CGRectMake(0, 0, 125, 32)];
+    _segmented = [[UISegmentedControl alloc]initWithItems:@[@"RSS",@"微信",@"话题"]];
+    [_segmented setFrame:CGRectMake(0, 0, 200, 32)];
     [_segmented setTintColor:[UIColor whiteColor]];
     _segmented.selectedSegmentIndex = 0;
-    self.navigationItem.titleView = _segmented;
+    [self setTitleView:_segmented];
     
-    _sceneModel = [AddFeedSceneModel SceneModel];
-
-    self.scrollerView = [[SceneScrollView alloc]initAutoLayoutAddToView:self.view];
+    self.scrollerView = [[SceneScrollView alloc]init];
     self.scrollerView.backgroundColor = [UIColor whiteColor];
+    [self addSubView:self.scrollerView extend:EXTEND_TOP];
+    [self.scrollerView addContentView];
 
     _textView = [[UITextField alloc]init];
     _textView.delegate = self;
@@ -55,35 +53,16 @@
     [self loadHudInKeyWindow];
     
     @weakify(self);
-    [[RACObserve(self.sceneModel, feed)
-      filter:^BOOL(FeedEntity* value) {
-          return value !=nil;
-      }]
-     subscribeNext:^(FeedEntity *value) {
-         @strongify(self);
-         [self hideHud];
-         RssListScene *scene =  [[RssListScene alloc]init];
-         scene.feed = value;
-         [self.navigationController pushViewController:scene animated:YES];
-     }];
-    
-    [[RACObserve(self.sceneModel.request, state)
-      filter:^BOOL(NSNumber *state) {
-          @strongify(self);
-          return self.sceneModel.request.failed;
-      }]
-     subscribeNext:^(id x) {
-         @strongify(self);
-         [self hideHudFailed:self.sceneModel.request.message];
-     }];
-    
+
     [RACObserve(self.segmented, selectedSegmentIndex)
      subscribeNext:^(NSNumber *index) {
          @strongify(self);
          if(index.integerValue == 0){
              self.textView.placeholder = @"请输入RSS源地址";
-         }else{
+         }else if(index.integerValue == 1){
              self.textView.placeholder = @"查询微信公众账号";
+         }else{
+             self.textView.placeholder = @"搜索相关话题";
          }
      }];
     
@@ -109,14 +88,26 @@
             _textView.text = [NSString stringWithFormat:@"http://%@",_textView.text];
         }
         if([NSURL URLWithString:_textView.text].host != nil){
+            AddFeedRequest *req = [AddFeedRequest Request];
+            req.feedUrl = _textView.text;
             [self showHudIndeterminate:@"加载中..."];
-            _sceneModel.request.feedUrl = _textView.text;
-            _sceneModel.request.requestNeedActive = YES;
+            [[ActionSceneModel sharedInstance] sendRequest:req success:^{
+                [self hideHud];
+                FeedEntity *feed =  [[FeedEntity alloc]initWithDictionary:req.output error:nil];
+                UIViewController *scene =  [UIViewController initFromString:feed.openUrl];
+                [self.navigationController pushViewController:scene animated:YES];
+            } error:^{
+                [self hideHudFailed:req.message];
+            }];
         }
-    }else{
+    }else if(self.segmented.selectedSegmentIndex == 1){
         WeChatListScene *scene = [[WeChatListScene alloc]init];
         scene.title = self.textView.text;
         [self.navigationController pushViewController:scene animated:YES];
+    }else{
+        NSString *string = [NSString stringWithFormat:@"easyrss://topic?title=%@",self.textView.text.urlencode];
+        UIViewController *vc = [UIViewController initFromString:string];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

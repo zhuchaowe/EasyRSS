@@ -7,8 +7,6 @@
 //
 
 #import "Scene.h"
-#import "FeedEntity.h"
 
 @interface RssListScene : Scene
-@property(nonatomic,strong) FeedEntity *feed;
 @end

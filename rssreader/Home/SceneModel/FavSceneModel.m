@@ -19,23 +19,4 @@
     GCDSharedInstance(^{ return [self SceneModel]; });
 }
 
--(void)retData{
-    NSDictionary *map =  @{@"isFav":@(1)};
-//    self.pagination.total = @([[[Rss Model] where:map] getCount]);
-//    self.favArray = [Rss rssListInDb:map page:self.pagination.page pageSize:self.pagination.pageSize];
-}
-
--(void)loadSceneModel{
-    self.pagination = [Pagination Model];
-    self.pagination.pageSize = @20;
-    
-    @weakify(self);
-    [RACObserve(self.pagination, page)
-     subscribeNext:^(NSNumber *page) {
-         @strongify(self);
-         [[GCDQueue globalQueue] queueBlock:^{
-             [self retData];
-         }];
-     }];
-}
 @end

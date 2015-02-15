@@ -7,26 +7,19 @@
 //
 
 #import "AppDelegate.h"
-#import "SubscribeScene.h"
 #import "MobClick.h"
 #import "RssEntity.h"
-#import "FeedSceneModel.h"
-#import "PresentRssList.h"
 #import "DataCenter.h"
-#import "AddScene.h"
-#import "SubscribeScene.h"
 #import "RDNavigationController.h"
-#import "TabBarController.h"
 
 @interface AppDelegate ()
-@property(nonatomic,retain)SubscribeScene *rootScene;
 @end
 
 @implementation AppDelegate
             
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+
     // IOS8 新系统需要使用新的代码咯
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
@@ -43,34 +36,13 @@
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
          (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
     }
-    
-//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    
  
     UILocalNotification * notification=[launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if(notification !=nil && [notification.userInfo objectForKey:@"time"]){
         [DataCenter sharedInstance].time = [notification.userInfo objectForKey:@"time"];
     }
     [self setUpBackGroundReflash];
-    
 
-    
-    self.database = [[AppDatabase alloc]initWithMigrations];
-    
-    [Action actionConfigHost:@"rss.iosx.me" client:@"easyios" codeKey:@"Code" rightCode:0 msgKey:@"Msg"];
-    
-    
-    [$ swizzleClassMethod:@selector(objectAtIndex:) with:@selector(safeObjectAtIndex:) in:[NSArray class]];
-    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor blackColor];
-    
-//    LeftScene *leftScene = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LeftScene"];
-//    _rootScene = [[SqureScene alloc]init];
-    TabBarController *centerNav = [[TabBarController alloc]init];
-
-    self.window.rootViewController = centerNav;
-    [self.window makeKeyAndVisible];
     return YES;
 }
 
@@ -94,14 +66,14 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
--(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
-    if([notification.userInfo objectForKey:@"time"]){
-        [DataCenter sharedInstance].time = [notification.userInfo objectForKey:@"time"];
-        PresentRssList *presentRssListScene =  [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"PresentRssList"];
-        RDNavigationController *nav = [[RDNavigationController alloc]initWithRootViewController:presentRssListScene];
-        [_rootScene presentViewController:nav animated:YES completion:nil];
-    }
-}
+//-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+//    if([notification.userInfo objectForKey:@"time"]){
+//        [DataCenter sharedInstance].time = [notification.userInfo objectForKey:@"time"];
+//        PresentRssList *presentRssListScene =  [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"PresentRssList"];
+//        RDNavigationController *nav = [[RDNavigationController alloc]initWithRootViewController:presentRssListScene];
+//        [_rootScene presentViewController:nav animated:YES completion:nil];
+//    }
+//}
 
 //- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
 //    NSLog(@"%@", [url absoluteString]);

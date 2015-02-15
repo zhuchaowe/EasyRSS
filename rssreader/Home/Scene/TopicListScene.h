@@ -1,13 +1,13 @@
 //
-//  FeedListScene.h
+//  TopicListScene.h
 //  rssreader
 //
-//  Created by zhuchao on 15/2/7.
+//  Created by zhuchao on 15/2/15.
 //  Copyright (c) 2015年 zhuchao. All rights reserved.
 //
 
 #import "Scene.h"
 
-@interface FeedListScene : Scene
+@interface TopicListScene : Scene
 
 @end

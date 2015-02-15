@@ -1,15 +1,14 @@
 //
-//  RecommendSceneModel.m
+//  ChannelSceneModel.m
 //  rssreader
 //
-//  Created by 朱潮 on 14-8-22.
-//  Copyright (c) 2014年 zhuchao. All rights reserved.
+//  Created by zhuchao on 15/2/9.
+//  Copyright (c) 2015年 zhuchao. All rights reserved.
 //
 
-#import "RecommendSceneModel.h"
+#import "ChannelSceneModel.h"
 
-
-@implementation RecommendSceneModel
+@implementation ChannelSceneModel
 
 /**
  *   初始化加载SceneModel
@@ -17,11 +16,11 @@
 -(void)loadSceneModel{
     [super loadSceneModel];
     [self.action useCache];
-    self.list = nil;
+    self.feedList = nil;
     self.tagList =  [NSMutableArray array];
     self.dataArray = [NSMutableArray array];
     @weakify(self);
-    _request = [RecommendRequest RequestWithBlock:^{  // 初始化请求回调
+    _request = [ChannelRequest RequestWithBlock:^{  // 初始化请求回调
         @strongify(self)
         [self SEND_CACHE_ACTION:self.request];
     }];
@@ -34,7 +33,7 @@
      subscribeNext:^(NSNumber *state) {
          @strongify(self);
          NSError *error;
-         self.list = [[RssList alloc] initWithDictionary:[self.request.output objectAtPath:@"Data"] error:&error];//Model的ORM操作，dictionary to object
+         self.feedList = [[FeedList alloc] initWithDictionary:[self.request.output objectAtPath:@"Data"] error:&error];//Model的ORM操作，dictionary to object
      }];
     
     _tagRequest = [TagListRequest RequestWithBlock:^{
@@ -50,6 +49,7 @@
      subscribeNext:^(NSNumber *state) {
          @strongify(self);
          self.tagList = [self.tagRequest.output objectAtPath:@"Data/list"];
-    }];
+     }];
 }
+
 @end

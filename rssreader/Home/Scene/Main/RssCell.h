@@ -10,6 +10,6 @@
 #import "FeedRssEntity.h"
 #import "ALBaseCell.h"
 
-@interface RssCell : ALBaseCell
+@interface RssCell : EzTableViewCell
 -(void)reloadRss:(FeedRssEntity *)rss;
 @end

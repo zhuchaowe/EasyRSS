@@ -1,33 +1,32 @@
 //
-//  SquareScene.m
+//  TopicScene.m
 //  rssreader
 //
-//  Created by zhuchao on 15/2/6.
+//  Created by zhuchao on 15/2/14.
 //  Copyright (c) 2015年 zhuchao. All rights reserved.
 //
 
-#import "SquareScene.h"
-#import "RssCell.h"
-#import "RssDetailScene.h"
-#import "RecommendSceneModel.h"
+#import "TopicScene.h"
+#import "TopicCell.h"
 #import <HTHorizontalSelectionList/HTHorizontalSelectionList.h>
-#import "WebDetailScene.h"
-#import "RssListScene.h"
+#import "TopicSceneModel.h"
+#import "UIColor+RSS.h"
 #import "AddScene.h"
 #import "RDNavigationController.h"
 
-@interface SquareScene ()<UITableViewDataSource,UITableViewDelegate,HTHorizontalSelectionListDelegate, HTHorizontalSelectionListDataSource>
-
+@interface TopicScene ()<UICollectionViewDataSource,UICollectionViewDelegate,HTHorizontalSelectionListDelegate, HTHorizontalSelectionListDataSource>
 @property (nonatomic, strong) HTHorizontalSelectionList *selectionList;
-@property (strong, nonatomic) SceneTableView *tableView;
-@property (strong, nonatomic) RecommendSceneModel *sceneModel;
+@property (strong, nonatomic) SceneCollectionView *collectionView;
+@property (strong, nonatomic) TopicSceneModel *sceneModel;
 @end
 
-@implementation SquareScene
+@implementation TopicScene
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"易阅";
+    self.title = @"话题";
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     UIButton *rssbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_rss" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
     [self showBarButton:NAV_RIGHT button:rssbutton];
 
@@ -42,21 +41,24 @@
     [self.selectionList alignTop:@"0" leading:@"0" bottom:nil trailing:@"0" toView:self.selectionList.superview];
     [self.selectionList constrainHeight:@"40"];
     
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+    layout.itemSize = CGSizeMake(95, 60);
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.sectionInset = UIEdgeInsetsMake(5.0, 5.0, 5.0, 5.0);
+    self.collectionView = [[SceneCollectionView alloc]initWithFrame:CGRectZero
+                                               collectionViewLayout:layout];
     
-    self.tableView = [[SceneTableView alloc]init];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.rowHeight = 210.0f;
-
-    [self.view addSubview:self.tableView];
-    [self.tableView constrainTopSpaceToView:self.selectionList predicate:@"0"];
-    [self.tableView alignTop:nil leading:@"0" bottom:@"0" trailing:@"0" toView:self.view];
+    self.collectionView.alwaysBounceVertical = YES;
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    [self.view addSubview:self.collectionView];
+    [self.collectionView constrainTopSpaceToView:self.selectionList predicate:@"0"];
+    [self.collectionView alignTop:nil leading:@"0" bottom:@"0" trailing:@"0" toView:self.view];
     
-    [self.tableView registerClass:[RssCell class] forCellReuseIdentifier:@"RssCell"];
+    [self.collectionView registerClass:[TopicCell class] forCellWithReuseIdentifier:@"TopicCell"];
     
-    _sceneModel = [RecommendSceneModel SceneModel];
-    
+    _sceneModel = [TopicSceneModel SceneModel];
     @weakify(self);
     self.sceneModel.tagRequest.requestNeedActive = YES;
     [[RACObserve(self.sceneModel, tagList)
@@ -68,30 +70,30 @@
          [self.selectionList reloadData];
      }];
     
-    [self.tableView addPullToRefreshWithActionHandler:^{
+    [self.collectionView addPullToRefreshWithActionHandler:^{
         @strongify(self);
         self.sceneModel.request.page = @1;
         self.sceneModel.request.requestNeedActive = YES;
     }];
     
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
+    [self.collectionView addInfiniteScrollingWithActionHandler:^{
         @strongify(self);
         self.sceneModel.request.page = [self.sceneModel.request.page increase:@1];
         self.sceneModel.request.requestNeedActive = YES;
     }];
     
     [[RACObserve(self.sceneModel, list)
-      filter:^BOOL(RssList* value) {
+      filter:^BOOL(FeedList* value) {
           return value !=nil;
       }]
-     subscribeNext:^(RssList *value) {
+     subscribeNext:^(FeedList *value) {
          @strongify(self);
          self.sceneModel.dataArray = [value.pagination
-                                         success:self.sceneModel.dataArray
-                                         newArray:value.list];
+                                      success:self.sceneModel.dataArray
+                                      newArray:value.list];
          self.sceneModel.request.page = value.pagination.page;
-         [self.tableView reloadData];
-         [self.tableView endAllRefreshingWithIntEnd:value.pagination.isEnd.integerValue];
+         [self.collectionView reloadData];
+         [self.collectionView endAllRefreshingWithIntEnd:value.pagination.isEnd.integerValue];
      }];
     
     [[RACObserve(self.sceneModel.request, state)
@@ -102,59 +104,39 @@
      subscribeNext:^(id x) {
          @strongify(self);
          self.sceneModel.request.page = self.sceneModel.list.pagination.page?:@1;
-         [self.tableView endAllRefreshingWithIntEnd:self.sceneModel.list.pagination.isEnd.integerValue];
+         [self.collectionView endAllRefreshingWithIntEnd:self.sceneModel.list.pagination.isEnd.integerValue];
      }];
-    [self.tableView triggerPullToRefresh];
+    [self.collectionView triggerPullToRefresh];
     
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 -(void)rightButtonTouch{
     RDNavigationController *nav = [[RDNavigationController alloc]initWithRootViewController:[[AddScene alloc]init]];
     [self presentViewController:nav animated:YES completion:nil];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.sceneModel.dataArray.count;
 }
 
-- (UITableViewCell *)tableView:(SceneTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    RssCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RssCell" forIndexPath:indexPath];
-    
-    FeedRssEntity *entity = [self.sceneModel.dataArray objectAtIndex:indexPath.row];
-    UIButton *_feedButton = [[UIButton alloc]init];
-    [cell.contentView addSubview:_feedButton];
-    [_feedButton alignTop:@"5" leading:@"5" toView:_feedButton.superview];
-    [_feedButton constrainWidth:@"120" height:@"40"];
-    
-    _feedButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        UIViewController *scene = [UIViewController initFromString:entity.feed.openUrl];
-        [self.navigationController pushViewController:scene animated:YES];
-        return [RACSignal empty];
-    }];
-    [cell reloadRss:entity];
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    TopicCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TopicCell" forIndexPath:indexPath];
+    cell.contentView.backgroundColor = [UIColor colorAtIndex:indexPath.row];
+    FeedEntity *entity = [self.sceneModel.dataArray safeObjectAtIndex:indexPath.row];
+    cell.textLabel.text = entity.title;
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    FeedRssEntity *feedRss = [self.sceneModel.dataArray objectAtIndex:indexPath.row];
-    if(feedRss.feed.feedType.integerValue == 0){
-        RssDetailScene* scene =  [[RssDetailScene alloc]init];
-        scene.feedRss = feedRss;
-        scene.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:scene animated:YES];
-    }else{
-        WebDetailScene* scene =  [[WebDetailScene alloc]init];
-        scene.feedRss = feedRss;
-        scene.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:scene animated:YES];
-    }
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    FeedEntity *entity = [self.sceneModel.dataArray safeObjectAtIndex:indexPath.row];
+    UIViewController *vc = [UIViewController initFromString:entity.openUrl];
+    [self.navigationController pushViewController:vc animated:YES];
 }
-
 #pragma mark - HTHorizontalSelectionListDataSource Protocol Methods
 
 - (NSInteger)numberOfItemsInSelectionList:(HTHorizontalSelectionList *)selectionList {
@@ -162,7 +144,6 @@
 }
 
 - (NSString *)selectionList:(HTHorizontalSelectionList *)selectionList titleForItemWithIndex:(NSInteger)index {
-    
     return  self.sceneModel.tagList[index];
 }
 
@@ -174,4 +155,5 @@
     self.sceneModel.request.page = @1;
     self.sceneModel.request.requestNeedActive = YES;
 }
+
 @end

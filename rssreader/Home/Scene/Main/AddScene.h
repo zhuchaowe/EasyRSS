@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import "SubscribeScene.h"
+#import "FavScene.h"
 
 @interface AddScene : Scene<UITextFieldDelegate>
 @property (strong, nonatomic) UITextField *textView;

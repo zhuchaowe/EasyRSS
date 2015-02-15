@@ -9,10 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FeedEntity.h"
 #import "SWTableViewCell.h"
-@interface FeedCell : SWTableViewCell
-@property(nonatomic,retain)UIImageView *logoImageView;
-@property(nonatomic,retain)UILabel *titleLabel;
-@property(nonatomic,retain)UILabel *numberLabel;
-@property(nonatomic,retain)UILongPressGestureRecognizer *longPress;
+@interface FeedCell : EzTableViewCell
+@property(nonatomic,retain)UIView *backGroundView;
 -(void)reload:(FeedEntity *)feed;
 @end

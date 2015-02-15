@@ -12,5 +12,4 @@
 @interface FavSceneModel : SceneModel
 @property(nonatomic,retain)NSArray *favArray;
 @property(nonatomic,retain)Pagination *pagination;
--(void)retData;
 @end

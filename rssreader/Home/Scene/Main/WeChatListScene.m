@@ -10,12 +10,13 @@
 #import "WeChatSceneModel.h"
 #import "FeedCell.h"
 #import "RssListScene.h"
-#import "AddFeedSceneModel.h"
+#import "AddFeedRequest.h"
+#import "ActionSceneModel.h"
+#import "UIColor+RSS.h"
 
 @interface WeChatListScene ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,retain)SceneTableView *tableView;
 @property(nonatomic,retain)WeChatSceneModel *sceneModel;
-@property(nonatomic,retain)AddFeedSceneModel *addFeedSceneModel;
 @end
 
 @implementation WeChatListScene
@@ -24,14 +25,16 @@
     [super viewDidLoad];
     self.sceneModel = [WeChatSceneModel SceneModel];
     self.sceneModel.request.query = self.title;
-    self.addFeedSceneModel = [AddFeedSceneModel SceneModel];
-
 
     self.tableView = [[SceneTableView alloc]init];
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     [self.tableView alignToView:self.view];
+    [self.tableView registerClass:[FeedCell class] forCellReuseIdentifier:@"FeedCell"];
+    
     
     @weakify(self);
     
@@ -72,27 +75,7 @@
          [self.tableView endAllRefreshingWithIntEnd:self.sceneModel.searchList.pagination.isEnd.integerValue];
      }];
     
-    [[RACObserve(self.addFeedSceneModel, feed)
-      filter:^BOOL(FeedEntity* value) {
-          return value !=nil;
-      }]
-     subscribeNext:^(FeedEntity *value) {
-         @strongify(self);
-         [self hideHud];
-         RssListScene *scene =  [[RssListScene alloc]init];
-         scene.feed = value;
-         [self.navigationController pushViewController:scene animated:YES];
-     }];
     
-    [[RACObserve(self.addFeedSceneModel.request, state)
-      filter:^BOOL(NSNumber *state) {
-          @strongify(self);
-          return self.addFeedSceneModel.request.failed;
-      }]
-     subscribeNext:^(id x) {
-         @strongify(self);
-         [self hideHudFailed:self.addFeedSceneModel.request.message];
-     }];
     [self loadHud:self.view];
     [self.tableView triggerPullToRefresh];
     
@@ -105,7 +88,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    return 84;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -113,8 +96,8 @@
 }
 
 - (FeedCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *SettingTableIdentifier = @"FeedCell";
-    FeedCell *cell = [[FeedCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingTableIdentifier];
+    FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FeedCell" forIndexPath:indexPath];
+    cell.backGroundView.backgroundColor = [UIColor colorAtIndex:indexPath.row];
     FeedEntity *feed = [self.sceneModel.dataArray objectAtIndex:indexPath.row];
     [cell reload:feed];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -124,10 +107,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     FeedEntity *feed = [self.sceneModel.dataArray objectAtIndex:indexPath.row];
+    AddFeedRequest *req = [AddFeedRequest Request];
+    req.feedUrl = feed.link;
+    req.feedType = @1;
+    
     [self showHudIndeterminate:@"加载中..."];
-    self.addFeedSceneModel.request.feedUrl = feed.link;
-    self.addFeedSceneModel.request.feedType = @1;
-    self.addFeedSceneModel.request.requestNeedActive = YES;
+    [[ActionSceneModel sharedInstance] sendRequest:req success:^{
+        [self hideHud];
+        FeedEntity *feed =  [[FeedEntity alloc]initWithDictionary:[req.output objectAtPath:@"Data/feed"] error:nil];
+        UIViewController *scene = [UIViewController initFromString:feed.openUrl];
+        [self.navigationController pushViewController:scene animated:YES];
+    } error:^{
+        [self hideHudFailed:req.message];
+    }];
+    
 }
 
 

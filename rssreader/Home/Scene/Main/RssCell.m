@@ -28,6 +28,7 @@
     _rssImageView = [[UIImageView alloc]init];
     _rssImageView.contentMode = UIViewContentModeScaleAspectFill;
     _rssImageView.clipsToBounds = YES;
+    _rssImageView.layer.cornerRadius = 5;
     [self.contentView addSubview:_rssImageView];
     
     UIView *blurView = [[UIView alloc]init];
@@ -43,8 +44,11 @@
     [self.contentView addSubview:_feedTitle];
     
     _feedImage = [[UIImageView alloc]init];
+    _feedImage.layer.masksToBounds = YES;
+    _feedImage.layer.cornerRadius = 2;
     [self.contentView addSubview:_feedImage];
     
+
     _time = [[UILabel alloc]init];
     _time.textAlignment = NSTextAlignmentRight;
     _time.font = [UIFont systemFontOfSize:12.0f];
@@ -55,7 +59,7 @@
     _rssTitle.numberOfLines = 0;
     _rssTitle.lineBreakMode = NSLineBreakByWordWrapping|NSLineBreakByTruncatingTail;
     _rssTitle.textAlignment = NSTextAlignmentLeft;
-    _rssTitle.font = [UIFont systemFontOfSize:18.0f];
+    _rssTitle.font = [UIFont fontWithName:XinGothic size:18.0f];
     _rssTitle.textColor = [UIColor whiteColor];
     [self.contentView addSubview:_rssTitle];
     
@@ -65,7 +69,7 @@
 -(void)loadAutolayout{
 
     [_rssImageView alignTop:@"3" leading:@"5" bottom:@"-3" trailing:@"-5" toView:_rssImageView.superview];
-    [_rssImageView constrainHeight:@"200@999"];
+//    [_rssImageView constrainHeight:@"200@999"];
     
     [_feedImage alignLeadingEdgeWithView:_feedImage.superview predicate:@"15"];
     [_feedImage alignTopEdgeWithView:_feedImage.superview predicate:@"15"];
@@ -75,14 +79,13 @@
     [_feedTitle alignCenterYWithView:_feedImage predicate:@"0"];
     [_feedTitle constrainHeight:@"16@999"];
     
+    
     [_time alignTopEdgeWithView:_feedTitle predicate:@"0"];
     [_time alignTrailingEdgeWithView:_time.superview predicate:@"-15"];
     [_time constrainHeight:@"16@999"];
     
     [_rssTitle alignCenterYWithView:_rssTitle.superview predicate:@"0"];
     [_rssTitle alignLeading:@"15" trailing:@"-15" toView:_rssTitle.superview];
-
-
 }
 
 -(void)reloadRss:(FeedRssEntity *)feedRss{
@@ -92,19 +95,16 @@
      [[UIImage imageNamed:@"rssIcon"] tintWithColor:[UIColor whiteColor]]];
     
     _time.text = rss.date;
-    _feedTitle.text = feed.title;
-    _rssTitle.text = rss.title;
+    _feedTitle.text = [feed.title replace:RX(@"\ue40a|\ue40b") with:@""];
+    _rssTitle.text = [rss.title replace:RX(@"\ue40a|\ue40b") with:@""];
 
-    UIImage *placeHoderImage = [UIImage imageWithColor:[UIColor randomFlatColor] size:CGSizeMake(_rssImageView.width, _rssImageView.height)];
     
+    self.rssImageView.backgroundColor = [UIColor randomFlatColor];
     if(rss.image.isNotEmpty){
-        [_rssImageView sd_setImageWithURL:[NSURL URLWithString:rss.image]  placeholderImage:placeHoderImage];
+        [_rssImageView sd_setImageWithURL:[NSURL URLWithString:rss.image]];
     }else{
-        [_rssImageView setImage:placeHoderImage];
+        _rssImageView.image = nil;
     }
 }
-
-
-
 
 @end

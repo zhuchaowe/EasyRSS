@@ -1,25 +1,28 @@
 //
-//  rssDetailScene.m
+//  WebDetailScene.m
 //  rssreader
 //
-//  Created by 朱潮 on 14-8-21.
-//  Copyright (c) 2014年 zhuchao. All rights reserved.
+//  Created by zhuchao on 15/2/10.
+//  Copyright (c) 2015年 zhuchao. All rights reserved.
 //
 
-#import "RssDetailScene.h"
+#import "WebDetailScene.h"
 #import "TOWebViewController.h"
 
-@interface RssDetailScene ()<UIWebViewDelegate>
+@interface WebDetailScene ()<UIWebViewDelegate>
 @property (strong, nonatomic) UIWebView *webView;
 @property(nonatomic,retain)NSURL *url;
 @property(nonatomic,retain)NSURLRequest *req;
+
 @end
 
-@implementation RssDetailScene
+@implementation WebDetailScene
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = _feedRss.rss.title;
+    
+    self.title = [_feedRss.rss.title replace:RX(@"\ue40a|\ue40b") with:@""];
+    
     self.webView = [[UIWebView alloc]init];
     self.webView.delegate = self;
     
@@ -30,8 +33,8 @@
     _webView.scalesPageToFit = YES;
     UIButton *leftbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_chevron_left" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
     [self showBarButton:NAV_LEFT button:leftbutton];
-
-    [self loadHTML:_feedRss.rss];
+    
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_feedRss.rss.link]]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,32 +43,9 @@
 }
 
 -(void)rightButtonTouch{
-    
     [self presentWebView:_url];
 }
 
-- (void)loadHTML:(RssEntity*)rss
-{
-    if(!rss.isNotEmpty) return;
-    self.title = rss.title;
-    
-    NSString *detailString = [NSMutableString stringFromResFile:@"detail.html" encoding:NSUTF8StringEncoding];
-
-    detailString = [detailString replace:RX(@"#title#") with:rss.title];
-    if(rss.link.isNotEmpty){
-        _url = [NSURL URLWithString:rss.link];
-        UIButton *rightbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_external_link" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
-        [self showBarButton:NAV_RIGHT button:rightbutton];
-     
-        detailString = [detailString replace:RX(@"#link#") with:_feedRss.feed.openUrl];
-    }else{
-        detailString = [detailString replace:RX(@"href=\"#link#\"") with:@""];
-    }
-    detailString = [detailString replace:RX(@"#author#") with:rss.author];
-    detailString = [detailString replace:RX(@"#publishDate#") with:rss.date];
-    detailString = [detailString replace:RX(@"#content#") with:rss.content];
-    [_webView loadHTMLString:detailString baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-}
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
@@ -93,4 +73,21 @@
     [webViewController setLoadingBarTintColor:[UIColor flatDarkGreenColor]];
     [self.navigationController pushViewController:webViewController animated:YES];
 }
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    NSString *html = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
+    RxMatch* match  = [html firstMatchWithDetails:RX(@"var\\smsg_source_url\\s=\\s'([^']+)';")];
+    if(match && match.groups.count >=2){
+        RxMatchGroup *group2 = match.groups[1];
+        self.url = [NSURL URLWithString:group2.value];
+        UIButton *rightbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_external_link" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
+        [self showBarButton:NAV_RIGHT button:rightbutton];
+    }
+    NSString *js = [NSString stringWithFormat:
+                     @"var postuser = document.getElementById(\"post-user\");"
+                     "postuser.parentNode.innerHTML = \"<em id=\\\"post-date\\\" class=\\\"rich_media_meta rich_media_meta_text\\\">%@</em><a href=\\\"%@\\\">%@</a>\";",_feedRss.rss.date,_feedRss.feed.openUrl,_feedRss.feed.title];
+    [webView stringByEvaluatingJavaScriptFromString:js];
+}
+
 @end
