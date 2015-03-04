@@ -23,17 +23,14 @@
                    @[@{@"title":@"订阅频道",@"link":@"easyrss://fav"},
                      @{@"title":@"订阅话题",@"link":@"easyrss://fav"},
                      @{@"title":@"收藏文章",@"link":@"easyrss://fav"}],
-                   @[@{@"title":@"设置",@"link":@"easyrss://fav"}]];
+                   @[@{@"title":@"设置",@"link":@"easyrss://setting"}]];
     self.tableView = [[SceneTableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundColor = [UIColor colorWithString:@"#EFEFF4"];
     self.tableView.rowHeight = 44.0f;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self addSubView:self.tableView extend:EXTEND_TOP];
-    
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    
-
     // Do any additional setup after loading the view.
 }
 
@@ -45,6 +42,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.text = [[_dataArray objectAtIndexPath:indexPath] objectForKey:@"title"];
     return cell;
 }

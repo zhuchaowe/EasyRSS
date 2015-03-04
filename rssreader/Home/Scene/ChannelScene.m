@@ -11,18 +11,17 @@
 #import "ChannelSceneModel.h"
 #import "RssListScene.h"
 #import "FeedCell.h"
-#import "UIColor+RSS.h"
 #import "AddScene.h"
 #import "RDNavigationController.h"
+#import "ChannelTableView.h"
+#import "ActionSceneModel.h"
 
 
 @interface ChannelScene ()<UITableViewDataSource,UITableViewDelegate,HTHorizontalSelectionListDelegate, HTHorizontalSelectionListDataSource>
 
 @property (nonatomic, strong) HTHorizontalSelectionList *selectionList;
-
-@property (strong, nonatomic) SceneTableView *tableView;
-@property(nonatomic,retain)ChannelSceneModel *channelSceneModel;
-
+@property (nonatomic, strong) NSMutableArray *tagList;
+@property (nonatomic, strong) SceneScrollView *scrollView;
 @end
 
 @implementation ChannelScene
@@ -47,73 +46,41 @@
     [self.selectionList constrainHeight:@"40"];
     
 
-    self.tableView = [[SceneTableView alloc]init];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    [self.view addSubview:self.tableView];
-    
-    [self.tableView registerClass:[FeedCell class] forCellReuseIdentifier:@"FeedCell"];
-    
-    [self.tableView constrainTopSpaceToView:self.selectionList predicate:@"0"];
-    [self.tableView alignTop:nil leading:@"0" bottom:@"0" trailing:@"0" toView:self.view];
-    
-    
-    
-    _channelSceneModel = [ChannelSceneModel SceneModel];
-    
+    self.scrollView = [[SceneScrollView alloc]init];
+    self.scrollView.backgroundColor = [UIColor whiteColor];
+    self.scrollView.delegate = self;
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.bounces = NO;
+    [self.view addSubview:self.scrollView];
+    [self.scrollView addHorizontalContentView];
+    [self.scrollView horizontalConstrainTopSpaceToView:self.selectionList predicate:@"0"];
+    [self.scrollView horizontalAlignBottomWithToView:self.scrollView.superview predicate:@"0"];
+    [self.scrollView alignLeading:@"0" trailing:@"0" toView:self.scrollView.superview];
     
     @weakify(self);
-    
-    self.channelSceneModel.tagRequest.requestNeedActive = YES;
-    [[RACObserve(self.channelSceneModel, tagList)
-      filter:^BOOL(NSMutableArray* value) {
-          return value.count >0;
-      }]
-     subscribeNext:^(NSMutableArray *value) {
-         @strongify(self);
-         [self.selectionList reloadData];
-     }];
-    
-    
-    [self.tableView addPullToRefreshWithActionHandler:^{
+    TagListRequest *req = [TagListRequest Request];
+    [[ActionSceneModel sharedInstance] sendRequest:req success:^{
         @strongify(self);
-        self.channelSceneModel.request.page = @1;
-        self.channelSceneModel.request.requestNeedActive = YES;
-    }];
+        self.tagList = [req.output objectAtPath:@"Data/list"];
+        NSUInteger count = self.tagList.count;
+        if(count>0){
+            [self.selectionList reloadData];
+            [self.tagList enumerateObjectsUsingBlock:^(NSString *title, NSUInteger idx, BOOL *stop) {
+                ChannelTableView *sqTableView = [[ChannelTableView alloc]init];
+                sqTableView.pushBlock = ^(UIViewController *controller){
+                    [self.navigationController pushViewController:controller animated:YES];
+                };
+                [self.scrollView addHorizontalSubView:sqTableView atIndex:idx];
+                if(idx == count-1){
+                    [self.scrollView endWithHorizontalView:sqTableView];
+                }
+                [sqTableView addPullRefreshWithTagName:title];
+            }];
+        }
+    } error:nil];
     
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
-        @strongify(self);
-        self.channelSceneModel.request.page = [self.channelSceneModel.request.page increase:@1];
-        self.channelSceneModel.request.requestNeedActive = YES;
-    }];
-    
-    [[RACObserve(self.channelSceneModel, feedList)
-      filter:^BOOL(FeedList* value) {
-          return value !=nil;
-      }]
-     subscribeNext:^(FeedList *value) {
-         @strongify(self);
-         self.channelSceneModel.dataArray = [value.pagination
-                                          success:self.channelSceneModel.dataArray
-                                          newArray:value.list];
-         self.channelSceneModel.request.page = value.pagination.page;
-         [self.tableView reloadData];
-         [self.tableView endAllRefreshingWithIntEnd:value.pagination.isEnd.integerValue];
-     }];
-    
-    [[RACObserve(self.channelSceneModel.request, state)
-      filter:^BOOL(NSNumber *state) {
-          @strongify(self);
-          return self.channelSceneModel.request.failed;
-      }]
-     subscribeNext:^(id x) {
-         @strongify(self);
-         self.channelSceneModel.request.page = self.channelSceneModel.feedList.pagination.page?:@1;
-         [self.tableView endAllRefreshingWithIntEnd:self.channelSceneModel.feedList.pagination.isEnd.integerValue];
-     }];
-    
-    [self.tableView triggerPullToRefresh];
 }
 
 -(void)rightButtonTouch{
@@ -122,47 +89,26 @@
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 84;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.channelSceneModel.dataArray.count;
-}
-
-- (FeedCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FeedCell" forIndexPath:indexPath];
-    cell.backGroundView.backgroundColor = [UIColor colorAtIndex:indexPath.row];
-    FeedEntity *feed = [self.channelSceneModel.dataArray objectAtIndex:indexPath.row];
-    [cell reload:feed];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    [cell setAccessoryType:UITableViewCellAccessoryNone];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    FeedEntity *entity =  [self.channelSceneModel.dataArray objectAtIndex:indexPath.row];
-    UIViewController *scene = [UIViewController initFromString:entity.openUrl];
-    [self.navigationController pushViewController:scene animated:YES];
-}
-
 #pragma mark - HTHorizontalSelectionListDataSource Protocol Methods
 
 - (NSInteger)numberOfItemsInSelectionList:(HTHorizontalSelectionList *)selectionList {
-    return self.channelSceneModel.tagList.count;
+    return self.tagList.count;
 }
 
 - (NSString *)selectionList:(HTHorizontalSelectionList *)selectionList titleForItemWithIndex:(NSInteger)index {
-    return  self.channelSceneModel.tagList[index];
+    return  self.tagList[index];
 }
 
 #pragma mark - HTHorizontalSelectionListDelegate Protocol Methods
-
 - (void)selectionList:(HTHorizontalSelectionList *)selectionList didSelectButtonWithIndex:(NSInteger)index {
-    [self.channelSceneModel.request cancle];
-    self.channelSceneModel.request.tagName = self.channelSceneModel.tagList[index];
-    self.channelSceneModel.request.page = @1;
-    self.channelSceneModel.request.requestNeedActive = YES;
+    [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.width * index, 0, self.scrollView.width, self.scrollView.height) animated:YES];
+}
+
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    CGFloat pageWidth = scrollView.frame.size.width;
+    NSInteger index = scrollView.contentOffset.x / pageWidth;
+    [self.selectionList selectedIndex:index];
 }
 
 @end

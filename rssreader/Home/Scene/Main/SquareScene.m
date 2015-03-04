@@ -9,18 +9,20 @@
 #import "SquareScene.h"
 #import "RssCell.h"
 #import "RssDetailScene.h"
-#import "RecommendSceneModel.h"
 #import <HTHorizontalSelectionList/HTHorizontalSelectionList.h>
 #import "WebDetailScene.h"
 #import "RssListScene.h"
 #import "AddScene.h"
 #import "RDNavigationController.h"
+#import "SquareTableView.h"
+#import "TagListRequest.h"
+#import "ActionSceneModel.h"
 
-@interface SquareScene ()<UITableViewDataSource,UITableViewDelegate,HTHorizontalSelectionListDelegate, HTHorizontalSelectionListDataSource>
+@interface SquareScene ()<HTHorizontalSelectionListDelegate, HTHorizontalSelectionListDataSource,UIScrollViewDelegate>
 
 @property (nonatomic, strong) HTHorizontalSelectionList *selectionList;
-@property (strong, nonatomic) SceneTableView *tableView;
-@property (strong, nonatomic) RecommendSceneModel *sceneModel;
+@property (strong, nonatomic) SceneScrollView *scrollView;
+@property (nonatomic, strong) NSMutableArray *tagList;
 @end
 
 @implementation SquareScene
@@ -43,70 +45,42 @@
     [self.selectionList constrainHeight:@"40"];
     
     
-    self.tableView = [[SceneTableView alloc]init];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.rowHeight = 210.0f;
+    self.scrollView = [[SceneScrollView alloc]init];
+    self.scrollView.backgroundColor = [UIColor whiteColor];
+    self.scrollView.delegate = self;
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.bounces = NO;
+    [self.view addSubview:self.scrollView];
+    [self.scrollView addHorizontalContentView];
+    [self.scrollView horizontalConstrainTopSpaceToView:self.selectionList predicate:@"0"];
+    [self.scrollView horizontalAlignBottomWithToView:self.scrollView.superview predicate:@"0"];
+    [self.scrollView alignLeading:@"0" trailing:@"0" toView:self.scrollView.superview];
 
-    [self.view addSubview:self.tableView];
-    [self.tableView constrainTopSpaceToView:self.selectionList predicate:@"0"];
-    [self.tableView alignTop:nil leading:@"0" bottom:@"0" trailing:@"0" toView:self.view];
-    
-    [self.tableView registerClass:[RssCell class] forCellReuseIdentifier:@"RssCell"];
-    
-    _sceneModel = [RecommendSceneModel SceneModel];
-    
     @weakify(self);
-    self.sceneModel.tagRequest.requestNeedActive = YES;
-    [[RACObserve(self.sceneModel, tagList)
-      filter:^BOOL(NSMutableArray* value) {
-          return value.count >0;
-      }]
-     subscribeNext:^(NSMutableArray *value) {
-         @strongify(self);
-         [self.selectionList reloadData];
-     }];
-    
-    [self.tableView addPullToRefreshWithActionHandler:^{
+    TagListRequest *req = [TagListRequest Request];
+    [[ActionSceneModel sharedInstance] sendRequest:req success:^{
         @strongify(self);
-        self.sceneModel.request.page = @1;
-        self.sceneModel.request.requestNeedActive = YES;
-    }];
+        self.tagList = [req.output objectAtPath:@"Data/list"];
+        NSUInteger count = self.tagList.count;
+        if(count>0){
+          [self.selectionList reloadData];
+          [self.tagList enumerateObjectsUsingBlock:^(NSString *title, NSUInteger idx, BOOL *stop) {
+            SquareTableView *sqTableView = [[SquareTableView alloc]init];
+            sqTableView.pushBlock = ^(UIViewController *controller){
+              [self.navigationController pushViewController:controller animated:YES];
+            };
+            [self.scrollView addHorizontalSubView:sqTableView atIndex:idx];
+            if(idx == count-1){
+                [self.scrollView endWithHorizontalView:sqTableView];
+            }
+            [sqTableView addPullRefreshWithTagName:title];
+          }];
+        }
+    } error:nil];
     
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
-        @strongify(self);
-        self.sceneModel.request.page = [self.sceneModel.request.page increase:@1];
-        self.sceneModel.request.requestNeedActive = YES;
-    }];
-    
-    [[RACObserve(self.sceneModel, list)
-      filter:^BOOL(RssList* value) {
-          return value !=nil;
-      }]
-     subscribeNext:^(RssList *value) {
-         @strongify(self);
-         self.sceneModel.dataArray = [value.pagination
-                                         success:self.sceneModel.dataArray
-                                         newArray:value.list];
-         self.sceneModel.request.page = value.pagination.page;
-         [self.tableView reloadData];
-         [self.tableView endAllRefreshingWithIntEnd:value.pagination.isEnd.integerValue];
-     }];
-    
-    [[RACObserve(self.sceneModel.request, state)
-      filter:^BOOL(NSNumber *state) {
-          @strongify(self);
-          return self.sceneModel.request.failed;
-      }]
-     subscribeNext:^(id x) {
-         @strongify(self);
-         self.sceneModel.request.page = self.sceneModel.list.pagination.page?:@1;
-         [self.tableView endAllRefreshingWithIntEnd:self.sceneModel.list.pagination.isEnd.integerValue];
-     }];
-    [self.tableView triggerPullToRefresh];
-    
-}
+ }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -118,60 +92,27 @@
     [self presentViewController:nav animated:YES completion:nil];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.sceneModel.dataArray.count;
-}
-
-- (UITableViewCell *)tableView:(SceneTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    RssCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RssCell" forIndexPath:indexPath];
-    
-    FeedRssEntity *entity = [self.sceneModel.dataArray objectAtIndex:indexPath.row];
-    UIButton *_feedButton = [[UIButton alloc]init];
-    [cell.contentView addSubview:_feedButton];
-    [_feedButton alignTop:@"5" leading:@"5" toView:_feedButton.superview];
-    [_feedButton constrainWidth:@"120" height:@"40"];
-    
-    _feedButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        UIViewController *scene = [UIViewController initFromString:entity.feed.openUrl];
-        [self.navigationController pushViewController:scene animated:YES];
-        return [RACSignal empty];
-    }];
-    [cell reloadRss:entity];
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    FeedRssEntity *feedRss = [self.sceneModel.dataArray objectAtIndex:indexPath.row];
-    if(feedRss.feed.feedType.integerValue == 0){
-        RssDetailScene* scene =  [[RssDetailScene alloc]init];
-        scene.feedRss = feedRss;
-        scene.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:scene animated:YES];
-    }else{
-        WebDetailScene* scene =  [[WebDetailScene alloc]init];
-        scene.feedRss = feedRss;
-        scene.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:scene animated:YES];
-    }
-}
 
 #pragma mark - HTHorizontalSelectionListDataSource Protocol Methods
 
 - (NSInteger)numberOfItemsInSelectionList:(HTHorizontalSelectionList *)selectionList {
-    return self.sceneModel.tagList.count;
+    return self.tagList.count;
 }
 
 - (NSString *)selectionList:(HTHorizontalSelectionList *)selectionList titleForItemWithIndex:(NSInteger)index {
     
-    return  self.sceneModel.tagList[index];
+    return  self.tagList[index];
 }
 
 #pragma mark - HTHorizontalSelectionListDelegate Protocol Methods
 
 - (void)selectionList:(HTHorizontalSelectionList *)selectionList didSelectButtonWithIndex:(NSInteger)index {
-    [self.sceneModel.request cancle];
-    self.sceneModel.request.tagName = self.sceneModel.tagList[index];
-    self.sceneModel.request.page = @1;
-    self.sceneModel.request.requestNeedActive = YES;
+    [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.width * index, 0, self.scrollView.width, self.scrollView.height) animated:YES];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    CGFloat pageWidth = scrollView.frame.size.width;
+    NSInteger index = scrollView.contentOffset.x / pageWidth;
+    [self.selectionList selectedIndex:index];
 }
 @end

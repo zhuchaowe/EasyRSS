@@ -6,6 +6,8 @@
 	<string>TOWebViewController</string>
 	<key>easyrss</key>
 	<dict>
+		<key>easyrss://setting</key>
+		<string>SettingScene</string>
 		<key>easyrss://topic</key>
 		<string>TopicListScene</string>
 		<key>easyrss://fav</key>

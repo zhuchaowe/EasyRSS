@@ -17,13 +17,10 @@
 @classPatchField(AppDelegate)
 
 AspectPatch(-, void,application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions) {
-    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"URLManage" ofType:@"plist"];
-    [[URLManager sharedInstance] loadConfigFromPlist:plistPath];
-    
+
     self.database = [[AppDatabase alloc]initWithMigrations];
     
     [Action actionConfigHost:@"rss.iosx.me" client:@"easyios" codeKey:@"Code" rightCode:0 msgKey:@"Msg"];
-    [$ swizzleClassMethod:@selector(objectAtIndex:) with:@selector(safeObjectAtIndex:) in:[NSArray class]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];

@@ -93,7 +93,7 @@
             [self showHudIndeterminate:@"加载中..."];
             [[ActionSceneModel sharedInstance] sendRequest:req success:^{
                 [self hideHud];
-                FeedEntity *feed =  [[FeedEntity alloc]initWithDictionary:req.output error:nil];
+                FeedEntity *feed =  [[FeedEntity alloc]initWithDictionary:[req.output objectAtPath:@"Data/feed"] error:nil];
                 UIViewController *scene =  [UIViewController initFromString:feed.openUrl];
                 [self.navigationController pushViewController:scene animated:YES];
             } error:^{

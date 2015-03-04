@@ -61,7 +61,7 @@
 }
 
 -(void)reload:(FeedEntity *)feed{
-    [_logoImageView sd_setImageWithURL:[NSURL URLWithString:feed.favicon] placeholderImage:[UIImage imageNamed:@"rssIcon"]];
+    [_logoImageView net_sd_setImageWithURL:[NSURL URLWithString:feed.favicon] placeholderImage:[UIImage imageNamed:@"rssIcon"]];
 
     _titleLabel.text = [feed.title replace:RX(@"\ue40a|\ue40b") with:@""];
     

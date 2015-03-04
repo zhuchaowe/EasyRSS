@@ -13,8 +13,6 @@
 
 @interface RecommendSceneModel : SceneModel
 @property(nonatomic,retain)RecommendRequest *request;
-@property(nonatomic,retain)TagListRequest *tagRequest;
 @property(nonatomic,retain)RssList *list;
-@property(nonatomic,retain)NSMutableArray *tagList;
 @property(nonatomic,retain)NSMutableArray *dataArray;
 @end

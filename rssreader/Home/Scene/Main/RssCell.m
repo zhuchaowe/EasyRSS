@@ -91,7 +91,7 @@
 -(void)reloadRss:(FeedRssEntity *)feedRss{
     RssEntity *rss = feedRss.rss;
     FeedEntity *feed = feedRss.feed;
-    [_feedImage sd_setImageWithURL:[NSURL URLWithString:feed.favicon] placeholderImage:
+    [_feedImage net_sd_setImageWithURL:[NSURL URLWithString:feed.favicon] placeholderImage:
      [[UIImage imageNamed:@"rssIcon"] tintWithColor:[UIColor whiteColor]]];
     
     _time.text = rss.date;
@@ -101,7 +101,7 @@
     
     self.rssImageView.backgroundColor = [UIColor randomFlatColor];
     if(rss.image.isNotEmpty){
-        [_rssImageView sd_setImageWithURL:[NSURL URLWithString:rss.image]];
+        [_rssImageView net_sd_setImageWithURL:[NSURL URLWithString:rss.image]];
     }else{
         _rssImageView.image = nil;
     }

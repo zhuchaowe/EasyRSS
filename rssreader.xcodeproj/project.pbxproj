@@ -7,10 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B24CF6A1AA5A90D005465E2 /* SquareHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B24CF691AA5A90D005465E2 /* SquareHeader.m */; };
+		5B24CF6D1AA5AE4F005465E2 /* SquareFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B24CF6C1AA5AE4F005465E2 /* SquareFooter.m */; };
 		5B46EABC1A8EDFCA0029ED94 /* Aspect-Window.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B46EABB1A8EDFCA0029ED94 /* Aspect-Window.m */; };
 		5B6BE9AE1A863A6100284BF9 /* UserCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6BE9AD1A863A6100284BF9 /* UserCenter.m */; };
+		5B74859C1AA5BC3F0092C21E /* ChannelTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B74859B1AA5BC3F0092C21E /* ChannelTableView.m */; };
 		5B824C811A86701000C31139 /* RecommendRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B824C801A86701000C31139 /* RecommendRequest.m */; };
 		5BA6C9BD1A8E035D004A72DD /* URLManage.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5BA6C9BC1A8E035D004A72DD /* URLManage.plist */; };
+		5BB741EA1A946908004795A1 /* UIImageView+Network.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB741E91A946908004795A1 /* UIImageView+Network.m */; };
+		5BB741EF1A947853004795A1 /* Aspect-Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB741EE1A947853004795A1 /* Aspect-Config.m */; };
+		5BB741F31A949277004795A1 /* SettingScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB741F21A949277004795A1 /* SettingScene.m */; };
+		5BB741F61A94A13F004795A1 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB741F51A94A13F004795A1 /* Config.m */; };
+		5BC03A7B1AA4618B001C17A4 /* SquareTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC03A7A1AA4618B001C17A4 /* SquareTableView.m */; };
 		5BCF1FB41A874E4200A82D1A /* FeedRssEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF1FB31A874E4200A82D1A /* FeedRssEntity.m */; };
 		5BCF1FB71A87685400A82D1A /* TagListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF1FB61A87685400A82D1A /* TagListRequest.m */; };
 		5BCF1FBE1A88929300A82D1A /* ChannelScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF1FBD1A88929300A82D1A /* ChannelScene.m */; };
@@ -79,12 +87,27 @@
 /* Begin PBXFileReference section */
 		4446E537F40BE1A10A479135 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		445A555592FDDF7A401F060B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		5B24CF681AA5A90D005465E2 /* SquareHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareHeader.h; sourceTree = "<group>"; };
+		5B24CF691AA5A90D005465E2 /* SquareHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareHeader.m; sourceTree = "<group>"; };
+		5B24CF6B1AA5AE4F005465E2 /* SquareFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareFooter.h; sourceTree = "<group>"; };
+		5B24CF6C1AA5AE4F005465E2 /* SquareFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareFooter.m; sourceTree = "<group>"; };
 		5B46EABB1A8EDFCA0029ED94 /* Aspect-Window.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Aspect-Window.m"; sourceTree = "<group>"; };
 		5B6BE9AC1A863A6100284BF9 /* UserCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenter.h; sourceTree = "<group>"; };
 		5B6BE9AD1A863A6100284BF9 /* UserCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenter.m; sourceTree = "<group>"; };
+		5B74859A1AA5BC3F0092C21E /* ChannelTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelTableView.h; sourceTree = "<group>"; };
+		5B74859B1AA5BC3F0092C21E /* ChannelTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelTableView.m; sourceTree = "<group>"; };
 		5B824C7F1A86701000C31139 /* RecommendRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendRequest.h; sourceTree = "<group>"; };
 		5B824C801A86701000C31139 /* RecommendRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendRequest.m; sourceTree = "<group>"; };
 		5BA6C9BC1A8E035D004A72DD /* URLManage.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = URLManage.plist; sourceTree = "<group>"; };
+		5BB741E81A946908004795A1 /* UIImageView+Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Network.h"; sourceTree = "<group>"; };
+		5BB741E91A946908004795A1 /* UIImageView+Network.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Network.m"; sourceTree = "<group>"; };
+		5BB741EE1A947853004795A1 /* Aspect-Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Aspect-Config.m"; sourceTree = "<group>"; };
+		5BB741F11A949277004795A1 /* SettingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingScene.h; sourceTree = "<group>"; };
+		5BB741F21A949277004795A1 /* SettingScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingScene.m; sourceTree = "<group>"; };
+		5BB741F41A94A13F004795A1 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
+		5BB741F51A94A13F004795A1 /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
+		5BC03A791AA4618B001C17A4 /* SquareTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareTableView.h; sourceTree = "<group>"; };
+		5BC03A7A1AA4618B001C17A4 /* SquareTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareTableView.m; sourceTree = "<group>"; };
 		5BCF1FB21A874E4200A82D1A /* FeedRssEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedRssEntity.h; sourceTree = "<group>"; };
 		5BCF1FB31A874E4200A82D1A /* FeedRssEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedRssEntity.m; sourceTree = "<group>"; };
 		5BCF1FB51A87685400A82D1A /* TagListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagListRequest.h; sourceTree = "<group>"; };
@@ -239,11 +262,31 @@
 			name = Rss;
 			sourceTree = "<group>";
 		};
+		5BB741EB1A946DFF004795A1 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				5BB741F41A94A13F004795A1 /* Config.h */,
+				5BB741F51A94A13F004795A1 /* Config.m */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
+		5BB741F01A949263004795A1 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				5BB741F11A949277004795A1 /* SettingScene.h */,
+				5BB741F21A949277004795A1 /* SettingScene.m */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
 		5BCF1FB81A88924200A82D1A /* Channel */ = {
 			isa = PBXGroup;
 			children = (
 				5BCF1FBC1A88929300A82D1A /* ChannelScene.h */,
 				5BCF1FBD1A88929300A82D1A /* ChannelScene.m */,
+				5B74859A1AA5BC3F0092C21E /* ChannelTableView.h */,
+				5B74859B1AA5BC3F0092C21E /* ChannelTableView.m */,
 			);
 			name = Channel;
 			sourceTree = "<group>";
@@ -254,6 +297,8 @@
 				5BCF1FDA1A8B89D400A82D1A /* UIColor+RSS.h */,
 				5BCF1FDB1A8B89D400A82D1A /* UIColor+RSS.m */,
 				5BA6C9BC1A8E035D004A72DD /* URLManage.plist */,
+				5BB741E81A946908004795A1 /* UIImageView+Network.h */,
+				5BB741E91A946908004795A1 /* UIImageView+Network.m */,
 			);
 			name = Vendor;
 			sourceTree = "<group>";
@@ -274,6 +319,7 @@
 		5BEF00C31A8372D6000D2E62 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				5BB741EB1A946DFF004795A1 /* Config */,
 				5BCF1FD31A8B303C00A82D1A /* Vendor */,
 				5BEF00C41A8372D6000D2E62 /* Data */,
 				5BEF00C71A8372D6000D2E62 /* Model */,
@@ -440,6 +486,12 @@
 			children = (
 				5BEF01721A848701000D2E62 /* SquareScene.h */,
 				5BEF01731A848701000D2E62 /* SquareScene.m */,
+				5BC03A791AA4618B001C17A4 /* SquareTableView.h */,
+				5BC03A7A1AA4618B001C17A4 /* SquareTableView.m */,
+				5B24CF681AA5A90D005465E2 /* SquareHeader.h */,
+				5B24CF691AA5A90D005465E2 /* SquareHeader.m */,
+				5B24CF6B1AA5AE4F005465E2 /* SquareFooter.h */,
+				5B24CF6C1AA5AE4F005465E2 /* SquareFooter.m */,
 			);
 			name = Square;
 			sourceTree = "<group>";
@@ -476,6 +528,7 @@
 		5BEF01791A848C6D000D2E62 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				5BB741F01A949263004795A1 /* Setting */,
 				5BEF017A1A848C8F000D2E62 /* MineScene.h */,
 				5BEF017B1A848C8F000D2E62 /* MineScene.m */,
 			);
@@ -504,6 +557,7 @@
 		5F578280199A43D600FCA0EE /* rssreader */ = {
 			isa = PBXGroup;
 			children = (
+				5BB741EE1A947853004795A1 /* Aspect-Config.m */,
 				5BCF1FC81A89E65700A82D1A /* Aspect-Font.m */,
 				5BEF01461A8372EC000D2E62 /* AppDelegate.h */,
 				5BEF01471A8372EC000D2E62 /* AppDelegate.m */,
@@ -676,14 +730,17 @@
 				5BEF01371A8372D6000D2E62 /* FavScene.m in Sources */,
 				5BEF01741A848701000D2E62 /* SquareScene.m in Sources */,
 				5BEF014E1A8372EC000D2E62 /* Aspect-UMengConfig.m in Sources */,
+				5B24CF6A1AA5A90D005465E2 /* SquareHeader.m in Sources */,
 				5BEF015C1A83872F000D2E62 /* WeChatSceneModel.m in Sources */,
 				5BEF01341A8372D6000D2E62 /* AddScene.m in Sources */,
 				5BEF01591A8386C0000D2E62 /* WeChatListScene.m in Sources */,
 				5BEF01211A8372D6000D2E62 /* RssList.m in Sources */,
 				5BEF016E1A847C9A000D2E62 /* TabBarController.m in Sources */,
 				5BEF017C1A848C8F000D2E62 /* MineScene.m in Sources */,
+				5BB741EA1A946908004795A1 /* UIImageView+Network.m in Sources */,
 				5BEF01381A8372D6000D2E62 /* RssCell.m in Sources */,
 				5B46EABC1A8EDFCA0029ED94 /* Aspect-Window.m in Sources */,
+				5B74859C1AA5BC3F0092C21E /* ChannelTableView.m in Sources */,
 				5BEF01401A8372D6000D2E62 /* FeedSceneModel.m in Sources */,
 				5BEF013E1A8372D6000D2E62 /* DiscoverySceneModel.m in Sources */,
 				5F578284199A43D700FCA0EE /* main.m in Sources */,
@@ -692,13 +749,18 @@
 				5BD1C9131A9045F5009274AD /* TopicCell.m in Sources */,
 				5BCF1FC41A889A3C00A82D1A /* ChannelRequest.m in Sources */,
 				5BEF01421A8372D6000D2E62 /* RssListSceneModel.m in Sources */,
+				5BB741F31A949277004795A1 /* SettingScene.m in Sources */,
 				5BEF01711A847D61000D2E62 /* RDNavigationController.m in Sources */,
 				5BEF011F1A8372D6000D2E62 /* FeedList.m in Sources */,
 				5BD1C91F1A9062D9009274AD /* TopicDetailRequest.m in Sources */,
 				5BEF014C1A8372EC000D2E62 /* Aspect-Appearance.m in Sources */,
+				5BB741F61A94A13F004795A1 /* Config.m in Sources */,
 				5BEF01201A8372D6000D2E62 /* RssEntity.m in Sources */,
+				5B24CF6D1AA5AE4F005465E2 /* SquareFooter.m in Sources */,
 				5BCF1FB71A87685400A82D1A /* TagListRequest.m in Sources */,
 				5BEF011D1A8372D6000D2E62 /* DataCenter.m in Sources */,
+				5BC03A7B1AA4618B001C17A4 /* SquareTableView.m in Sources */,
+				5BB741EF1A947853004795A1 /* Aspect-Config.m in Sources */,
 				5BEF01241A8372D6000D2E62 /* RssListRequest.m in Sources */,
 				5BEF014B1A8372EC000D2E62 /* AppDelegate.m in Sources */,
 			);
