@@ -17,7 +17,7 @@
 AspectPatch(-, BOOL, application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions) {
 
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"URLManage" ofType:@"plist"];
-    [[URLManager sharedInstance] loadConfigFromPlist:plistPath];
+    [URLManager loadConfigFromPlist:plistPath];
     
     return XAMessageForward(application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions);
     

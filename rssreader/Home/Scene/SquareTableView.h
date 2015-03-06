@@ -8,8 +8,6 @@
 
 #import "SceneTableView.h"
 
-typedef void (^PushBlock)(UIViewController *controller);
 @interface SquareTableView : SceneTableView
-@property(nonatomic,copy)PushBlock pushBlock;
 -(void)addPullRefreshWithTagName:(NSString *)tagName;
 @end

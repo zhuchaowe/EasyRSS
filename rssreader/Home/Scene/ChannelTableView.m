@@ -98,8 +98,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     FeedEntity *entity =  [self.channelSceneModel.dataArray objectAtIndex:indexPath.row];
-    UIViewController *scene = [UIViewController initFromString:entity.openUrl];
-    self.pushBlock(scene);
-    
+    [URLManager pushURLString:entity.openUrl animated:YES];
 }
 @end

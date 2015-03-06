@@ -94,8 +94,7 @@
             [[ActionSceneModel sharedInstance] sendRequest:req success:^{
                 [self hideHud];
                 FeedEntity *feed =  [[FeedEntity alloc]initWithDictionary:[req.output objectAtPath:@"Data/feed"] error:nil];
-                UIViewController *scene =  [UIViewController initFromString:feed.openUrl];
-                [self.navigationController pushViewController:scene animated:YES];
+                [URLManager pushURLString:feed.openUrl animated:YES];
             } error:^{
                 [self hideHudFailed:req.message];
             }];
@@ -106,8 +105,7 @@
         [self.navigationController pushViewController:scene animated:YES];
     }else{
         NSString *string = [NSString stringWithFormat:@"easyrss://topic?title=%@",self.textView.text.urlencode];
-        UIViewController *vc = [UIViewController initFromString:string];
-        [self.navigationController pushViewController:vc animated:YES];
+        [URLManager pushURLString:string animated:YES];
     }
 }
 

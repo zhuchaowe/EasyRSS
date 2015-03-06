@@ -128,8 +128,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     FeedEntity *feed =  [self.feedSceneModel.dataArray objectAtIndex:indexPath.row];
-    UIViewController *scene = [UIViewController initFromString:feed.openUrl];
-    [self.navigationController pushViewController:scene animated:YES];
+    [URLManager pushURLString:feed.openUrl animated:YES];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{

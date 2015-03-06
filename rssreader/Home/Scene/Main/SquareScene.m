@@ -58,6 +58,7 @@
     [self.scrollView horizontalAlignBottomWithView:self.scrollView.superview predicate:@"0"];
     [self.scrollView alignLeading:@"0" trailing:@"0" toView:self.scrollView.superview];
 
+    
     @weakify(self);
     TagListRequest *req = [TagListRequest Request];
     [[ActionSceneModel sharedInstance] sendRequest:req success:^{
@@ -68,9 +69,6 @@
           [self.selectionList reloadData];
           [self.tagList enumerateObjectsUsingBlock:^(NSString *title, NSUInteger idx, BOOL *stop) {
             SquareTableView *sqTableView = [[SquareTableView alloc]init];
-            sqTableView.pushBlock = ^(UIViewController *controller){
-              [self.navigationController pushViewController:controller animated:YES];
-            };
             [self.scrollView addHorizontalSubView:sqTableView atIndex:idx];
             if(idx == count-1){
                 [self.scrollView endWithHorizontalView:sqTableView];

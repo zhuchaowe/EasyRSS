@@ -69,7 +69,8 @@
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
-        UIViewController *controller= [UIViewController initFromURL:request.URL];
+        
+        UIViewController *controller= [UIViewController initFromURL:request.URL fromConfig:[URLManager manager].config];
         if([controller isKindOfClass:[TOWebViewController class]]){
             [(TOWebViewController *)controller setButtonTintColor:[UIColor flatDarkOrangeColor]];
             [(TOWebViewController *)controller setLoadingBarTintColor:[UIColor flatDarkGreenColor]];

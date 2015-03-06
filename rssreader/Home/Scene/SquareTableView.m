@@ -96,10 +96,7 @@
     [_feedButton constrainWidth:@"120" height:@"40"];
     
     _feedButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        UIViewController *scene = [UIViewController initFromString:entity.feed.openUrl];
-         if(self.pushBlock){
-             self.pushBlock(scene);
-         }
+        [URLManager pushURLString:entity.feed.openUrl animated:YES];
         return [RACSignal empty];
     }];
     [cell reloadRss:entity];
@@ -112,17 +109,12 @@
         RssDetailScene* scene =  [[RssDetailScene alloc]init];
         scene.feedRss = feedRss;
         scene.hidesBottomBarWhenPushed = YES;
-        if(self.pushBlock ){
-            self.pushBlock(scene);
-        }
-        
+        [URLNavigation pushViewController:scene animated:YES];
     }else{
         WebDetailScene* scene =  [[WebDetailScene alloc]init];
         scene.feedRss = feedRss;
         scene.hidesBottomBarWhenPushed = YES;
-         if(self.pushBlock){
-             self.pushBlock(scene);
-         }
+        [URLNavigation pushViewController:scene animated:YES];
     }
 }
 

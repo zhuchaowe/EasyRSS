@@ -57,8 +57,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *link = [[_dataArray objectAtIndexPath:indexPath] objectForKey:@"link"];
-    UIViewController *vc = [UIViewController initFromString:link];
-    [self.navigationController pushViewController:vc animated:YES];
+    [URLManager pushURLString:link animated:YES];
 }
 
 

@@ -134,9 +134,9 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     FeedEntity *entity = [self.sceneModel.dataArray safeObjectAtIndex:indexPath.row];
-    UIViewController *vc = [UIViewController initFromString:entity.openUrl];
-    [self.navigationController pushViewController:vc animated:YES];
+    [URLManager pushURLString:entity.openUrl animated:YES];
 }
+
 #pragma mark - HTHorizontalSelectionListDataSource Protocol Methods
 
 - (NSInteger)numberOfItemsInSelectionList:(HTHorizontalSelectionList *)selectionList {
