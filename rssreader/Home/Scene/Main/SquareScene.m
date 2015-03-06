@@ -55,7 +55,7 @@
     [self.view addSubview:self.scrollView];
     [self.scrollView addHorizontalContentView];
     [self.scrollView horizontalConstrainTopSpaceToView:self.selectionList predicate:@"0"];
-    [self.scrollView horizontalAlignBottomWithToView:self.scrollView.superview predicate:@"0"];
+    [self.scrollView horizontalAlignBottomWithView:self.scrollView.superview predicate:@"0"];
     [self.scrollView alignLeading:@"0" trailing:@"0" toView:self.scrollView.superview];
 
     @weakify(self);
@@ -113,6 +113,7 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     CGFloat pageWidth = scrollView.frame.size.width;
     NSInteger index = scrollView.contentOffset.x / pageWidth;
-    [self.selectionList selectedIndex:index];
+    
+    [self.selectionList setSelectedButtonIndex:index animated:YES];
 }
 @end
