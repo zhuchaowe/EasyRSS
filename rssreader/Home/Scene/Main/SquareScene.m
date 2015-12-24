@@ -32,7 +32,7 @@
     self.title = @"易阅";
     UIButton *rssbutton = [IconFont buttonWithIcon:[IconFont icon:@"fa_rss" fromFont:fontAwesome] fontName:fontAwesome size:24.0f color:[UIColor whiteColor]];
     [self showBarButton:NAV_RIGHT button:rssbutton];
-
+    
     
     self.selectionList = [[HTHorizontalSelectionList alloc] init];
     self.selectionList.delegate = self;

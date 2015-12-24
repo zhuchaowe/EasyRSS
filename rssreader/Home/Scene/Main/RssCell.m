@@ -55,7 +55,7 @@
     _time.textColor = [UIColor whiteColor];
     [self.contentView addSubview:_time];
     
-    _rssTitle = [[TTTAttributedLabel alloc]init];
+    _rssTitle = [[UILabel alloc]init];
     _rssTitle.numberOfLines = 0;
     _rssTitle.lineBreakMode = NSLineBreakByWordWrapping|NSLineBreakByTruncatingTail;
     _rssTitle.textAlignment = NSTextAlignmentLeft;
