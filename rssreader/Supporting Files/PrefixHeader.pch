@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 zhuchao. All rights reserved.
 //
 
-#import "swift-bridge.h"
+#import <EasyIOS/EasyIOS.h>
 #import "UIColor+MLPFlatColors.h"
 #import "PullFooter.h"
 #import "PullHeader.h"
